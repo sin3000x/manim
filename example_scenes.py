@@ -134,3 +134,10 @@ class UpdatersExample(Scene):
         self.wait()
 
 # See old_projects folder for many, many more
+class MyScene(Scene):
+    def construct(self):
+        title = TextMobject('那些蜜汁数学操作（')
+        title.scale(2)
+        self.add(title)
+        # self.play(Write(title))
+        self.wait(3)

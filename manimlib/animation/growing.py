@@ -1,5 +1,5 @@
 from manimlib.animation.transform import Transform
-# from manimlib.utils.paths import counterclockwise_path
+# from new_packages.utils.paths import counterclockwise_path
 from manimlib.constants import PI
 
 

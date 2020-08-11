@@ -19,7 +19,7 @@ from manimlib.utils.config_ops import digest_config
 from manimlib.utils.rate_functions import linear
 from manimlib.utils.simple_functions import sigmoid
 from manimlib.utils.space_ops import get_norm
-# from manimlib.utils.space_ops import normalize
+# from new_packages.utils.space_ops import normalize
 
 
 DEFAULT_SCALAR_FIELD_COLORS = [BLUE_E, GREEN, YELLOW, RED]
