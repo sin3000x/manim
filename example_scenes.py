@@ -140,4 +140,4 @@ class MyScene(Scene):
         title.scale(2)
         self.add(title)
         # self.play(Write(title))
-        self.wait(3)
+        self.wait(3):
