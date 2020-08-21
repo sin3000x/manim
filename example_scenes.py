@@ -140,6 +140,7 @@ class UpdatersExample(Scene):
 class MyScene(Scene):
     def construct(self):
         j = TextMobject('【解】')
+        z = TextMobject('【证明】')
         # ========== title ==============================
         title = TextMobject('那些蜜汁数学操作（')
         title.scale(2)
@@ -149,33 +150,33 @@ class MyScene(Scene):
         self.play(FadeOut(title))
 
         # ============= 1. (a+b)^n ===========================
-        q1 = TextMobject(r"1. 展开$(a+b)^n$.", color=YELLOW)
-        q1.to_edge(TOP)
+        q1 = TextMobject(r"1. 展开",r"$(a+b)^n$",".", color=YELLOW)
+        q1.to_edge(TOP).shift(UP)
         self.play(Write(q1))
         self.wait()
         j.next_to(q1, DOWN).to_edge(LEFT, buff=1.5)
-        s1_l = [TexMobject('(a+b)^n'), TexMobject('(~a~+~b~)^n'),
+        s1_l = [TextMobject('$(a+b)^n$'), TexMobject('(~a~+~b~)^n'),
                 TexMobject('(~~a~~+~~b~~)^n'), TexMobject('(~~~a~~~+~~~b~~~)^{~n}'),
                 TexMobject('(~~~~~a~~~~~+~~~~~b~~~~~)^{~~~n}')]
-        s1_l[0].scale(1.5)
         # s1_l[0].next_to(j, DOWN).move_to(ORIGIN)
         self.play(Write(j))
-        self.play(Write(s1_l[0]))
+        self.play(ReplacementTransform(q1[1].copy(), s1_l[0]))
         for i in range(1, 5):
-            s1_l[i].scale(1.5)
+            # s1_l[i].scale(1.5)
             # s1_l[i].next_to(j, DOWN).move_to(ORIGIN)
             self.play(ReplacementTransform(s1_l[i - 1], s1_l[i]))
 
         self.wait(2)
-        r1 = TextMobject(r'\textbf{展得真开...}', color=BLUE)
+        r1 = TextMobject(r'\textit{展得真开...}', color=BLUE)
         r1.to_edge(BOTTOM)
-        self.play(Write(r1))
-        self.wait()
-        self.play(FadeOut(q1), FadeOut(j), FadeOut(s1_l[4]), FadeOut(r1))
+        framebox = SurroundingRectangle(r1, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r1))
+        self.wait(2)
+        self.play(FadeOut(q1), FadeOut(j), FadeOut(s1_l[4]), FadeOut(r1), FadeOut(framebox))
 
         # ============= 2. 不等号 ===========================
         q2 = TextMobject('2. 已知$0<x<y<1$，填入不等号：', color=YELLOW)
-        q2.to_edge(TOP)
+        q2.to_edge(TOP).shift(UP)
 
         s2 = TextMobject(r'$\frac{1}{\ln{(1-x^2)}}~~~$', r'$\neq$', r'$~~~\frac{1}{\ln{(1-y^2)}}$')
         s2.scale(1.5)
@@ -186,54 +187,56 @@ class MyScene(Scene):
         s2_line.set_color(YELLOW)
         self.play(Write(q2), run_time=3)
         self.play(Write(s2[0]), Write(s2[2]), Write(s2_line))
-        self.wait()
+        self.wait(2)
         self.play(Write(s2[1]))
         self.wait(2)
 
-        r2 = TextMobject(r'\textbf{真·不等号}', color=BLUE)
+        r2 = TextMobject(r'\textit{真·不等号}', color=BLUE)
         r2.to_edge(BOTTOM)
-        self.play(Write(r2))
-        self.wait()
-        self.play(FadeOut(q2), FadeOut(s2), FadeOut(s2_line), FadeOut(r2))
+        framebox = SurroundingRectangle(r2, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r2))
+        self.wait(2)
+        self.play(FadeOut(q2), FadeOut(s2), FadeOut(s2_line), FadeOut(r2), FadeOut(framebox))
 
         # ============= 3. 求x ===========================
         q3 = TextMobject("3. 已知$x^2-x-1=0$，求$x$.", color=YELLOW)
-        q3.to_edge(TOP)
+        q3.to_edge(TOP).shift(UP)
         self.play(Write(q3))
         self.wait(1)
 
         j.next_to(q3, DOWN).to_edge(LEFT, buff=1.5)
-        s3 = TextMobject('$x$，求你了。').scale(1.5)
+        s3 = TexMobject(r'x\text{，求你了.}')
         # s3.next_to(j, DOWN).move_to(ORIGIN)
         self.play(Write(j))
+        self.wait()
         self.play(Write(s3))
         self.wait(2)
 
-        r3 = TextMobject(r'\textbf{...你咋那么听话呢}', color=BLUE)
+        r3 = TextMobject(r'\textit{大丈夫能屈能伸！}', color=BLUE)
         r3.to_edge(BOTTOM)
-        self.play(Write(r3))
-        self.wait()
-        self.play(FadeOut(q3), FadeOut(s3), FadeOut(r3), FadeOut(j))
+        framebox = SurroundingRectangle(r3, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r3))
+        self.wait(2)
+        self.play(FadeOut(q3), FadeOut(s3), FadeOut(r3), FadeOut(j), FadeOut(framebox))
 
         # ============= 4. 666666 ===========================
-        q4 = TextMobject(r'4. 判断$\sum_{n=1}^\infty\frac{\sin x}{n}$的敛散性.', color=YELLOW)
-        q4.to_edge(TOP)
+        q4 = TextMobject(r'4. 判断',r'$\sum_{n=1}^\infty\frac{\sin x}{n}$','的敛散性.', color=YELLOW)
+        q4.to_edge(TOP).shift(UP)
         j.next_to(q4, DOWN).to_edge(LEFT, buff=1.5)
 
-        s4_1 = TexMobject(r'\sum\limits_{n=1}^\infty\frac{\mathrm{sin}~x}{n}')
-        s4_2 = TexMobject(r'\sum\limits_{n=1}^\infty\frac{\mathrm{si\cancel{n}}~x}{\cancel{n}}')
+        s4_1 = TexMobject(r'\sum\limits_{n=1}^\infty\frac{\mathrm{sin}~x}{n}').shift(UP)
+        s4_2 = TexMobject(r'\sum\limits_{n=1}^\infty\frac{\mathrm{si\cancel{n}}~x}{\cancel{n}}').shift(UP)
         s4_3 = TexMobject(r'\sum\limits_{n=1}^\infty\frac{\mathrm{si\cancel{n}}~x}{\cancel{n}}',
-                          r'=', '\sum\limits_{n=1}^\infty', r'\text{six}')
+                          r'=', '\sum\limits_{n=1}^\infty', r'\text{six}').shift(UP)
         s4_4 = TexMobject(r'\sum\limits_{n=1}^\infty\frac{\mathrm{si\cancel{n}}~x}{\cancel{n}}',
-                          r'=', r'\sum\limits_{n=1}^\infty', '~6')
+                          r'=', r'\sum\limits_{n=1}^\infty', '~6').shift(UP)
 
-        s4_5 = TexMobject(r'=', r'6+6+6+\cdots').align_to(s4_4[1], LEFT)
-        s4_5.shift(DOWN * 1.5)
+        s4_5 = TexMobject(r'=', r'6+6+6+\cdots').align_to(s4_4[1], LEFT).shift(DOWN*0.7)
         self.play(Write(q4))
         self.wait(1)
 
         self.play(Write(j))
-        self.play(Write(s4_1))
+        self.play(ReplacementTransform(q4[1].copy(), s4_1))
         self.play(FadeIn(s4_2))
         self.remove(s4_1)
         self.play(ReplacementTransform(s4_2, s4_3), run_time=1)
@@ -242,26 +245,163 @@ class MyScene(Scene):
         self.wait()
         self.play(Write(s4_5))
 
-        s4 = TextMobject('故发散。')
+        s4 = TextMobject('故发散.')
         s4.next_to(s4_5, DOWN).align_to(q4, LEFT)
         self.play(Write(s4))
         self.wait(2)
 
-        r4 = TextMobject(r'\textbf{66666666}', color=BLUE)
-        r4.to_edge(DOWN)
-        self.play(Write(r4))
+        r4 = TextMobject(r'\texttt{66666666...}', color=BLUE)
+        r4.to_edge(BOTTOM).shift(DOWN)
+        framebox = SurroundingRectangle(r4, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r4))
+        self.wait(2)
+
+        self.play(FadeOut(s4_4), FadeOut(j), FadeOut(s4_5), FadeOut(r4), FadeOut(q4), FadeOut(s4), FadeOut(framebox))
+        # ============= 5. 1/0 ===========================
+        q5 = TextMobject(r'5. 已知',r'$\frac 10=\infty$',r'，证明$\frac 1\infty=0$.', color=YELLOW).to_edge(TOP).shift(UP)
+        z.next_to(q5, DOWN).to_edge(buff=1.5)
+        self.play(Write(q5))
+        self.wait()
+        self.play(Write(z))
+
+        s5_1 = TexMobject(r'{','1','\\over','0',r'}', '=', r'\infty')
+        s5_2 = TexMobject(r'{','1','\\over','0',r'}', '=', r'\infty').rotate(PI/2)
+        s5_31 = TexMobject('8').move_to(s5_2[-1])
+        s5_32 = TexMobject('8','-8').move_to(s5_31)
+        s5_33 = TexMobject('0').move_to(s5_32)
+        s5_41 = TexMobject('-10').move_to(s5_2[2])
+        s5_42 = TexMobject('-10','-8').move_to(s5_41)
+        s5_43 = TexMobject('-18').move_to(s5_42)
+
+        self.play(ReplacementTransform(q5[1].copy(),s5_1))
+        self.wait()
+        self.play(ReplacementTransform(s5_1, s5_2))
+        self.wait()
+        self.play(Transform(s5_2[-1], s5_31))   # inf -> 8
+        self.wait()
+        self.play(Transform(s5_2[0:5], s5_41))   # 1/0 -> -10
+        self.wait()
+        self.play(Transform(s5_2[-1], s5_32), Transform(s5_2[0:5], s5_42))
+        self.wait()
+        self.play(Transform(s5_2[-1], s5_33), Transform(s5_2[0:5], s5_43))
+        self.wait()
+        self.play(Transform(s5_2, s5_2.copy().rotate(-PI/2)))
         self.wait()
 
-        self.play(FadeOut(s4_4), FadeOut(j), FadeOut(s4_5), FadeOut(r4), FadeOut(q4), FadeOut(s4))
+        s5_51 = TexMobject('{','1','\\over','\\infty').move_to(s5_2[0:5])
+        s5_52 = TexMobject('0').move_to(s5_2[-1])
+        self.play(Transform(s5_2[0:5], s5_51))
+        self.wait()
+        self.play(Transform(s5_2[-1], s5_52))
+        self.wait()
 
+        s5 = TextMobject('证毕.').next_to(s5_2, DOWN).align_to(q5, LEFT)
+        self.play(Write(s5))
+        self.wait(2)
+
+        r5 = TextMobject('\\textit{步\\quad 步\\quad 惊 \\quad 心}', color=BLUE).to_edge(BOTTOM).shift(DOWN)
+        framebox = SurroundingRectangle(r5, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r5), run_time=2)
+        self.wait(2)
+        self.play(FadeOut(q5), FadeOut(r5), FadeOut(s5), FadeOut(s5_2), FadeOut(framebox), FadeOut(z))
+
+        # ============6. lim 5===================================================
+        q6 = TextMobject(r'6. 已知$$\lim\limits_{x\to8}{1\over{x-8}}=\infty,$$那么', color=YELLOW).to_edge(TOP).shift(UP)
+        s6 = TexMobject(r'\lim\limits_{x\to5}{1\over{x-5}}=','~5').next_to(q6, DOWN)
+        s6[0].set_color(YELLOW)
+        s6[1].scale(1.3)
+        self.play(Write(q6), run_time=4)
+        self.play(Write(s6[0]))
+        self.wait(2)
+        s6[1].rotate(PI/2)
+        self.play(Write(s6[1]))
+        self.wait()
+
+        r6 = TextMobject('\\textit{我也想躺会...}', color=BLUE).to_edge(BOTTOM).shift(DOWN)
+        framebox = SurroundingRectangle(r6, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r6), run_time=2)
+        self.wait(2)
+
+        self.play(FadeOut(s6), FadeOut(q6), FadeOut(r6), FadeOut(framebox))
+
+        # =======7. 3*9===============================================================
+        q7 = TextMobject(r'7. 求$3\times 9.$', color=YELLOW).to_edge(TOP).shift(UP)
+        self.play(Write(q7))
+        self.wait()
+        j.next_to(q7, DOWN).to_edge(buff=1.5)
+        self.play(Write(j))
+
+        s7_1 = TexMobject(r"3\times 9=",r"3", r"\times", r"\sqrt", r"{81}").shift(UP)
+        s7_2 = TexMobject(r"3", r"\sqrt", r"{", '8', '1', "}").move_to(s7_1[1:])
+        s7_2_2 = TexMobject(r"3", r"\sqrt", r"{81}").move_to(s7_1[1:])
+        self.play(Write(s7_1))
+        self.play(ReplacementTransform(s7_1[1:], s7_2_2))
+        self.add(s7_2)
+        self.remove(s7_2_2)
+        self.wait(0.5)
+
+        s7_3 = TexMobject('2').next_to(s7_2, UP).align_to(s7_2[3], LEFT)
+        self.play(Write(s7_3))
+
+        s7_4 = TexMobject('6').next_to(s7_2, DOWN).align_to(s7_2[3], LEFT)
+        self.play(Write(s7_4))
+        self.wait(0.5)
+
+        line7 = Line().move_to(s7_4).shift(DOWN*0.3)
+        line7.set_length(1.5)
+        line7.set_stroke(width=2)
+        self.play(ShowCreation(line7), run_time=0.3)
+        self.wait(0.5)
+
+        s7_5 = TexMobject('21').next_to(line7, DOWN, buff=0.2).align_to(s7_4, LEFT)
+        self.play(Write(s7_5))
+
+        s7_6 = TexMobject('27').next_to(s7_2, UP).align_to(s7_2[3], LEFT)
+        self.play(Transform(s7_3, s7_6))
+
+        s7_7 = s7_5.copy().next_to(s7_5, DOWN)
+        self.play(Write(s7_7))
+
+        line7_2 = Line().move_to(s7_7).shift(DOWN*0.3)
+        line7_2.set_length(1.5)
+        line7_2.set_stroke(width=2)
+        self.play(ShowCreation(line7_2), run_time=0.3)
+
+        s7_8 = TexMobject('0').next_to(line7_2, DOWN, buff=0.2).align_to(s7_7, RIGHT)
+        self.play(Write(s7_8))
+
+        box = SurroundingRectangle(s7_6, color=YELLOW)
+        s7 = TextMobject('即为所求.').next_to(box, RIGHT)
+        s7.scale(0.8)
+        self.play(ShowCreation(box))
+        self.play(Write(s7))
+        self.wait(2)
+
+        r7 = TextMobject('\\textit{居然对了才是最骚的}', color=BLUE).to_edge(BOTTOM).shift(DOWN)
+        framebox = SurroundingRectangle(r7, buff=.1, color=BLUE)
+        self.play(ShowCreation(framebox), Write(r7), run_time=2)
+        self.wait(2)
+        self.play(FadeOut(s7_1),FadeOut(s7_2),FadeOut(s7_3),FadeOut(s7_4),
+                  FadeOut(s7_5),FadeOut(s7_6),FadeOut(s7_7),FadeOut(s7_8),FadeOut(s7),
+                  FadeOut(line7),FadeOut(line7_2),FadeOut(r7),FadeOut(framebox),FadeOut(j),
+                  FadeOut(box), FadeOut(q7))
+
+        # ================ end =======================
+        end = TextMobject(r'感谢收看(￣$\nabla$￣)$\~{}$*')
+        end.scale(2)
+        self.add(end)
+        self.wait(2)
 
 class test(Scene):
     def construct(self):
         j = TextMobject('【解】')
-        q5 = TextMobject(r'已知$\frac 10=\infty$，证明$\frac 1\infty=0$.', color=YELLOW).to_edge(TOP)
-        j.next_to(q5, DOWN).to_edge(buff=1.5)
-        self.play(Write(q5))
-        self.play(Write(j))
+        s4_2 = TexMobject(r'\frac{\mathrm{si\cancel{n}}~x}{\cancel{n}}=\mathrm{six}')
+        s4_2.scale(2)
+        self.add(s4_2)
+        self.wait()
+
+
+
 
 
 class Graphing(GraphScene):
