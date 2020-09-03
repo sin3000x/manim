@@ -137,7 +137,7 @@ class UpdatersExample(Scene):
 
 
 # See old_projects folder for many, many more
-class MyScene(Scene):
+class Sao(Scene):
     def construct(self):
         j = TextMobject('【解】')
         z = TextMobject('【证明】')
@@ -394,12 +394,37 @@ class MyScene(Scene):
 
 class test(Scene):
     def construct(self):
-        j = TextMobject('【解】')
-        s4_2 = TexMobject(r'\frac{\mathrm{si\cancel{n}}~x}{\cancel{n}}=\mathrm{six}')
-        s4_2.scale(2)
-        self.add(s4_2)
+        # theorem
+        theorem_name = TextMobject(r'\underline{\textbf{Hamilton-Cayley定理}}').set_color(YELLOW)\
+            .to_corner(LEFT+TOP).shift(UP*1.5)
+        theorem_content = TextMobject(r'设矩阵$A$的特征多项式$f(\lambda)=|\lambda E-A|$, ', r'则有$f(A)=O.$')\
+            .set_color(YELLOW).next_to(theorem_name, DOWN).align_to(theorem_name, LEFT).shift(DOWN*0.5)
+        self.play(Write(theorem_name))
+        self.wait()
+        self.play(Write(theorem_content[0]))
+        self.wait()
+        self.play(Write(theorem_content[1]))
         self.wait()
 
+        # example
+        li = TextMobject('【例】').align_to(theorem_content, LEFT).shift(UP*0.5)
+        mA = TexMobject(r'A','=',r'\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}').shift(UP*0.5)
+        self.play(Write(li))
+        self.play(Write(mA))
+        self.wait()
+
+        eig = TexMobject(r'|\lambda E-A|',r'=',r'\begin{vmatrix} \lambda-1 & -2 \\ -3 & \lambda-4 \end{vmatrix}',
+                         r'=',r'\lambda^2-5\lambda-2')\
+            .next_to(mA, DOWN)
+        # eig_poly = TexMobject(r'=',r'\lambda^2-5\lambda-2').next_to(eig, DOWN).align_to(eig[1], LEFT)
+        self.play(Write(eig))
+        self.wait()
+        poly = TexMobject(r'\lambda','^2-5',r'\lambda','-2').next_to(eig, DOWN)\
+            .align_to(eig, LEFT).set_color_by_tex(r'\lambda', RED)
+        poly_A = TexMobject(r'A','^2-5','A','-2').move_to(poly).set_color_by_tex('A', BLUE)
+        self.play(ReplacementTransform(eig[-1].copy(), poly))
+        self.wait()
+        self.play(Transform(poly, poly_A))
 
 
 
