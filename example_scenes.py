@@ -421,10 +421,21 @@ class test(Scene):
         self.wait()
         poly = TexMobject(r'\lambda','^2-5',r'\lambda','-2').next_to(eig, DOWN)\
             .align_to(eig, LEFT).set_color_by_tex(r'\lambda', RED)
-        poly_A = TexMobject(r'A','^2-5','A','-2').move_to(poly).set_color_by_tex('A', BLUE)
+        poly_A = TexMobject(r'A','^2-5','A','-2','E','=',
+                            r'\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}^2'
+                            r'-5\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}'
+                            r'-2\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}').next_to(eig, DOWN)\
+            .align_to(eig, LEFT).set_color_by_tex('A', BLUE).set_color_by_tex('E', BLUE)
+        poly = TexMobject(r'\lambda','^2-5',r'\lambda','-2',r'\cdot 1').move_to(poly_A[:5]).set_color_by_tex(r'\lambda', RED)
+        poly_O = TexMobject(r'A','^2-5','A','-2','E','=',
+                             r'\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}').next_to(eig, DOWN)\
+            .align_to(eig, LEFT).set_color_by_tex('A', BLUE).set_color_by_tex('E', BLUE)
         self.play(ReplacementTransform(eig[-1].copy(), poly))
         self.wait()
-        self.play(Transform(poly, poly_A))
+        self.play(Transform(poly, poly_A[:5]))
+        self.wait()
+        self.play(Write(poly_A[5:]))
+        self.play(Transform(poly_A, poly_O))
 
 
 
