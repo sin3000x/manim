@@ -392,12 +392,12 @@ class Sao(Scene):
         self.add(end)
         self.wait(2)
 
-class test(Scene):
+class HC(Scene):
     def construct(self):
         # theorem
         theorem_name = TextMobject(r'\underline{\textbf{Hamilton-Cayley定理}}').set_color(YELLOW)\
             .to_corner(LEFT+TOP).shift(UP*1.5)
-        theorem_content = TextMobject(r'设矩阵$A$的特征多项式$f(\lambda)=|\lambda E-A|$, ', r'则有$f(A)=O.$')\
+        theorem_content = TextMobject(r'设矩阵$A_{n\times n}$的特征多项式$f(\lambda)=|\lambda E-A|$, ', r'则$f(A)=O.$')\
             .set_color(YELLOW).next_to(theorem_name, DOWN).align_to(theorem_name, LEFT).shift(DOWN*0.5)
         self.play(Write(theorem_name))
         self.wait()
@@ -407,39 +407,166 @@ class test(Scene):
         self.wait()
 
         # example
-        li = TextMobject('【例】').align_to(theorem_content, LEFT).shift(UP*0.5)
-        mA = TexMobject(r'A','=',r'\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}').shift(UP*0.5)
+        li = TextMobject('【例】').align_to(theorem_content, LEFT).shift(UP * 0.5)
+        mA = TexMobject(r'A', '=', r'\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}').shift(UP * 0.5)
         self.play(Write(li))
         self.play(Write(mA))
         self.wait()
 
-        eig = TexMobject(r'|\lambda E-A|',r'=',r'\begin{vmatrix} \lambda-1 & -2 \\ -3 & \lambda-4 \end{vmatrix}',
-                         r'=',r'\lambda^2-5\lambda-2')\
+        eig = TexMobject(r'|\lambda E-A|', r'=', r'\begin{vmatrix} \lambda-1 & -2 \\ -3 & \lambda-4 \end{vmatrix}',
+                         r'=', r'\lambda^2-5\lambda-2') \
             .next_to(mA, DOWN)
         # eig_poly = TexMobject(r'=',r'\lambda^2-5\lambda-2').next_to(eig, DOWN).align_to(eig[1], LEFT)
         self.play(Write(eig))
         self.wait()
-        poly = TexMobject(r'\lambda','^2-5',r'\lambda','-2').next_to(eig, DOWN)\
-            .align_to(eig, LEFT).set_color_by_tex(r'\lambda', RED)
-        poly_A = TexMobject(r'A','^2-5','A','-2','E','=',
-                            r'\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}^2'
+        poly_A = TexMobject(r'A', '^2-5', 'A', '-2', 'E', '=',
+                            r'\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}^2',
                             r'-5\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}'
-                            r'-2\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}').next_to(eig, DOWN)\
+                            r'-2\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}').next_to(eig, DOWN) \
             .align_to(eig, LEFT).set_color_by_tex('A', BLUE).set_color_by_tex('E', BLUE)
-        poly = TexMobject(r'\lambda','^2-5',r'\lambda','-2',r'\cdot 1').move_to(poly_A[:5]).set_color_by_tex(r'\lambda', RED)
-        poly_O = TexMobject(r'A','^2-5','A','-2','E','=',
-                             r'\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}').next_to(eig, DOWN)\
-            .align_to(eig, LEFT).set_color_by_tex('A', BLUE).set_color_by_tex('E', BLUE)
+        poly = TexMobject(r'\lambda', '^2-5', r'\lambda', '-2', r'\cdot 1').move_to(poly_A[:5]). \
+            set_color_by_tex_to_color_map({r'\lambda': RED, r'\cdot 1': RED})
+        poly_O = TexMobject(r'\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}').move_to(poly_A[6])
         self.play(ReplacementTransform(eig[-1].copy(), poly))
         self.wait()
         self.play(Transform(poly, poly_A[:5]))
         self.wait()
         self.play(Write(poly_A[5:]))
-        self.play(Transform(poly_A, poly_O))
+        self.play(Transform(poly_A[6:], poly_O))
+        self.wait()
+        self.play(FadeOut(VGroup(li, mA, eig, poly, poly_O, poly_A)))
 
+        # proof1
+        zheng = TextMobject('【证】').next_to(theorem_content, DOWN).align_to(theorem_content, LEFT)
+        l1 = TexMobject(r'\text{记}',r'~B(',r'\lambda',r')=(',r'\lambda',r'E-A)^*',r'\text{ 为 }~',r'\lambda',r'E-A\text{ 的}\underline{\textbf{\textit{伴随阵}}}','~,')\
+            .set_color_by_tex(r'\lambda', RED).next_to(theorem_content, DOWN)
+        self.play(Write(zheng))
+        self.play(Write(l1))
+        self.wait()
 
+        # flash back
+        shan = TextMobject(r'\textbf{闪回！}').to_corner(LEFT+TOP).scale(1.2)
+        self.play(FadeOut(VGroup(theorem_content, theorem_name, zheng, l1)))
+        self.add(shan)
+        self.wait()
 
+        s1 = TextMobject(r'矩阵$A=\left(a_{i j}\right)_{n \times n}$的伴随矩阵'
+                         r'$$A^*=\left(\begin{array}{cccc} A_{11} & A_{21} & \cdots & A_{n 1} \\'
+                         r'A_{12} & A_{22} & \cdots & A_{n 2} \\ '
+                         r'\vdots & \vdots & & \vdots \\'
+                         r'A_{1 n} & A_{2 n} & \cdots & A_{n n}\end{array}\right)$$').shift(UP)
+        s2 = TextMobject(r'其中$A_{ij}$是$a_{ij}$的\underline{\textit{代数余子式}}.').next_to(s1, DOWN)
+        s3 = TextMobject(r'满足',r'$AA^*=|A|E$', '.').next_to(s2, DOWN, buff=1.0)
+        s3[-2].set_color(YELLOW)
+        self.play(Write(s1), runtime=4)
+        self.wait()
+        self.play(Write(s2))
+        self.wait()
+        self.play(Write(s3))
+        self.wait(3)
 
+        self.play(FadeOut(VGroup(shan, s1, s2, s3)), FadeIn(VGroup(theorem_content, theorem_name, zheng, l1)))
+class test(Scene):
+    def construct(self):
+        # theorem
+        theorem_name = TextMobject(r'\underline{\textbf{Hamilton-Cayley定理}}').set_color(YELLOW)\
+            .to_corner(LEFT+TOP).shift(UP*1.5)
+        theorem_content = TextMobject(r'设矩阵$A_{n\times n}$的特征多项式$f(\lambda)=|\lambda E-A|$, ', r'则$f(A)=O.$')\
+            .set_color(YELLOW).next_to(theorem_name, DOWN).align_to(theorem_name, LEFT).shift(DOWN*0.5)
+        self.play(Write(theorem_name))
+        self.wait()
+        self.play(Write(theorem_content[0]))
+        self.wait()
+        self.play(Write(theorem_content[1]))
+        self.wait()
+
+        # proof1
+        zheng = TextMobject('【证】').next_to(theorem_content, DOWN).align_to(theorem_content, LEFT)
+        l1 = TexMobject(r'\text{记}',r'~B(',r'\lambda',r')=(',r'\lambda',r'E-A)^*',r'\text{ 为 }~',r'\lambda',r'E-A\text{ 的}\underline{\textit{伴随阵}}','~,')\
+            .set_color_by_tex(r'\lambda', RED).next_to(theorem_content, DOWN)
+        self.play(Write(zheng))
+        self.play(Write(l1))
+        self.wait()
+
+        # proof2
+        l2 = TexMobject(r'\text{那么有 }~','B(',r'\lambda',r')(',r'\lambda',r'E-A)=', r'|',r'\lambda',r'E','-','A', r'|', 'E.')\
+            .set_color_by_tex(r'\lambda', RED).next_to(l1, DOWN).align_to(l1, LEFT)
+        l2_2 = TexMobject('f(',r'\lambda',')','E.').set_color_by_tex('\\lambda', RED).next_to(l2[5],RIGHT)
+        self.play(Write(l2))
+        self.wait()
+        self.play(Transform(l2[6:], l2_2))
+
+        # find B(lambda)
+        b0_0 = [TexMobject('\\lambda','-2').set_color_by_tex('\\lambda', RED),TexMobject('1'),TexMobject('0')]
+        b0_1 = [TexMobject('-2'),TexMobject('\\lambda','+1').set_color_by_tex('\\lambda', RED),TexMobject('3')]
+        b0_2 = [TexMobject('-4'),TexMobject('2'),TexMobject('\\lambda','-4').set_color_by_tex('\\lambda', RED)]
+        m1 = Matrix([b0_0,b0_1, b0_2], element_to_mobject=lambda x: x,element_alignment_corner=ORIGIN)
+        b1 = VGroup(TexMobject('B(',r'\lambda',')','=').set_color_by_tex('\\lambda', RED), m1)\
+            .arrange(RIGHT).next_to(l2, DOWN).shift(LEFT)
+        star = TexMobject('*').move_to(b1.get_corner(UR))
+        line_1 = Line(b1[1][0].get_left()+UP*0.8, b1[1][0].get_right()+UP*0.8).set_color(BLUE)
+        line_2 = Line(b1[1][0].get_top()+LEFT*1.4, b1[1][0].get_bottom()+LEFT*1.4).set_color(BLUE)
+        self.play(Write(b1))
+        self.play(Write(star))
+        self.play(ShowCreation(line_1))
+        self.play(ShowCreation(line_2))
+        self.wait()
+        row1 = [TexMobject('\\lambda','+1').set_color_by_tex('\\lambda', RED),TexMobject('3')]
+        row2 = [TexMobject('2'),TexMobject('\\lambda','-4').set_color_by_tex('\\lambda', RED)]
+        det = Matrix([row1, row2], element_to_mobject=lambda x: x, bracket='v', element_alignment_corner=ORIGIN)\
+            .next_to(b1, RIGHT, buff=.8)
+        b2 = TexMobject(r'=',r'\lambda',r'^2-3',r'\lambda',r'-10').set_color_by_tex('\\lambda', RED).next_to(det, DOWN)
+        self.play(FadeInFrom(det, LEFT))
+        self.play(Write(b2))
+
+        ro1 = [TexMobject(r'\lambda',r'^2-3',r'\lambda',r'-10').set_color_by_tex('\\lambda', RED), TexMobject(r'-',r'\lambda','+4').set_color_by_tex('\\lambda', RED), TexMobject('3')]
+        ro2 = [TexMobject('2', r'\lambda','-20').set_color_by_tex('\\lambda', RED), TexMobject(r'\lambda',r'^2-6',r'\lambda',r'+8').set_color_by_tex('\\lambda', RED), TexMobject(r'-3',r'\lambda',r'+6').set_color_by_tex('\\lambda', RED)]
+        ro3 = [TexMobject('4', r'\lambda').set_color_by_tex('\\lambda', RED), TexMobject('-2',r'\lambda').set_color_by_tex('\\lambda', RED), TexMobject(r'\lambda',r'^2-',r'\lambda').set_color_by_tex('\\lambda', RED)]
+        m2 = Matrix([ro1, ro2, ro3], element_to_mobject=lambda x: x, h_buff=3).next_to(b1[0],RIGHT)
+        self.play(FadeOut(VGroup(b1[1], star, det, line_1, line_2, b2[0])))
+        self.play(Transform(b2[1:], m2[0][0][0:]))
+        self.play(FadeIn(m2))
+        self.wait()
+        b3 = TextMobject(r'$\phi$(>$\omega$<*) 每个元素的次数最高是$n-1$.').next_to(m2, DOWN, buff=.2).scale(1)
+        self.play(Write(b3))
+
+        B0 = Matrix([[1,0,0],[0,1,0],[0,0,1]], h_buff=.8, v_buff=.6).scale(.8)
+        B1 = Matrix([[-3,-1,0],[2,-6,-3],[4,-2,-1]], h_buff=.8, v_buff=.6).scale(.8)
+        B2 = Matrix([[-10,4,3],[-20,8,6],[0,0,0]], h_buff=.8, v_buff=.6).scale(.8)
+        b4 = VGroup(TexMobject(r'\lambda','^2').set_color_by_tex('\\lambda', RED), B0, TexMobject('+',r'\lambda')
+                    .set_color_by_tex('\\lambda', RED), B1,TexMobject('+'), B2).arrange(RIGHT).next_to(b1[0],RIGHT)
+        b5 = b4.copy()
+        starts = []
+        for i in [1,3,5]:
+            b5[i].set_color(BLUE)
+            starts.append(b5[i].get_bottom())
+        self.play(FadeOut(b2[1:]))
+        self.play(ReplacementTransform(m2, b4))
+        self.wait()
+        self.play(Transform(b4, b5))
+
+        arrows = [Line(start, b3.get_top(), stroke_width=3, preserve_tip_size_when_scaling=True).set_color(BLUE) for start in starts]
+        self.play(GrowArrow(arrows[0]), GrowArrow(arrows[1]), GrowArrow(arrows[2]), Transform(b3, TextMobject('\\textit{数字矩阵}').move_to(b3).set_color(BLUE)))
+
+        b6 = TexMobject(r'\lambda',r'^{n-1}',r'B_0',r'+',r'\lambda',r'^{n-2}',r'B_1',r'+',r'\cdots',r'+',r'B_{n-1}').set_color_by_tex("\\lambda", RED).next_to(b1[0], RIGHT)
+        self.play(FadeOut(VGroup(*arrows, b3)))
+        self.play(ReplacementTransform(b4, b6))
+
+        ## proof3
+        l3 = TexMobject(r'f(',r'\lambda',r')','=',r'\lambda',r'^n+a_1',r'\lambda',r'^{n-1}+\cdots+a_n').set_color_by_tex('\\lambda', RED).next_to(b6, DOWN)
+        l3[3].align_to(b1[0][-1], LEFT)
+        l3[:3].align_to(b1, LEFT)
+        l3[4:].align_to(b6, LEFT)
+        self.play(Write(l3))
+        self.wait()
+
+        box = SurroundingRectangle(l2[1:], buff=.1).set_color(YELLOW)
+        self.play(ShowCreation(box))
+
+        l4 = TexMobject(r'\left(',r'\lambda',r'^{n-1}',r'B_0',r'+',r'\lambda',r'^{n-2}',r'B_1',r'+',r'\cdots',r'+',r'B_{n-1}',r'\right)',r'(',r'\lambda','E-A)').set_color_by_tex("\\lambda", RED).move_to(b6)
+        l5 = TexMobject(r'\left(',r'\lambda',r'^n+a_1',r'\lambda',r'^{n-1}+\cdots+a_n',r'\right)','E').set_color_by_tex('\\lambda', RED).move_to(l3)
+        self.play(FadeOut(b1[0]), FadeOut(l3[:4]))
+        self.play(ReplacementTransform(b6, l4), ReplacementTransform(l3[4:], l5))
 class Graphing(GraphScene):
     CONFIG = {
         "x_min": -5,

@@ -63,6 +63,7 @@ class Matrix(VMobject):
         "element_to_mobject": TexMobject,
         "element_to_mobject_config": {},
         "element_alignment_corner": DR,
+        "bracket": 'p'
     }
 
     def __init__(self, matrix, **kwargs):
@@ -101,12 +102,22 @@ class Matrix(VMobject):
         return self
 
     def add_brackets(self):
-        bracket_pair = TexMobject("\\big[", "\\big]")
-        bracket_pair.scale(2)
-        bracket_pair.stretch_to_fit_height(
-            self.get_height() + 2 * self.bracket_v_buff
-        )
-        l_bracket, r_bracket = bracket_pair.split()
+        if self.bracket == 'p':
+            bracket_pair = TexMobject("\\left(", "\\right)")
+            bracket_pair.scale(2)
+            bracket_pair.stretch_to_fit_height(
+                self.get_height() + 2 * self.bracket_v_buff
+            )
+            l_bracket, r_bracket = bracket_pair.split()
+        elif self.bracket == 'v':
+            bracket_pair = TexMobject(r"\left|")
+            bracket_pair.scale(2)
+            bracket_pair.stretch_to_fit_height(
+                self.get_height() + 2 * self.bracket_v_buff
+            )
+            l_bracket = bracket_pair
+            r_bracket = l_bracket.copy()
+
         l_bracket.next_to(self, LEFT, self.bracket_h_buff)
         r_bracket.next_to(self, RIGHT, self.bracket_h_buff)
         self.add(l_bracket, r_bracket)
