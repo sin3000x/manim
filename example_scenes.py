@@ -445,7 +445,7 @@ class HC(Scene):
         self.wait()
 
         # flash back
-        shan = TextMobject(r'\textbf{闪回！}').to_corner(LEFT+TOP).scale(1.2)
+        shan = TextMobject(r'\textbf{闪回！}').to_corner(LEFT+TOP).scale(1.2).set_color(YELLOW)
         self.play(FadeOut(VGroup(theorem_content, theorem_name, zheng, l1)))
         self.add(shan)
         self.wait()
@@ -466,6 +466,222 @@ class HC(Scene):
         self.wait(3)
 
         self.play(FadeOut(VGroup(shan, s1, s2, s3)), FadeIn(VGroup(theorem_content, theorem_name, zheng, l1)))
+
+        # proof2
+        l2 = TexMobject(r'\text{那么有 }~','B(',r'\lambda',r')(',r'\lambda',r'E-A)=', r'|',r'\lambda',r'E','-','A', r'|', 'E.')\
+            .set_color_by_tex(r'\lambda', RED).next_to(l1, DOWN).align_to(l1, LEFT)
+        l2_2 = TexMobject('f(',r'\lambda',')','E.').set_color_by_tex('\\lambda', RED).next_to(l2[5],RIGHT)
+        self.play(Write(l2))
+        self.wait(2)
+        self.play(Transform(l2[6:], l2_2))
+
+        # find B(lambda)
+        b0_0 = [TexMobject('\\lambda','-2').set_color_by_tex('\\lambda', RED),TexMobject('1'),TexMobject('0')]
+        b0_1 = [TexMobject('-2'),TexMobject('\\lambda','+1').set_color_by_tex('\\lambda', RED),TexMobject('3')]
+        b0_2 = [TexMobject('-4'),TexMobject('2'),TexMobject('\\lambda','-4').set_color_by_tex('\\lambda', RED)]
+        m1 = Matrix([b0_0,b0_1, b0_2], element_to_mobject=lambda x: x,element_alignment_corner=ORIGIN)
+        b1 = VGroup(TexMobject('B(',r'\lambda',')','=').set_color_by_tex('\\lambda', RED), m1)\
+            .arrange(RIGHT).next_to(l2, DOWN).shift(LEFT)
+        star = TexMobject('*').move_to(b1.get_corner(UR))
+        line_1 = Line(b1[1][0].get_left()+UP*0.8, b1[1][0].get_right()+UP*0.8).set_color(BLUE)
+        line_2 = Line(b1[1][0].get_top()+LEFT*1.4, b1[1][0].get_bottom()+LEFT*1.4).set_color(BLUE)
+        self.play(Write(b1))
+        self.play(Write(star))
+        self.play(ShowCreation(line_1))
+        self.play(ShowCreation(line_2))
+        self.wait()
+        row1 = [TexMobject('\\lambda','+1').set_color_by_tex('\\lambda', RED),TexMobject('3')]
+        row2 = [TexMobject('2'),TexMobject('\\lambda','-4').set_color_by_tex('\\lambda', RED)]
+        det = Matrix([row1, row2], element_to_mobject=lambda x: x, bracket='v', element_alignment_corner=ORIGIN)\
+            .next_to(b1, RIGHT, buff=.8)
+        b2 = TexMobject(r'=',r'\lambda',r'^2-3',r'\lambda',r'-10').set_color_by_tex('\\lambda', RED).next_to(det, DOWN)
+        self.play(FadeInFrom(det, LEFT))
+        self.play(Write(b2))
+
+        ro1 = [TexMobject(r'\lambda',r'^2-3',r'\lambda',r'-10').set_color_by_tex('\\lambda', RED), TexMobject(r'-',r'\lambda','+4').set_color_by_tex('\\lambda', RED), TexMobject('3')]
+        ro2 = [TexMobject('2', r'\lambda','-20').set_color_by_tex('\\lambda', RED), TexMobject(r'\lambda',r'^2-6',r'\lambda',r'+8').set_color_by_tex('\\lambda', RED), TexMobject(r'-3',r'\lambda',r'+6').set_color_by_tex('\\lambda', RED)]
+        ro3 = [TexMobject('4', r'\lambda').set_color_by_tex('\\lambda', RED), TexMobject('-2',r'\lambda').set_color_by_tex('\\lambda', RED), TexMobject(r'\lambda',r'^2-',r'\lambda').set_color_by_tex('\\lambda', RED)]
+        m2 = Matrix([ro1, ro2, ro3], element_to_mobject=lambda x: x, h_buff=3).next_to(b1[0],RIGHT)
+        self.play(FadeOut(VGroup(b1[1], star, det, line_1, line_2, b2[0])))
+        self.play(Transform(b2[1:], m2[0][0][0:]))
+        self.play(FadeIn(m2))
+        self.wait()
+        b3 = TextMobject(r'$\phi$(>$\omega$<*) 每个元素的次数最高是$n-1$.').next_to(m2, DOWN, buff=.2).scale(1)
+        self.play(Write(b3))
+
+        B0 = Matrix([[1,0,0],[0,1,0],[0,0,1]], h_buff=.8, v_buff=.6).scale(.8)
+        B1 = Matrix([[-3,-1,0],[2,-6,-3],[4,-2,-1]], h_buff=.8, v_buff=.6).scale(.8)
+        B2 = Matrix([[-10,4,3],[-20,8,6],[0,0,0]], h_buff=.8, v_buff=.6).scale(.8)
+        b4 = VGroup(TexMobject(r'\lambda','^2').set_color_by_tex('\\lambda', RED), B0, TexMobject('+',r'\lambda')
+                    .set_color_by_tex('\\lambda', RED), B1,TexMobject('+'), B2).arrange(RIGHT).next_to(b1[0],RIGHT)
+        b5 = b4.copy()
+        starts = []
+        for i in [1,3,5]:
+            b5[i].set_color(BLUE)
+            starts.append(b5[i].get_bottom())
+        self.play(FadeOut(b2[1:]))
+        self.play(ReplacementTransform(m2, b4))
+        self.wait()
+        self.play(Transform(b4, b5))
+
+        arrows = [Line(start, b3.get_top(), stroke_width=3, preserve_tip_size_when_scaling=True).set_color(BLUE) for start in starts]
+        self.play(GrowArrow(arrows[0]), GrowArrow(arrows[1]), GrowArrow(arrows[2]), Transform(b3, TextMobject('\\textit{数字矩阵}').move_to(b3).set_color(BLUE)))
+
+        b6 = TexMobject(r'\lambda',r'^{n-1}',r'B_0',r'+',r'\lambda',r'^{n-2}',r'B_1',r'+',r'\cdots',r'+',r'B_{n-1}').set_color_by_tex("\\lambda", RED).next_to(b1[0], RIGHT)
+        self.play(FadeOut(VGroup(*arrows, b3)))
+        self.play(ReplacementTransform(b4, b6))
+        self.wait()
+
+        ## proof3
+        l3 = TexMobject(r'f(',r'\lambda',r')','=',r'\lambda',r'^n+a_1',r'\lambda',r'^{n-1}+\cdots+a_n').set_color_by_tex('\\lambda', RED).next_to(b6, DOWN)
+        l3[3].align_to(b1[0][-1], LEFT)
+        l3[:3].align_to(b1, LEFT)
+        l3[4:].align_to(b6, LEFT)
+        self.play(Write(l3))
+        self.wait()
+
+        box = SurroundingRectangle(l2[1:], buff=.1).set_color(YELLOW)
+        self.play(ShowCreation(box))
+
+        l4 = TexMobject(r'\left(',r'\lambda',r'^{n-1}',r'B_0',r'+',r'\lambda',r'^{n-2}',r'B_1',r'+',r'\cdots',r'+',r'B_{n-1}',r'\right)',r'(',r'\lambda','E-A)').set_color_by_tex("\\lambda", RED).move_to(b6)
+        l5 = TexMobject(r'\left(',r'\lambda',r'^n+a_1',r'\lambda',r'^{n-1}+\cdots+a_n',r'\right)','E').set_color_by_tex('\\lambda', RED).move_to(l3)
+
+        # self.play(FadeOut(b1[0]), FadeOut(l3[:4]))
+        self.play(FadeOut(b1[0]), FadeOut(l3[:4]), ReplacementTransform(b6, l4[1:12]), ReplacementTransform(l3[4:], l5[1:5]))
+        self.play(FadeIn(VGroup(l4[0], l4[12:], l5[0], l5[5:])))
+        self.wait()
+
+        # l6 = TexMobject(r'\lambda',r'^n B_0','+',r'\lambda',r'^{n-1}(B_1-B_0 A)','+',r'\lambda',r'^{n-2}(B_2-B_1
+        # A)+\cdots+',r'\lambda',r'(B_{n-1}-B_{n-2}A)-B_{n-1}A').set_color_by_tex('\\lambda', RED).move_to(l4)
+        l6 = TexMobject(r'\lambda',r'^n',' B_0','+',r'\lambda',r'^{n-1}','(B_1-B_0 A)','+','\cdots','+',r'\lambda',r'(B_{n-1}-B_{n-2}A)','-','B_{n-1}','A').set_color_by_tex('\\lambda', RED).move_to(l4)
+        #                  0         1      2    3       4         5           6        7    8       9      10         11                 12      13     14
+        l7 = TexMobject(r'\lambda',r'^n',' E','+','a_1 ',r'\lambda',r'^{n-1}','E','+','\cdots','+','a_{n-1}',r'\lambda',r' E','+','a_n E').set_color_by_tex('\\lambda', RED).move_to(l5).align_to(ORIGIN, ORIGIN)
+        #                  0        1      2   3    4          5        6      7   8     9      10    11           12      13  14   15
+        l7[:3].align_to(l6[:3], LEFT)
+        l7[3].align_to(l6[3], LEFT)
+        l7[4:8].align_to(l6[4:7], LEFT)
+        l7[8].align_to(l6[7], LEFT)
+        l7[9].align_to(l6[8], LEFT)
+        l7[10].align_to(l6[9], LEFT)
+        l7[11:14].align_to(l6[10:12], LEFT)
+        l7[14].align_to(l6[12], LEFT)
+        l7[15].align_to(l6[13:], LEFT)
+
+        # match color
+        first, second, third, fourth = YELLOW, GREEN, BLUE, PURPLE
+        l6_1 = l6.copy()
+        tmp = l6.copy()
+        l7_1 = l7.copy()
+        l6_1[2].set_color(first)
+        l7_1[2].set_color(first)
+        l6_1[6].set_color(second)
+        l7_1[4].set_color(second)
+        l7_1[7].set_color(second)
+        l6_1[11].set_color(third)
+        l7_1[11].set_color(third)
+        l7_1[13].set_color(third)
+        l6_1[12:].set_color(fourth)
+        l7_1[14:].set_color(fourth)
+
+        self.play(ReplacementTransform(l4, l6), ReplacementTransform(l5, l7), run_time=2)
+        self.play(ReplacementTransform(l6, l6_1), ReplacementTransform(l7, l7_1))
+
+        # brace
+        l8_1 = VGroup(l6_1[2].copy(), TexMobject('='), l7_1[2].copy()).arrange(RIGHT).to_edge(TOP).shift(UP)
+        # l8_2 = VGroup(l6_1[6].copy(), TexMobject('='), l7_1[4].copy(), l7_1[7].copy()).arrange(RIGHT).next_to(l8_1, DOWN)
+        l8_2 = VGroup(l6_1[6].copy(), TexMobject('='), TexMobject('a_1','E').set_color(second)).arrange(RIGHT).next_to(l8_1, DOWN)
+        # l8_3 = VGroup(l6_1[11].copy(), TexMobject('='), l7_1[11].copy(), l7_1[13].copy()).arrange(RIGHT).next_to(l8_2, DOWN)
+        l8_0 = TexMobject('\\vdots').next_to(l8_2, DOWN).align_to(l8_1[1].get_center(), LEFT)
+
+        l8_3 = VGroup(l6_1[11].copy(), TexMobject('='), TexMobject('a_{n-1}','E').set_color(third)).arrange(RIGHT).next_to(l8_0, DOWN)
+        l8_4 = VGroup(l6_1[12:].copy(), TexMobject('='), l7_1[15].copy()).arrange(RIGHT).next_to(l8_3, DOWN)
+        for l in [l8_2, l8_3, l8_4]:
+            l[0].align_to(l8_1[0], RIGHT)
+            l[1].align_to(l8_1[1], LEFT)
+            l[2].align_to(l8_1[2], LEFT)
+
+        br = Brace(VGroup(l8_1, l8_2, l8_0, l8_3, l8_4), LEFT)
+
+
+        self.play(FadeOut(VGroup(theorem_name, theorem_content, zheng, box, l1, l2)))
+        self.play(ReplacementTransform(VGroup(l6_1[2], l7_1[2]), l8_1))
+        self.play(ReplacementTransform(VGroup(l6_1[6], l7_1[4], l7_1[7]), l8_2))
+        self.play(Write(l8_0))
+        self.play(ReplacementTransform(VGroup(l6_1[11], l7_1[11], l7_1[13]), l8_3))
+        self.play(ReplacementTransform(VGroup(l6_1[12:], l7_1[14:]), l8_4))
+
+        self.play(GrowFromCenter(br), FadeOut(VGroup(l6_1[:2],l6_1[3:6],l6_1[7:11], l7_1[:2], l7_1[3], l7_1[5:7], l7_1[8:11], l7_1[12])))
+
+        # change color
+        dest = TexMobject(r'\text{要证}','f(','A',')=','A','^n+','a_1','A','^{n-1}+\cdots+','a_{n-1}','A','+','a_n', 'E=O.').set_color_by_tex_to_color_map({'A': RED, 'a_1': second, 'a_{n-1}': third, 'a_n': fourth}).to_edge(BOTTOM).shift(DOWN)
+        self.play(Write(dest))
+        l8_11 = VGroup(TexMobject('B_0').move_to(l8_1[0]), TexMobject('=').move_to(l8_1[1]), TexMobject('E').move_to(l8_1[2]))
+        l8_21 = VGroup(TexMobject('(','B_1-B_0','A',')').set_color_by_tex('A', RED).move_to(l8_2[0]), TexMobject('=').move_to(l8_2[1]), TexMobject('a_1','E').set_color_by_tex('a_1', second).move_to(l8_2[2]))
+        l8_31 = VGroup(TexMobject('(','B_{n-1}-B_{n-2}','A',')').set_color_by_tex('A', RED).move_to(l8_3[0]), TexMobject('=').move_to(l8_3[1]), TexMobject('a_{n-1}', 'E').set_color_by_tex('a_{n-1}', third).move_to(l8_3[2]))
+        tmp.set_color(WHITE)
+        tmp[-1].set_color(RED)
+        l8_41 = VGroup(tmp[12:].move_to(l8_4[0]), TexMobject('=').move_to(l8_4[1]), TexMobject('a_n','E').set_color_by_tex('a_n', fourth).move_to(l8_4[2]))
+        self.play(FadeIn(VGroup(l8_11, l8_21, l8_31, l8_41)))
+        self.remove(l8_1, l8_2, l8_3, l8_4)
+        self.wait()
+
+        # times A^...
+        l9_1 = VGroup(TexMobject('B_0','A','^n').set_color_by_tex('A', RED).move_to(l8_11).align_to(l8_11[0], RIGHT),TexMobject('E','A','^n').set_color_by_tex('A', RED).move_to(l8_11).align_to(l8_11[2], LEFT))
+        l9_2 = VGroup(TexMobject('(','B_1-B_0','A',')','A','^{n-1}').set_color_by_tex('A', RED).move_to(l8_21).align_to(l8_21[0], RIGHT), TexMobject('a_1','E','A','^{n-1}').set_color_by_tex('a_1', second).set_color_by_tex('A', RED).move_to(l8_21).align_to(l8_21[2], LEFT))
+        l9_3 = VGroup(TexMobject('(','B_{n-1}-B_{n-2}','A',')','A').set_color_by_tex('A', RED).move_to(l8_31).align_to(l8_31[0], RIGHT), TexMobject('a_{n-1}','E','A').set_color_by_tex('a_{n-1}', third).set_color_by_tex('A', RED).move_to(l8_31).align_to(l8_31[2], LEFT))
+
+        self.play(ReplacementTransform(l8_11[0], l9_1[0][0]), FadeIn(l9_1[0][1:]), ReplacementTransform(l8_11[2], l9_1[1][0]), FadeIn(l9_1[1][1:]))
+        self.play(ReplacementTransform(l8_21[0], l9_2[0][:4]), FadeIn(l9_2[0][4:]), ReplacementTransform(l8_21[2], l9_2[1][:2]), FadeIn(l9_2[1][2:]))
+        br2 = br.copy().shift(LEFT*0.3)
+        self.play(ReplacementTransform(br, br2), ReplacementTransform(l8_31[0], l9_3[0][:4]), FadeIn(l9_3[0][4:]), ReplacementTransform(l8_31[2], l9_3[1][:2]), FadeIn(l9_3[1][2:]))
+        self.wait()
+
+        # processing
+        l10_1_1 = TexMobject('A','^n').set_color_by_tex('A',RED).next_to(l8_11[1], RIGHT)
+        l10_2_0 = TexMobject('B_1','A','^{n-1}','-','B_0','A','^n').set_color_by_tex('A',RED).next_to(l8_21[1], LEFT)
+        l10_2_1 = TexMobject('a_1','A','^{n-1}').set_color_by_tex('a_1', second).set_color_by_tex('A', RED).next_to(l8_21[1], RIGHT)
+        l10_3_0 = TexMobject('B_{n-1}','A','-','B_{n-2}','A','^2').set_color_by_tex('A',RED).next_to(l8_31[1], LEFT)
+        l10_3_1 = TexMobject('a_{n-1}','A').set_color_by_tex('a_{n-1}', third).set_color_by_tex('A', RED).next_to(l8_31[1], RIGHT)
+        self.play(ReplacementTransform(l9_1[1], l10_1_1))
+        self.play(ReplacementTransform(l9_2[0], l10_2_0), ReplacementTransform(l9_2[1], l10_2_1))
+        self.play(ReplacementTransform(l9_3[0], l10_3_0), ReplacementTransform(l9_3[1], l10_3_1))
+        self.wait()
+
+        # sum
+        line_3 = Line(br2.get_corner(DL), br2.get_corner(DL)+RIGHT*8).shift(DOWN*0.5).set_color(YELLOW)
+        plus = TexMobject('+').set_color(YELLOW).move_to(br2.get_bottom())
+        equal = TexMobject('=').next_to(line_3, DOWN, buff=0.4).align_to(l8_31[1], LEFT)
+        self.play(ShowCreation(line_3), Transform(l9_1[0], l9_1[0].copy().align_to(l10_2_0, LEFT)))
+        self.play(ReplacementTransform(br2, plus))
+        self.play(ReplacementTransform(l8_41[1].copy(), equal))
+        self.wait()
+
+        O = TexMobject('O').next_to(equal, LEFT)
+        rhs = TexMobject('f(','A',')').set_color_by_tex('A', RED).next_to(equal, RIGHT)
+        diag1 = Line(l9_1[0].get_center(), l10_2_0[3:].get_center()).set_color(YELLOW)
+        delta = -(l10_2_0[3:].get_center() - l9_1[0].get_center())[1]
+
+        diag2 = diag1.copy().shift(DOWN*delta)
+        diag3 = diag2.copy().shift(DOWN*delta)
+        diag4 = diag3.copy().shift(DOWN*delta)
+
+        self.play(ReplacementTransform(VGroup(l10_1_1.copy(), l10_2_1.copy(), l10_3_1.copy(), l8_41[-1].copy()), rhs))
+        self.wait()
+        for diag in [diag1, diag2, diag3, diag4]:
+            self.play(ShowCreation(diag))
+        self.play(ReplacementTransform(VGroup(l9_1[0].copy(), l10_2_0.copy(), l10_3_0.copy(), l8_41[0].copy()), O))
+        self.wait()
+        # t = TextMobject(r"(￣$\\nabla$￣)／").next_to(rhs, RIGHT, buff=1)
+        # self.play(Write(t))
+        # self.wait()
+        self.play(FadeOut(VGroup(l9_1[0], l8_11[1], l10_1_1, l10_2_0, l8_21[1], l10_2_1,
+                                 l8_0, l10_3_0, l8_31[1], l10_3_1, l8_4,l8_41,
+                                 diag1, diag2, diag3, diag4, line_3, plus,
+                                 O, equal, rhs, dest)),
+                  FadeIn(VGroup(theorem_name,theorem_content, l1, l2, box, zheng)))
+        self.wait()
+
+
 class test(Scene):
     def construct(self):
         # theorem
@@ -551,6 +767,7 @@ class test(Scene):
         b6 = TexMobject(r'\lambda',r'^{n-1}',r'B_0',r'+',r'\lambda',r'^{n-2}',r'B_1',r'+',r'\cdots',r'+',r'B_{n-1}').set_color_by_tex("\\lambda", RED).next_to(b1[0], RIGHT)
         self.play(FadeOut(VGroup(*arrows, b3)))
         self.play(ReplacementTransform(b4, b6))
+        self.wait()
 
         ## proof3
         l3 = TexMobject(r'f(',r'\lambda',r')','=',r'\lambda',r'^n+a_1',r'\lambda',r'^{n-1}+\cdots+a_n').set_color_by_tex('\\lambda', RED).next_to(b6, DOWN)
@@ -565,8 +782,142 @@ class test(Scene):
 
         l4 = TexMobject(r'\left(',r'\lambda',r'^{n-1}',r'B_0',r'+',r'\lambda',r'^{n-2}',r'B_1',r'+',r'\cdots',r'+',r'B_{n-1}',r'\right)',r'(',r'\lambda','E-A)').set_color_by_tex("\\lambda", RED).move_to(b6)
         l5 = TexMobject(r'\left(',r'\lambda',r'^n+a_1',r'\lambda',r'^{n-1}+\cdots+a_n',r'\right)','E').set_color_by_tex('\\lambda', RED).move_to(l3)
-        self.play(FadeOut(b1[0]), FadeOut(l3[:4]))
-        self.play(ReplacementTransform(b6, l4), ReplacementTransform(l3[4:], l5))
+
+        # self.play(FadeOut(b1[0]), FadeOut(l3[:4]))
+        self.play(FadeOut(b1[0]), FadeOut(l3[:4]), ReplacementTransform(b6, l4[1:12]), ReplacementTransform(l3[4:], l5[1:5]))
+        self.play(FadeIn(VGroup(l4[0], l4[12:], l5[0], l5[5:])))
+        self.wait()
+
+        # l6 = TexMobject(r'\lambda',r'^n B_0','+',r'\lambda',r'^{n-1}(B_1-B_0 A)','+',r'\lambda',r'^{n-2}(B_2-B_1
+        # A)+\cdots+',r'\lambda',r'(B_{n-1}-B_{n-2}A)-B_{n-1}A').set_color_by_tex('\\lambda', RED).move_to(l4)
+        l6 = TexMobject(r'\lambda',r'^n',' B_0','+',r'\lambda',r'^{n-1}','(B_1-B_0 A)','+','\cdots','+',r'\lambda',r'(B_{n-1}-B_{n-2}A)','-','B_{n-1}','A').set_color_by_tex('\\lambda', RED).move_to(l4)
+        #                  0         1      2    3       4         5           6        7    8       9      10         11                 12      13     14
+        l7 = TexMobject(r'\lambda',r'^n',' E','+','a_1 ',r'\lambda',r'^{n-1}','E','+','\cdots','+','a_{n-1}',r'\lambda',r' E','+','a_n E').set_color_by_tex('\\lambda', RED).move_to(l5).align_to(ORIGIN, ORIGIN)
+        #                  0        1      2   3    4          5        6      7   8     9      10    11           12      13  14   15
+        l7[:3].align_to(l6[:3], LEFT)
+        l7[3].align_to(l6[3], LEFT)
+        l7[4:8].align_to(l6[4:7], LEFT)
+        l7[8].align_to(l6[7], LEFT)
+        l7[9].align_to(l6[8], LEFT)
+        l7[10].align_to(l6[9], LEFT)
+        l7[11:14].align_to(l6[10:12], LEFT)
+        l7[14].align_to(l6[12], LEFT)
+        l7[15].align_to(l6[13:], LEFT)
+
+        # match color
+        first, second, third, fourth = YELLOW, GREEN, BLUE, PURPLE
+        l6_1 = l6.copy()
+        tmp = l6.copy()
+        l7_1 = l7.copy()
+        l6_1[2].set_color(first)
+        l7_1[2].set_color(first)
+        l6_1[6].set_color(second)
+        l7_1[4].set_color(second)
+        l7_1[7].set_color(second)
+        l6_1[11].set_color(third)
+        l7_1[11].set_color(third)
+        l7_1[13].set_color(third)
+        l6_1[12:].set_color(fourth)
+        l7_1[14:].set_color(fourth)
+
+        self.play(ReplacementTransform(l4, l6), ReplacementTransform(l5, l7), run_time=2)
+        self.play(ReplacementTransform(l6, l6_1), ReplacementTransform(l7, l7_1))
+
+        # brace
+        l8_1 = VGroup(l6_1[2].copy(), TexMobject('='), l7_1[2].copy()).arrange(RIGHT).to_edge(TOP).shift(UP)
+        # l8_2 = VGroup(l6_1[6].copy(), TexMobject('='), l7_1[4].copy(), l7_1[7].copy()).arrange(RIGHT).next_to(l8_1, DOWN)
+        l8_2 = VGroup(l6_1[6].copy(), TexMobject('='), TexMobject('a_1','E').set_color(second)).arrange(RIGHT).next_to(l8_1, DOWN)
+        # l8_3 = VGroup(l6_1[11].copy(), TexMobject('='), l7_1[11].copy(), l7_1[13].copy()).arrange(RIGHT).next_to(l8_2, DOWN)
+        l8_0 = TexMobject('\\vdots').next_to(l8_2, DOWN).align_to(l8_1[1].get_center(), LEFT)
+
+        l8_3 = VGroup(l6_1[11].copy(), TexMobject('='), TexMobject('a_{n-1}','E').set_color(third)).arrange(RIGHT).next_to(l8_0, DOWN)
+        l8_4 = VGroup(l6_1[12:].copy(), TexMobject('='), l7_1[15].copy()).arrange(RIGHT).next_to(l8_3, DOWN)
+        for l in [l8_2, l8_3, l8_4]:
+            l[0].align_to(l8_1[0], RIGHT)
+            l[1].align_to(l8_1[1], LEFT)
+            l[2].align_to(l8_1[2], LEFT)
+
+        br = Brace(VGroup(l8_1, l8_2, l8_0, l8_3, l8_4), LEFT)
+
+
+        self.play(FadeOut(VGroup(theorem_name, theorem_content, zheng, box, l1, l2)))
+        self.play(ReplacementTransform(VGroup(l6_1[2], l7_1[2]), l8_1))
+        self.play(ReplacementTransform(VGroup(l6_1[6], l7_1[4], l7_1[7]), l8_2))
+        self.play(Write(l8_0))
+        self.play(ReplacementTransform(VGroup(l6_1[11], l7_1[11], l7_1[13]), l8_3))
+        self.play(ReplacementTransform(VGroup(l6_1[12:], l7_1[14:]), l8_4))
+
+        self.play(GrowFromCenter(br), FadeOut(VGroup(l6_1[:2],l6_1[3:6],l6_1[7:11], l7_1[:2], l7_1[3], l7_1[5:7], l7_1[8:11], l7_1[12])))
+
+        # change color
+        dest = TexMobject(r'\text{要证}','f(','A',')=','A','^n+','a_1','A','^{n-1}+\cdots+','a_{n-1}','A','+','a_n', 'E=O.').set_color_by_tex_to_color_map({'A': RED, 'a_1': second, 'a_{n-1}': third, 'a_n': fourth}).to_edge(BOTTOM).shift(DOWN)
+        self.play(Write(dest))
+        l8_11 = VGroup(TexMobject('B_0').move_to(l8_1[0]), TexMobject('=').move_to(l8_1[1]), TexMobject('E').move_to(l8_1[2]))
+        l8_21 = VGroup(TexMobject('(','B_1-B_0','A',')').set_color_by_tex('A', RED).move_to(l8_2[0]), TexMobject('=').move_to(l8_2[1]), TexMobject('a_1','E').set_color_by_tex('a_1', second).move_to(l8_2[2]))
+        l8_31 = VGroup(TexMobject('(','B_{n-1}-B_{n-2}','A',')').set_color_by_tex('A', RED).move_to(l8_3[0]), TexMobject('=').move_to(l8_3[1]), TexMobject('a_{n-1}', 'E').set_color_by_tex('a_{n-1}', third).move_to(l8_3[2]))
+        tmp.set_color(WHITE)
+        tmp[-1].set_color(RED)
+        l8_41 = VGroup(tmp[12:].move_to(l8_4[0]), TexMobject('=').move_to(l8_4[1]), TexMobject('a_n','E').set_color_by_tex('a_n', fourth).move_to(l8_4[2]))
+        self.play(FadeIn(VGroup(l8_11, l8_21, l8_31, l8_41)))
+        self.remove(l8_1, l8_2, l8_3, l8_4)
+        self.wait()
+
+        # times A^...
+        l9_1 = VGroup(TexMobject('B_0','A','^n').set_color_by_tex('A', RED).move_to(l8_11).align_to(l8_11[0], RIGHT),TexMobject('E','A','^n').set_color_by_tex('A', RED).move_to(l8_11).align_to(l8_11[2], LEFT))
+        l9_2 = VGroup(TexMobject('(','B_1-B_0','A',')','A','^{n-1}').set_color_by_tex('A', RED).move_to(l8_21).align_to(l8_21[0], RIGHT), TexMobject('a_1','E','A','^{n-1}').set_color_by_tex('a_1', second).set_color_by_tex('A', RED).move_to(l8_21).align_to(l8_21[2], LEFT))
+        l9_3 = VGroup(TexMobject('(','B_{n-1}-B_{n-2}','A',')','A').set_color_by_tex('A', RED).move_to(l8_31).align_to(l8_31[0], RIGHT), TexMobject('a_{n-1}','E','A').set_color_by_tex('a_{n-1}', third).set_color_by_tex('A', RED).move_to(l8_31).align_to(l8_31[2], LEFT))
+
+        self.play(ReplacementTransform(l8_11[0], l9_1[0][0]), FadeIn(l9_1[0][1:]), ReplacementTransform(l8_11[2], l9_1[1][0]), FadeIn(l9_1[1][1:]))
+        self.play(ReplacementTransform(l8_21[0], l9_2[0][:4]), FadeIn(l9_2[0][4:]), ReplacementTransform(l8_21[2], l9_2[1][:2]), FadeIn(l9_2[1][2:]))
+        br2 = br.copy().shift(LEFT*0.3)
+        self.play(ReplacementTransform(br, br2), ReplacementTransform(l8_31[0], l9_3[0][:4]), FadeIn(l9_3[0][4:]), ReplacementTransform(l8_31[2], l9_3[1][:2]), FadeIn(l9_3[1][2:]))
+        self.wait()
+
+        # processing
+        l10_1_1 = TexMobject('A','^n').set_color_by_tex('A',RED).next_to(l8_11[1], RIGHT)
+        l10_2_0 = TexMobject('B_1','A','^{n-1}','-','B_0','A','^n').set_color_by_tex('A',RED).next_to(l8_21[1], LEFT)
+        l10_2_1 = TexMobject('a_1','A','^{n-1}').set_color_by_tex('a_1', second).set_color_by_tex('A', RED).next_to(l8_21[1], RIGHT)
+        l10_3_0 = TexMobject('B_{n-1}','A','-','B_{n-2}','A','^2').set_color_by_tex('A',RED).next_to(l8_31[1], LEFT)
+        l10_3_1 = TexMobject('a_{n-1}','A').set_color_by_tex('a_{n-1}', third).set_color_by_tex('A', RED).next_to(l8_31[1], RIGHT)
+        self.play(ReplacementTransform(l9_1[1], l10_1_1))
+        self.play(ReplacementTransform(l9_2[0], l10_2_0), ReplacementTransform(l9_2[1], l10_2_1))
+        self.play(ReplacementTransform(l9_3[0], l10_3_0), ReplacementTransform(l9_3[1], l10_3_1))
+        self.wait()
+
+        # sum
+        line_3 = Line(br2.get_corner(DL), br2.get_corner(DL)+RIGHT*8).shift(DOWN*0.5).set_color(YELLOW)
+        plus = TexMobject('+').set_color(YELLOW).move_to(br2.get_bottom())
+        equal = TexMobject('=').next_to(line_3, DOWN, buff=0.4).align_to(l8_31[1], LEFT)
+        self.play(ShowCreation(line_3), Transform(l9_1[0], l9_1[0].copy().align_to(l10_2_0, LEFT)))
+        self.play(ReplacementTransform(br2, plus))
+        self.play(ReplacementTransform(l8_41[1].copy(), equal))
+        self.wait()
+
+        O = TexMobject('O').next_to(equal, LEFT)
+        rhs = TexMobject('f(','A',')').set_color_by_tex('A', RED).next_to(equal, RIGHT)
+        diag1 = Line(l9_1[0].get_center(), l10_2_0[3:].get_center()).set_color(YELLOW)
+        delta = -(l10_2_0[3:].get_center() - l9_1[0].get_center())[1]
+
+        diag2 = diag1.copy().shift(DOWN*delta)
+        diag3 = diag2.copy().shift(DOWN*delta)
+        diag4 = diag3.copy().shift(DOWN*delta)
+
+        self.play(ReplacementTransform(VGroup(l10_1_1.copy(), l10_2_1.copy(), l10_3_1.copy(), l8_41[-1].copy()), rhs))
+        self.wait()
+        for diag in [diag1, diag2, diag3, diag4]:
+            self.play(ShowCreation(diag))
+        self.play(ReplacementTransform(VGroup(l9_1[0].copy(), l10_2_0.copy(), l10_3_0.copy(), l8_41[0].copy()), O))
+        self.wait()
+        # t = TextMobject(r"(￣$\\nabla$￣)／").next_to(rhs, RIGHT, buff=1)
+        # self.play(Write(t))
+        # self.wait()
+        self.play(FadeOut(VGroup(l9_1[0], l8_11[1], l10_1_1, l10_2_0, l8_21[1], l10_2_1,
+                                 l8_0, l10_3_0, l8_31[1], l10_3_1, l8_4,l8_41,
+                                 diag1, diag2, diag3, diag4, line_3, plus,
+                                 O, equal, rhs, dest)),
+                  FadeIn(VGroup(theorem_name,theorem_content, l1, l2, box, zheng)))
+        self.wait()
+
 class Graphing(GraphScene):
     CONFIG = {
         "x_min": -5,
