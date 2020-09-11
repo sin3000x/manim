@@ -136,6 +136,7 @@ class UpdatersExample(Scene):
         self.wait()
 
 
+
 # See old_projects folder for many, many more
 class Sao(Scene):
     def construct(self):
@@ -391,6 +392,7 @@ class Sao(Scene):
         end.scale(2)
         self.add(end)
         self.wait(2)
+
 
 class HC(Scene):
     def construct(self):
@@ -685,7 +687,10 @@ class HC(Scene):
 
 class test(Scene):
     def construct(self):
-       self.add(TextMobject("(￣$\\nabla$￣) /"))
+        mat = Matrix([[1,''], ['', 1]])
+        self.add(mat)
+        self.wait()
+
 
 class Graphing(GraphScene):
     CONFIG = {
@@ -701,19 +706,19 @@ class Graphing(GraphScene):
     def construct(self):
         # Make graph
         self.setup_axes(animate=True)
-        func_graph = self.get_graph(func_to_graph, self.function_color)
-        graph_lab = self.get_graph_label(func_graph, label="x^{2}")
+        func_graph = self.get_graph(np.sin, self.function_color)
+        graph_lab = self.get_graph_label(func_graph, label="\\sin x")
 
-        func_graph_2 = self.get_graph(func_to_graph_2, self.function_color)
-        graph_lab_2 = self.get_graph_label(func_graph_2, label="x^{3}")
+        func_graph_2 = self.get_graph(np.cos, self.function_color)
+        graph_lab_2 = self.get_graph_label(func_graph_2, label="\\cos x")
 
         vert_line = self.get_vertical_line_to_graph(1, func_graph, color=YELLOW)
 
-        x = self.coords_to_point(1, func_to_graph(1))
-        y = self.coords_to_point(0, func_to_graph(1))
+        x = self.coords_to_point(1, np.sin(1))
+        y = self.coords_to_point(0, np.cos(1))
         horz_line = Line(x, y, color=YELLOW)
 
-        point = Dot(self.coords_to_point(1, func_to_graph(1)))
+        point = Dot(self.coords_to_point(1, np.sin(1)))
 
         # Display graph
         self.play(ShowCreation(func_graph), Write(graph_lab))
@@ -724,9 +729,3 @@ class Graphing(GraphScene):
         self.wait(1)
         self.play(Transform(func_graph, func_graph_2), Transform(graph_lab, graph_lab_2))
         self.wait(2)
-
-    def func_to_graph(x):
-        return x ** 2
-
-    def func_to_graph_2(x):
-        return x ** 3

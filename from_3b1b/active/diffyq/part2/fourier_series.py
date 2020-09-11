@@ -929,3 +929,16 @@ class ExplainCircleAnimations(FourierCirclesScene):
         self.configure_path(path)
         path.scale(1.5, about_edge=DOWN)
         return path
+
+class FourierOctocat(FourierOfTrebleClef):
+    CONFIG = {
+        "height": 4,
+        "n_vectors": 100,
+        "run_time": 10,
+        "arrow_config": {
+            "tip_length": 0.1,
+            "stroke_width": 2,}
+        }
+    def get_shape(self):
+        shape = SVGMobject('Octocat.svg')
+        return shape

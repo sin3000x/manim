@@ -3,7 +3,7 @@
 
 from manimlib.imports import *
 
-from once_useful_constructs.light import *
+from manimlib.once_useful_constructs.light import *
 
 import warnings
 warnings.warn("""
