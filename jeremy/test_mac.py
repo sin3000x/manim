@@ -1,7 +1,7 @@
 from manimlib.imports import *
 
 
-class test(GraphScene):
+class test(GraphScene, Scene):
     CONFIG = {
         "x_min": -5,
         "x_max": 5,
@@ -21,9 +21,9 @@ class test(GraphScene):
         self.play(Write(func_lab))
         self.wait()
 
-        x_dots = [Dot(self.coords_to_point(self.a_n(n), 0), color=YELLOW) for n in range(1, 20)]
+        x_dots = [Dot(self.coords_to_point(self.a_n(n), 0), color=WHITE) for n in range(1, 20)]
         vert_lines = [DashedVMobject(self.get_vertical_line_to_graph(self.a_n(n), func_graph)) for n in range(1, 20)]
-        func_dots = [Dot(self.coords_to_point(self.a_n(n), self.func(self.a_n(n))), color=YELLOW) for n in range(1, 20)]
+        func_dots = [Dot(self.coords_to_point(self.a_n(n), self.func(self.a_n(n))), color=WHITE) for n in range(1, 20)]
 
         for x_dot in x_dots:
             self.add(x_dot)
@@ -33,11 +33,24 @@ class test(GraphScene):
             self.play(ShowCreation(vert_line), run_time=.1)
             self.add(func_dot)
             self.wait(.3/(i+1))
-            # self.remove(vert_line)
+            self.remove(vert_line)
             self.wait(.1)
 
-        arrow = Arrow(x_dots[0], x_dots[-1], buff=-1, stroke_width=4,max_tip_length_to_length_ratio=0.1).shift(DOWN*0.5)
-        self.play(GrowArrow(arrow))
+        # arrow = Line(RIGHT*2, ORIGIN).shift(DOWN*0.5)
+        # curve_arrow = CurvedArrow(func_dots[1].get_center(), func_dots[-1].get_center())
+        origin = Dot(color=YELLOW)
+        label_o = TextMobject("$0$").next_to(ORIGIN, DL, buff=SMALL_BUFF)
+        empty = Circle(arc_center=self.coords_to_point(0, 1), radius=.08, color=YELLOW)
+        label_1 = TextMobject("$1$").next_to(empty, UL, buff=SMALL_BUFF)
+        # self.play(GrowArrow(arrow))
+        self.add(origin)
+        self.play(Write(label_o))
+        self.wait(1)
+        # self.play(FadeIn(curve_arrow))
+        self.add(empty)
+        self.play(Write(label_1))
+        self.wait()
+
 
     @staticmethod
     def func(x):
