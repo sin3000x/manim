@@ -11,7 +11,7 @@ class Heine(GraphScene):
         "theorem": VGroup(
             TexMobject(r"\lim\limits_{x\to a}f(x)=L", "\Longleftrightarrow").set_color_by_tex("\Longleftrightarrow",
                                                                                               RED),
-            TextMobject(r"$ \forall x_n\to a$", r",$\lim\limits_{n\to\infty}f(x_n)=L$")).arrange(RIGHT),
+            TextMobject(r"$ \forall x_n\to a$", r",",r"$\lim\limits_{n\to\infty}f(x_n)=L$")).arrange(RIGHT),
         "title": TextMobject("\\underline{\\textbf{Heine}\\heiti 定理}").set_color(YELLOW).to_corner(
             LEFT + TOP),
     }
@@ -26,10 +26,10 @@ class Heine(GraphScene):
     #         LEFT + TOP)
 
     def construct(self):
-        # self.opening()
-        # self.drawing()
-        self.proof()
-        # self.proof1()
+        self.opening()
+        self.drawing()
+        # self.proof()
+        self.proof1()
         self.proof2()
 
     def opening(self):
@@ -41,6 +41,7 @@ class Heine(GraphScene):
         self.play(Write(theorem[1][0]))
         self.wait()
         self.play(Write(theorem[1][1:]))
+        self.wait()
         self.play(FadeOut(VGroup(title, *theorem)))
 
     def drawing(self):
@@ -98,23 +99,21 @@ class Heine(GraphScene):
         self.play(
             FadeOut(VGroup(lim, func_lab, func_graph,
                            arrow, arrow_lab, curve_arrow, curve_lab,
-                           origin, label_o, empty, label_1)),
-            FadeOut(VGroup(*x_dots)),
-            FadeOut(VGroup(*func_dots)),
-            FadeOut(self.axes)
+                           origin, label_o, empty, label_1,
+                           *x_dots, *func_dots, self.axes)),
+            FadeIn(VGroup(self.title, self.theorem))
         )
 
-    def proof(self):
-        self.play(FadeIn(VGroup(self.title, self.theorem)))
+
         self.play(Transform(self.title, self.title.copy().to_corner(UL)),
                   Transform(self.theorem, self.theorem.copy().to_corner(UL).shift(DOWN).align_to(self.title, LEFT)))
 
         first = TexMobject(r"\{x_n\} \subset f\text{的定义域}", color=BLUE).scale(0.8) \
-            .move_to(self.theorem[1][1].get_center()).shift(DOWN * 1.5)
+            .move_to(self.theorem[1][-1].get_center()).shift(DOWN * 1.5)
         second = TexMobject(r"x_n\neq a", color=BLUE).scale(0.8) \
             .move_to(self.theorem[1][0].get_center()).shift(DOWN * 1.5).align_to(first, UP)
-        arrow1 = Arrow(self.theorem[1][1].get_bottom(), first.get_top(), color=BLUE)
-        arrow2 = Arrow((self.theorem[1][0].get_bottom()[0], self.theorem[1][1].get_bottom()[1], 0),
+        arrow1 = Arrow(self.theorem[1][-1].get_bottom(), first.get_top(), color=BLUE)
+        arrow2 = Arrow((self.theorem[1][0].get_bottom()[0], self.theorem[1][-1].get_bottom()[1], 0),
                        second.get_top(), color=BLUE)
         self.play(ShowCreation(arrow1))
         self.play(Write(first))
@@ -198,14 +197,14 @@ class Heine(GraphScene):
         t2 = TextMobject("总存在$x$", color=YELLOW).scale(.8)
         t3 = TextMobject("使$f(x)$与$L$有正距离", color=YELLOW).scale(.8).next_to(c3, DOWN)
 
-        self.play(ShowCreation(c1))
+        self.play(GrowFromCenter(c1))
         self.play(Write(t1))
         self.play(ReplacementTransform(c1, c2))
         self.play(Transform(t1, t1.copy().next_to(c2, DOWN)))
         t2.next_to(t1, DOWN)
         self.play(Write(t2))
         self.wait()
-        self.play(ShowCreation(c3))
+        self.play(GrowFromCenter(c3))
         self.play(Write(t3))
         self.wait()
 
@@ -219,28 +218,29 @@ class Heine(GraphScene):
                         r"0<|",
                         # 10  11       12             13         14   15   16      17           18
                         "x_1", "-a|<", r"1", r"\Rightarrow", r" |f(", "x_1", ")-L|", "\geq", r"\varepsilon_0") \
-            .set_color_by_tex_to_color_map({r"\varepsilon_0": BLUE}).move_to(l2)
+            .set_color_by_tex_to_color_map({"\\delta": GREEN,r"\varepsilon_0": BLUE}).move_to(l2)
         l41[12].set_color(GREEN)
         #                   0            1             2           3           4        5       6        7   8      9
         l42 = TexMobject(r"\exists", r"\varepsilon_0", r">0, ", r"\forall", r"\delta", r">0,", r"\exists", "x_2", ":",
                         r"0<|",
                         # 10  11       12             13         14   15   16      17           18
                         "x_2", "-a|<", r"\frac 12", r"\Rightarrow", r" |f(", "x_2", ")-L|", "\geq", r"\varepsilon_0") \
-            .set_color_by_tex_to_color_map({r"\varepsilon_0": BLUE}).move_to(l2)
+            .set_color_by_tex_to_color_map({"\\delta": GREEN,r"\varepsilon_0": BLUE}).move_to(l2)
         l42[12].set_color(GREEN)
         #                   0            1             2           3           4        5       6        7   8      9
         l43 = TexMobject(r"\exists", r"\varepsilon_0", r">0, ", r"\forall", r"\delta", r">0,", r"\exists", "x_3", ":",
                         r"0<|",
                         # 10  11       12             13         14   15   16      17           18
                         "x_3", "-a|<", r"\frac 13", r"\Rightarrow", r" |f(", "x_3", ")-L|", "\geq", r"\varepsilon_0") \
-            .set_color_by_tex_to_color_map({r"\varepsilon_0": BLUE}).move_to(l2)
+            .set_color_by_tex_to_color_map({"\\delta": GREEN,r"\varepsilon_0": BLUE}).move_to(l2)
         l43[12].set_color(GREEN)
-        #                   0            1             2           3           4        5       6        7   8      9
+        #                   0            1             2           3           4        5       6           7      8
         l44 = TexMobject(r"\exists", r"\varepsilon_0", r">0, ", r"\forall", r"\delta", r">0,", r"\exists", "x_n", ":",
+                        # 9
                         r"0<|",
-                        # 10  11       12             13         14   15   16      17           18
+                        # 10       11       12             13         14         15   16      17           18
                         "x_n", "-a|<", r"\frac 1n", r"\Rightarrow", r" |f(", "x_n", ")-L|", "\geq", r"\varepsilon_0") \
-            .set_color_by_tex_to_color_map({r"\varepsilon_0": BLUE}).move_to(l2)
+            .set_color_by_tex_to_color_map({"\\delta": GREEN,r"\varepsilon_0": BLUE}).move_to(l2)
         l44[12].set_color(GREEN)
         self.play(ReplacementTransform(l2, l41))
         self.wait()
@@ -250,3 +250,29 @@ class Heine(GraphScene):
         self.wait()
         self.play(ReplacementTransform(l43, l44))
         self.wait()
+
+        b = Brace(l44[9:13], DOWN, buff=SMALL_BUFF)
+        t4 = TexMobject(r"x_n\to a").next_to(b, DOWN)
+        box = SurroundingRectangle(self.theorem[1][-1], buff=SMALL_BUFF, color=YELLOW)
+        self.play(GrowFromCenter(b))
+        self.play(Write(t4))
+        self.play(ShowCreation(box))
+
+        l5 = TexMobject(r"\Rightarrow",r" |f(", "x_n", ")-L|", "<", r"{\varepsilon_0 \over 2}")\
+            .move_to(t4)
+        l5[-1].set_color(BLUE)
+        l5[0].align_to(l44[13], LEFT)
+        l5[1:4].align_to(l44[14:17], LEFT)
+        l5[4].align_to(l44[17], LEFT)
+        l5[5].align_to(l44[-1], LEFT)
+        self.play(Write(l5[:-1]))
+        self.wait()
+        self.play(Write(l5[-1]))
+
+        l6 = TextMobject(r"当$n\gg 1$.").next_to(l5, DOWN)
+        self.play(Write(l6))
+
+        box2 = SurroundingRectangle(VGroup(l44[14:], l5[1:]), color=YELLOW, buff=SMALL_BUFF)
+        self.play(ReplacementTransform(box, box2))
+        self.wait()
+
