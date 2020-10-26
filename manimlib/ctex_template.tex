@@ -19,6 +19,12 @@
 %\DisableLigatures{encoding = *, family = * }
 \usepackage[UTF8]{ctex}
 \usepackage{centernot}
+
+\usepackage{tipa}
+\makeatletter
+\newcommand{\cemph}[1]{\@tfor\i:=#1\do{\textsubdot{\i}}}
+\makeatother
+
 \linespread{1}
 
 \DeclareCharacterInheritance
