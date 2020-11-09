@@ -6,6 +6,7 @@ from manimlib.animation.update import UpdateFromAlphaFunc
 from manimlib.constants import *
 from manimlib.mobject.functions import ParametricFunction
 from manimlib.mobject.geometry import Line
+from manimlib.mobject.geometry import Dot
 from manimlib.mobject.geometry import Rectangle
 from manimlib.mobject.geometry import RegularPolygon
 from manimlib.mobject.number_line import NumberLine
@@ -1062,3 +1063,21 @@ class GraphScene(Scene):
         )
         secant_slope_group.kwargs["x"] = target_x
         secant_slope_group.kwargs["dx"] = target_dx
+
+    def get_points_from_coords(self, coords):
+        return [
+            # Convert COORDS -> POINTS
+            self.coords_to_point(px, py)
+            # See manimlib/scene/graph_scene.py
+            for px, py in coords
+        ]
+
+    # Return the dots of a set of points
+    def get_dots_from_coords(self, coords, radius=0.1):
+        points = self.get_points_from_coords(coords)
+        dots = VGroup(*[
+            Dot(radius=radius).move_to([px, py, pz])
+            for px, py, pz in points
+        ]
+                      )
+        return dots

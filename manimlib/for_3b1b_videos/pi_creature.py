@@ -65,7 +65,7 @@ class PiCreature(SVGMobject):
                           (self.file_name_prefix, mode))
             # TODO, this needs to change to a different, better directory
             svg_file = os.path.join(
-                FILE_DIR,
+                PI_CREATURE_DIR,
                 "PiCreatures_plain.svg",
             )
             SVGMobject.__init__(self, mode="plain", file_name=svg_file, **kwargs)

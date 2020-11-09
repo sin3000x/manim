@@ -22,7 +22,7 @@ class NumericalMatrixMultiplication(Scene):
 
     def construct(self):
         left_string_matrix, right_string_matrix = [
-            np.array(matrix).astype("string")
+            np.array(matrix).astype("str")
             for matrix in (self.left_matrix, self.right_matrix)
         ]
         if right_string_matrix.shape[0] != left_string_matrix.shape[1]:

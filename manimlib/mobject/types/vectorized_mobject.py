@@ -974,3 +974,15 @@ class DashedVMobject(VMobject):
         # Family is already taken care of by get_subcurve
         # implementation
         self.match_style(vmobject, family=False)
+
+
+class DiscreteGraphFromSetPoints(VMobject):
+    def __init__(self,set_of_points,**kwargs):
+        super().__init__(**kwargs)
+        self.set_points_as_corners(set_of_points)
+
+
+class SmoothGraphFromSetPoints(VMobject):
+    def __init__(self,set_of_points,**kwargs):
+        super().__init__(**kwargs)
+        self.set_points_smoothly(set_of_points)

@@ -26,6 +26,11 @@ from manimlib.utils.space_ops import angle_of_vector
 from manimlib.utils.space_ops import complex_to_R3
 from manimlib.utils.space_ops import rotate_vector
 
+pi_creature_dir_maybe = os.path.join(MEDIA_DIR, "assets", "PiCreature")
+if os.path.exists(pi_creature_dir_maybe):
+    PI_CREATURE_DIR = pi_creature_dir_maybe
+else:
+    PI_CREATURE_DIR = os.path.join("assets")
 
 class Lightbulb(SVGMobject):
     CONFIG = {
@@ -430,7 +435,7 @@ class Bubble(SVGMobject):
         try:
             SVGMobject.__init__(self, **kwargs)
         except IOError as err:
-            self.file_name = os.path.join(FILE_DIR, self.file_name)
+            self.file_name = os.path.join(PI_CREATURE_DIR, self.file_name)
             SVGMobject.__init__(self, **kwargs)
         self.center()
         self.stretch_to_fit_height(self.height)
