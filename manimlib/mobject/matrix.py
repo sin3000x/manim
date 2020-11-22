@@ -62,7 +62,7 @@ class Matrix(VMobject):
         "include_background_rectangle": False,
         "element_to_mobject": TexMobject,
         "element_to_mobject_config": {},
-        "element_alignment_corner": DR,
+        "element_alignment_corner": ORIGIN,
         "bracket": 'p'
     }
 

@@ -11,8 +11,8 @@ class dots(Scene):
             d.set_color(RED)
             return d
 
-        # self.play(AnimationGroup(*[
-        #     ApplyFunction(update_dot, dot, rate_func=there_and_back) for dot in dots
-        # ], lag_ratio=.1))
+        self.play(AnimationGroup(*[
+            ApplyFunction(update_dot, dot, rate_func=there_and_back) for dot in dots
+        ], lag_ratio=.1))
 
         self.play(LaggedStartMap(GrowFromCenter, dots))
