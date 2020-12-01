@@ -7,12 +7,12 @@ class LA(Scene):
     }
 
     def construct(self):
-        self.opening()
+        # self.opening()
         # self.matrices_vectors()
-        self.zero_identity()
+        # self.zero_identity()
         # self.transposition()
-        # self.inner_outer()
-
+        # self.inner()
+        self.addition()
     @staticmethod
     def myTitle(string, underline=True):
         title = TextMobject(f"\\textbf{{\\heiti{{{string}}}}}", color=YELLOW).to_edge(UP)
@@ -318,7 +318,7 @@ class LA(Scene):
 
         self.play(FadeOut(VGroup(title, c_trans, c_notation, trans_prop, ctrans_prop)))
 
-    def inner_outer(self):
+    def inner(self):
         title = self.mT("4. inner product (内积)", underline=True)
 
         self.runTitle(title)
@@ -516,7 +516,52 @@ class LA(Scene):
         self.play(FadeOut(VGroup(title, c_inner_def, length_formula, v2, brace2, orthonormal_label)))
 
     def addition(self):
-        pass
+        title = self.mT("5. Addition (加法)", underline=True)
+        self.runTitle(title)
+        self.wait()
+
+        trans = TexMobject(r"\mathbb{R}^{m\times n}\times\mathbb{R}^{m\times n}\to\mathbb{R}^{m\times n}")
+        trans.next_to(title[-1], DOWN)
+        self.play(Write(trans))
+        self.wait(2)
+
+        a = np.array([[1,1],[1,2],[1,3]])
+        b = np.array([[0,0],[0,1],[1,2]])
+        A = Matrix(a, h_buff=1)
+        A.get_entries().set_color(self.color_map['x'])
+        B = Matrix(b, h_buff=1)
+        B.get_entries().set_color(self.color_map['y'])
+        beginning = VGroup(A, TexMobject("+"), B, TexMobject("=")).arrange()
+        mob_matrix = np.array([VGroup(TexMobject("a"))], dtype=object).repeat(6).reshape(3,2)
+        for i in range(3):
+            for j in range(2):
+                mob_matrix[i][j] = TexMobject(str(a[i][j]),"+",str(b[i][j]))
+                mob_matrix[i][j][0].set_color(self.color_map['A'])
+                mob_matrix[i][j][2].set_color(self.color_map['B'])
+        C = MobjectMatrix(mob_matrix, h_buff=1.5)
+        VGroup(beginning, C).arrange()#.next_to(trans, DOWN, buff=MED_LARGE_BUFF)
+
+        self.play(Write(beginning))
+        self.wait()
+        A_entries, B_entries, C_entries = A.get_entries(), B.get_entries(), C.get_entries()
+        def update_matrices(entries):
+            A_entries, B_entries, C_entries = entries
+            for A_entry, B_entry, C_entry in zip(A_entries, B_entries, C_entries):
+                A_entry.copy().become(C_entry[0])
+            return C_entries
+
+        self.play(AnimationGroup(*[ReplacementTransform(A_entries[i].copy(), C_entries[i][0]) for i in range(a.size)], lag_ratio=0),
+                  AnimationGroup(*[ReplacementTransform(B_entries[i].copy(), C_entries[i][2]) for i in range(b.size)], lag_ratio=0),
+                  AnimationGroup(*[Write(C_entries[i][1]) for i in range(a.size)], lag_ratio=0),
+                  Write(C.get_brackets()),run_time=3)
+
+        self.wait()
+        result = Matrix(a+b, h_buff=1).next_to(beginning, RIGHT)
+        beginning_c = beginning.copy()
+        VGroup(beginning_c, result).arrange()
+        self.play(ReplacementTransform(beginning, beginning_c), ReplacementTransform(C, result))
+        self.wait()
+        self.play(FadeOut(VGroup(title, beginning_c, C, trans, result)))
 
     def scalar_mul(self):
         pass
@@ -524,10 +569,10 @@ class LA(Scene):
     def mat_mul(self):
         pass
 
-    def powers(self):
+    def special(self):
         pass
 
-    def special(self):
+    def ele_op(self):
         pass
 
     def linear_combination(self):
