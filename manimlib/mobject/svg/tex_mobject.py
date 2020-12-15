@@ -229,6 +229,10 @@ class TexMobject(SingleStringTexMobject):
                     self.set_color_by_tex(tex, color, **kwargs)
         return self
 
+    def tm(self, texs_to_color_map, **kwargs):
+        return self.set_color_by_tex_to_color_map(texs_to_color_map, **kwargs)
+        # return self
+
     def index_of_part(self, part):
         split_self = self.split()
         if part not in split_self:
