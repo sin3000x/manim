@@ -1,5 +1,6 @@
 import itertools as it
 import string
+import random
 
 from manimlib.animation.animation import Animation
 from manimlib.animation.rotation import Rotating
@@ -31,6 +32,7 @@ if os.path.exists(pi_creature_dir_maybe):
     PI_CREATURE_DIR = pi_creature_dir_maybe
 else:
     PI_CREATURE_DIR = os.path.join("assets")
+
 
 class Lightbulb(SVGMobject):
     CONFIG = {
@@ -388,7 +390,7 @@ class ClockPassesTime(Animation):
 
     def __init__(self, clock, **kwargs):
         digest_config(self, kwargs)
-        assert(isinstance(clock, Clock))
+        assert (isinstance(clock, Clock))
         rot_kwargs = {
             "axis": OUT,
             "about_point": clock.get_center()
@@ -901,7 +903,7 @@ class PlayingCard(VGroup):
                 value = self.key[:-1]
             else:
                 value = random.choice(self.possible_values)
-        value = string.upper(str(value))
+        value = str(value).upper()
         if value == "1":
             value = "A"
         if value not in self.possible_values:
@@ -1091,3 +1093,33 @@ class SuitSymbol(SVGMobject):
         self.set_stroke(width=0)
         self.set_fill(color, 1)
         self.set_height(self.height)
+
+
+class Like(SVGMobject):
+    CONFIG = {
+        "color": "#fb7199"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="good", **kwargs)
+
+
+class Coin(SVGMobject):
+    CONFIG = {
+        "color": "#03b5e5"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="coin", **kwargs)
+
+
+class Favo(SVGMobject):
+    CONFIG = {
+        "color": "#f3a034"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="favo", **kwargs)

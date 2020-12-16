@@ -8,7 +8,7 @@ class LA(Scene):
 
     def construct(self):
         # self.opening()
-        # self.matrices_vectors()
+        self.matrices_vectors()
         # self.zero_identity()
         # self.transposition()
         # self.inner()

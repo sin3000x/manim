@@ -15,6 +15,8 @@ from manimlib.mobject.mobject import Mobject
 from manimlib.scene.scene_file_writer import SceneFileWriter
 from manimlib.utils.iterables import list_update
 
+from manimlib.mobject.svg.text_mobject import Text
+
 
 class Scene(Container):
     """
@@ -1163,6 +1165,12 @@ class Scene(Container):
         """
         self.update_frame(ignore_skipping=True)
         self.get_image().show()
+
+    def debugTeX(self, texm, scale_factor=0.6, text_color=PURPLE):
+        for i, j in enumerate(texm):
+            tex_id = Text(str(i), font="Consolas").scale(scale_factor).set_color(text_color)
+            tex_id.move_to(j)
+            self.add(tex_id)
 
 
 class EndSceneEarlyException(Exception):
