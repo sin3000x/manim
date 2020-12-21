@@ -3,16 +3,19 @@ from manimlib.imports import *
 
 class LA(Scene):
     CONFIG = {
-        "color_map": {"A": RED, "B": BLUE, "x": RED, "y": BLUE, "O": RED, "I": BLUE, "unit": YELLOW}
+        "color_map": {"A": RED, "B": BLUE, "x": RED, "y": BLUE, "O": RED, "I": BLUE, "unit": YELLOW},
+        "x": RED, "y": BLUE
     }
 
     def construct(self):
         # self.opening()
-        self.matrices_vectors()
+        # self.matrices_vectors()
         # self.zero_identity()
         # self.transposition()
         # self.inner()
-        self.addition()
+        # self.addition()
+        self.scalar_mul()
+
     @staticmethod
     def myTitle(string, underline=True):
         title = TextMobject(f"\\textbf{{\\heiti{{{string}}}}}", color=YELLOW).to_edge(UP)
@@ -80,6 +83,7 @@ class LA(Scene):
 
         # square
         self.play(ReplacementTransform(Aex2, square))
+        self.wait()
         self.play(Write(square_label))
         self.wait()
 
@@ -91,8 +95,9 @@ class LA(Scene):
             box11, UP)
         box13 = SurroundingRectangle(VGroup(array[8], array[13]), color=RED).set_width(box11.get_width()).align_to(
             box11, LEFT)
-        box14 = SurroundingRectangle(VGroup(array[10], array[15]), color=RED).set_height(box13.get_height()).set_width(
-            box12.get_width()).align_to(box12, LEFT)
+        box14 = SurroundingRectangle(VGroup(array[10], array[15]), color=RED).set_height(box13.get_height(),
+                                                                                         stretch=True).set_width(
+            box12.get_width(), stretch=True).align_to(box12, LEFT).align_to(box13, DOWN)
         block1 = Matrix([["A_{11}", "A_{12}"], ["A_{21}", "A_{22}"]]).move_to(square)
         block2 = Matrix([["A_{11}", "A_{12}", "\\cdots", "A_{1n}"]], h_buff=1).move_to(block1)
         block1_entries = block1.get_entries()
@@ -186,8 +191,8 @@ class LA(Scene):
         #     self.play(ShowCreation(box))
         # self.wait()
 
-        units = VGroup(*[TexMobject(f"e_{i+1}", color=self.color_map['unit']) for i in range(N)])
-        for i,unit in enumerate(units):
+        units = VGroup(*[TexMobject(f"e_{i + 1}", color=self.color_map['unit']) for i in range(N)])
+        for i, unit in enumerate(units):
             unit.next_to(boxes[i], DOWN).scale(.8)
             self.play(ShowCreation(boxes[i]))
             self.play(Write(unit))
@@ -202,7 +207,7 @@ class LA(Scene):
         # self.play(ReplacementTransform(I, I2))
         to_fade = []
         for i, ele in enumerate(I[-1].get_entries()):
-            if i%(N+1):
+            if i % (N + 1):
                 to_fade.append(ele)
         self.play(VGroup(*to_fade).fade, 1)
         self.wait()
@@ -525,38 +530,41 @@ class LA(Scene):
         self.play(Write(trans))
         self.wait(2)
 
-        a = np.array([[1,1],[1,2],[1,3]])
-        b = np.array([[0,0],[0,1],[1,2]])
+        a = np.array([[1, 1], [1, 2], [1, 3]])
+        b = np.array([[0, 0], [0, 1], [1, 2]])
         A = Matrix(a, h_buff=1)
         A.get_entries().set_color(self.color_map['x'])
         B = Matrix(b, h_buff=1)
         B.get_entries().set_color(self.color_map['y'])
         beginning = VGroup(A, TexMobject("+"), B, TexMobject("=")).arrange()
-        mob_matrix = np.array([VGroup(TexMobject("a"))], dtype=object).repeat(6).reshape(3,2)
+        mob_matrix = np.array([VGroup(TexMobject("a"))], dtype=object).repeat(6).reshape(3, 2)
         for i in range(3):
             for j in range(2):
-                mob_matrix[i][j] = TexMobject(str(a[i][j]),"+",str(b[i][j]))
+                mob_matrix[i][j] = TexMobject(str(a[i][j]), "+", str(b[i][j]))
                 mob_matrix[i][j][0].set_color(self.color_map['A'])
                 mob_matrix[i][j][2].set_color(self.color_map['B'])
         C = MobjectMatrix(mob_matrix, h_buff=1.5)
-        VGroup(beginning, C).arrange()#.next_to(trans, DOWN, buff=MED_LARGE_BUFF)
+        VGroup(beginning, C).arrange()  # .next_to(trans, DOWN, buff=MED_LARGE_BUFF)
 
         self.play(Write(beginning))
         self.wait()
         A_entries, B_entries, C_entries = A.get_entries(), B.get_entries(), C.get_entries()
+
         def update_matrices(entries):
             A_entries, B_entries, C_entries = entries
             for A_entry, B_entry, C_entry in zip(A_entries, B_entries, C_entries):
                 A_entry.copy().become(C_entry[0])
             return C_entries
 
-        self.play(AnimationGroup(*[ReplacementTransform(A_entries[i].copy(), C_entries[i][0]) for i in range(a.size)], lag_ratio=0),
-                  AnimationGroup(*[ReplacementTransform(B_entries[i].copy(), C_entries[i][2]) for i in range(b.size)], lag_ratio=0),
+        self.play(AnimationGroup(*[ReplacementTransform(A_entries[i].copy(), C_entries[i][0]) for i in range(a.size)],
+                                 lag_ratio=0),
+                  AnimationGroup(*[ReplacementTransform(B_entries[i].copy(), C_entries[i][2]) for i in range(b.size)],
+                                 lag_ratio=0),
                   AnimationGroup(*[Write(C_entries[i][1]) for i in range(a.size)], lag_ratio=0),
-                  Write(C.get_brackets()),run_time=3)
+                  Write(C.get_brackets()), run_time=3)
 
         self.wait()
-        result = Matrix(a+b, h_buff=1).next_to(beginning, RIGHT)
+        result = Matrix(a + b, h_buff=1).next_to(beginning, RIGHT)
         beginning_c = beginning.copy()
         VGroup(beginning_c, result).arrange()
         self.play(ReplacementTransform(beginning, beginning_c), ReplacementTransform(C, result))
@@ -564,7 +572,58 @@ class LA(Scene):
         self.play(FadeOut(VGroup(title, beginning_c, C, trans, result)))
 
     def scalar_mul(self):
-        pass
+        title = self.mT("6. Scalar-Matrix Multiplication (数量乘法)", underline=True)
+        self.runTitle(title)
+        self.wait()
+
+        trans = TexMobject(r"\mathbb{R}\times\mathbb{R}^{m\times n}\to\mathbb{R}^{m\times n}")
+        trans.next_to(title[-1], DOWN)
+        self.play(Write(trans))
+        self.wait(2)
+
+        a = np.array([[1, 1], [1, 2], [1, 3]])
+        A = Matrix(a, h_buff=1)
+        A.get_entries().set_color(self.x)
+        two = TexMobject("2", color=self.y)
+        eq = TexMobject("=")
+        mob_matrix = np.array([VGroup(TexMobject("a"))], dtype=object).repeat(6).reshape(3, 2)
+        for i in range(3):
+            for j in range(2):
+                mob_matrix[i][j] = TexMobject("2", r"\cdot", str(a[i][j]))
+                mob_matrix[i][j][0].set_color(self.y)
+                mob_matrix[i][j][2].set_color(self.x)
+        R = MobjectMatrix(mob_matrix, h_buff=1.5)
+        v = VGroup(two, A, eq, R).arrange()
+        # self.play(Write(two))
+        # self.play(Write(A))
+        # self.play(Write(eq))
+        self.play(Write(v[:3]))
+        self.wait()
+        Rs = R.get_entries()
+        As = A.get_entries()
+        self.play(Write(R.get_brackets()),
+                  AnimationGroup(*[ReplacementTransform(As[i].copy(), Rs[i][2]) for i in range(a.size)]), )
+        self.play(
+            AnimationGroup(*[ReplacementTransform(two.copy(), Rs[i][0]) for i in range(a.size)]),
+            AnimationGroup(*[Write(Rs[i][1]) for i in range(a.size)]),
+            run_time=2
+        )
+        self.wait()
+        result = Matrix(2 * a, h_buff=1)
+        A_c = A.copy()
+        twoc = two.copy()
+        eqc = eq.copy()
+        VGroup(twoc, A_c, eqc, result).arrange()
+        self.play(
+            ReplacementTransform(A, A_c),
+            ReplacementTransform(two, twoc),
+            ReplacementTransform(eq, eqc),
+            ReplacementTransform(R, result)
+        )
+        self.wait()
+        self.play(FadeOut(VGroup(title, A_c, R, trans, result, twoc, eqc)))
+        # for a, r in zip(A.get_entries(), R.get_entries()):
+        #     ReplacementTransform(a.copy(), r[0])
 
     def mat_mul(self):
         pass

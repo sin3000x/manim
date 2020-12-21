@@ -1400,7 +1400,7 @@ class OdometerScene(ColorMappedObjectsScene):
             rate_func=linear)
 
 #############
-# Above are mostly general tools; here, we list, in order, finished or near-finished scenes
+# Above are mostly general tools; here, we list, in order, old or near-old scenes
 
 class FirstSqrtScene(EquationSolver1d):
     CONFIG = {

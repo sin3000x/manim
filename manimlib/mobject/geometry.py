@@ -609,6 +609,17 @@ class Elbow(VMobject):
         self.set_width(self.width, about_point=ORIGIN)
         self.rotate(self.angle, about_point=ORIGIN)
 
+class lVector(Line):
+    CONFIG = {
+        "buff": 0,
+    }
+
+    def __init__(self, direction=RIGHT, **kwargs):
+        super().__init__(**kwargs)
+        if len(direction) == 2:
+            direction = np.append(np.array(direction), 0)
+        Line.__init__(self, ORIGIN, direction, **kwargs)
+        self.add_tip()
 
 class Arrow(Line):
     CONFIG = {

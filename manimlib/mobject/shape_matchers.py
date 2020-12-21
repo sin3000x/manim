@@ -1,11 +1,22 @@
 from manimlib.constants import *
 from manimlib.mobject.geometry import Line
-from manimlib.mobject.geometry import Rectangle, RoundedRectangle
+from manimlib.mobject.geometry import Rectangle, RoundedRectangle, Ellipse
 from manimlib.mobject.types.vectorized_mobject import VGroup
 from manimlib.mobject.types.vectorized_mobject import VMobject
 from manimlib.utils.color import Color
 from manimlib.utils.config_ops import digest_config
 
+class SurroundingEllipse(Ellipse):
+    CONFIG = {
+        "color": YELLOW,
+        "buff": LARGE_BUFF,
+    }
+    def __init__(self, mobject, **kwargs):
+        digest_config(self, kwargs)
+        kwargs["width"] = mobject.get_width() + 2 * self.buff
+        kwargs["height"] = mobject.get_height() + 2 * self.buff
+        Ellipse.__init__(self, **kwargs)
+        self.move_to(mobject)
 
 class SurroundingRectangle(Rectangle):
     CONFIG = {

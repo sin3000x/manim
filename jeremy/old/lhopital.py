@@ -43,7 +43,7 @@ class main(Scene):
         t1 = TexMobject(*r"f , g \text{~在~}(a,b)\text{~上可导~}".split())
         t2 = TexMobject(*r"g '(x) \neq 0,\quad\forall x\in(a,b)".split())
         t3 = TexMobject(*r"\lim_{ x\to a^+} f (x) = \lim_{x\to "
-        #    0    1    2   3  4  5     6
+                         #    0    1    2   3  4  5     6
                          r"a^+} g (x) = 0".split())
         ###################  7  8  9 10 11
         t3_inf = TexMobject(*r"\lim_{x\to "

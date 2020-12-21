@@ -126,12 +126,23 @@ class ClockwiseTransform(Transform):
         "path_arc": -np.pi
     }
 
+class ClockwiseReplacementTransform(Transform):
+    CONFIG = {
+        "path_arc": -np.pi,
+        "replace_mobject_with_target_in_scene": True,
+    }
+
 
 class CounterclockwiseTransform(Transform):
     CONFIG = {
         "path_arc": np.pi
     }
 
+class CounterclockwiseReplacementTransform(Transform):
+    CONFIG = {
+        "path_arc": np.pi,
+        "replace_mobject_with_target_in_scene": True,
+    }
 
 class MoveToTarget(Transform):
     def __init__(self, mobject, **kwargs):
