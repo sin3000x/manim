@@ -619,7 +619,7 @@ class lVector(Line):
         if len(direction) == 2:
             direction = np.append(np.array(direction), 0)
         Line.__init__(self, ORIGIN, direction, **kwargs)
-        self.add_tip()
+        self.add_tip(**kwargs)
 
 class Arrow(Line):
     CONFIG = {

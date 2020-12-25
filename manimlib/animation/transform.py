@@ -108,6 +108,10 @@ class ReplacementTransform(Transform):
         "replace_mobject_with_target_in_scene": True,
     }
 
+class RT(Transform):
+    CONFIG = {
+        "replace_mobject_with_target_in_scene": True,
+    }
 
 class TransformFromCopy(Transform):
     """
