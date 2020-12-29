@@ -331,3 +331,14 @@ class Title(TextMobject):
                 underline.set_width(self.underline_width)
             self.add(underline)
             self.underline = underline
+
+
+class myTitle(TextMobject):
+    CONFIG = {
+        "color": YELLOW
+    }
+
+    def __init__(self, *text_parts, **kwargs):
+        digest_config(self, kwargs)
+        group = [r"\underline{\textbf{\heiti %s}}" % text for text in text_parts]
+        TextMobject.__init__(self, *group,color=self.color,  **kwargs)

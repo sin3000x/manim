@@ -68,12 +68,13 @@ class Indicate(Transform):
 class FocusInto(Transform):
     CONFIG = {
         "scale_factor": 4,
+        "fade": 1,
     }
 
     def create_target(self):
         target = self.mobject.copy()
         target.scale_in_place(self.scale_factor).move_to(ORIGIN)
-        target.fade(1)
+        target.fade(self.fade)
         return target
 
 class Flash(AnimationGroup):
