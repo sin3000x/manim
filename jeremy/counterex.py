@@ -156,7 +156,7 @@ class increasing(GraphScene, MovingCameraScene):
             self.wait()
             self.play(self.camera.frame.shift, UP * (title.get_top()[1] - l5.get_center()[1]), run_time=2)
 
-            self.play(FadeOut(VGroup(f1, box, l1, l2, l3, l41, l42, l4, brace, l5, self.axes, graph, dots, dot0)))
+            # self.play(FadeOut(VGroup(f1, box, l1, l2, l3, l41, l42, l4, brace, l5, self.axes, graph, dots, dot0)))
 
         first()
         second()

@@ -339,6 +339,6 @@ class myTitle(TextMobject):
     }
 
     def __init__(self, *text_parts, **kwargs):
-        digest_config(self, kwargs)
+        # digest_config(self, kwargs)
         group = [r"\underline{\textbf{\heiti %s}}" % text for text in text_parts]
-        TextMobject.__init__(self, *group,color=self.color,  **kwargs)
+        TextMobject.__init__(self, *group, **kwargs)

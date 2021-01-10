@@ -199,11 +199,17 @@ class continuum(Scene):
         hypo = TextMobject("\\kaishu 没有中间的基数", color=YELLOW).next_to(chain[0][-1], UP, buff=LARGE_BUFF)
         arrow = Arrow(hypo.get_bottom(), chain[0][-1].get_top())
         title = TextMobject("\\underline{\\textbf{\\heiti 连续统假设}}", color=YELLOW).to_corner(UL)
+        say = VGroup(TextMobject("不存在一个集合，其元素").scale(1.2),
+                     TextMobject("比整数","多","，实数","少").tm({"多": YELLOW, "少": YELLOW}).scale(1.2))\
+            .arrange(DOWN)
         self.play(GrowArrow(arrow))
         self.play(Write(hypo))
         self.wait()
         self.play(Write(title))
         self.wait()
+        self.play(Write(say))
+        self.wait()
+        self.play(FadeOut(say))
 
         timeline = NumberLine(x_min=1870, x_max=1970, unit_size=0.1, tick_frequency=50, include_ticks=False,
                               include_tip=True).shift(DOWN * 2 + LEFT * 192)
@@ -409,3 +415,150 @@ class real(Scene):
     def construct(self):
         title = myTitle(r"$\mathbb{R}$不是可数集").to_corner(UL)
         self.play(Write(title))
+        self.wait()
+        consider = TextMobject(r"只需考虑子集",r"$[0, 1]$",".").next_to(title, DOWN, aligned_edge=LEFT)
+        consider2 = TextMobject(r"只需考虑子集",r"$[0, 1)$",".").next_to(title, DOWN, aligned_edge=LEFT)
+        proof = TextMobject(r"反证.",r"假设","$[0,1]$",r"被排成").next_to(consider)
+        proof2 = TextMobject(r"反证.",r"假设","$[0,1)$",r"被排成").next_to(consider)
+        seq = TexMobject(*r"x_1 , x_2 , x_3 , \cdots".split()).next_to(proof, DOWN, buff=.7).set_x(0)
+        interval = UnitInterval(tick_frequency=1, decimal_number_config={"num_decimal_places": 0},
+                                numbers_with_elongated_ticks=[]).add_numbers(0, 1).shift(DOWN)
+        ticks1 = VGroup(interval.get_tick(1/3), interval.get_tick(2/3))
+        ticks2 = VGroup(interval.get_tick(1/3+1/9), interval.get_tick(2/3-1/9))
+        ticks3 = VGroup(interval.get_tick(2/3-1/9+1/27), interval.get_tick(2/3-1/9+2/27))
+        ticks = VGroup(ticks1, ticks2, ticks3)
+        dots = VGroup(Dot(interval.n2p(0.2)), Dot(interval.n2p(1/3+1/9)), Dot(interval.n2p(.8)))
+        xi = Dot(interval.n2p(2/3-1/9+0.3/27), color=BLUE)
+        lines = VGroup(
+            Line(interval.n2p(1/3), interval.n2p(2/3), color=YELLOW),
+            Line(interval.n2p(2/3-1/9), interval.n2p(2/3), color=RED),
+            Line(interval.n2p(2/3-1/9), interval.n2p(2/3-1/9+1/27), color=BLUE),
+        )
+        braces = VGroup(*[Brace(line, DOWN, color=line.get_color()) for line in lines])
+        labels = VGroup(*[TextMobject("\\kaishu 不含",rf"${s}$", color=lines[i].get_color()).next_to(braces[i], DOWN)
+                          for i, s in enumerate(["x_1","x_1,x_2","x_1,x_2,x_3"])])
+        xi_label = TexMobject("\\xi", color=BLUE).next_to(xi, DOWN)
+        xi_comment = TextMobject("\\kaishu 与$x_1,x_2,x_3,\\cdots$都不同.", color=BLUE).next_to(xi_label, DOWN)
+        self.play(Write(consider))
+        self.wait()
+        self.play(Write(proof[0]))
+        self.wait()
+        self.play(Write(proof[1:]))
+        self.play(RT(proof[2].copy(), seq))
+        self.wait()
+        self.play(FadeIn(interval))
+        self.wait()
+        for i in range(3):
+            self.play(FadeIn(ticks[i]))
+            self.wait()
+            self.play(RT(seq[i*2].copy(), dots[i]))
+            self.wait()
+            if i == 0:
+                self.play(ShowCreation(lines[i]), GrowFromCenter(braces[0]), GrowFromCenter(labels[0]))
+            else:
+                self.play(ShowCreation(lines[i]), RT(braces[i-1], braces[i]), RT(labels[i-1], labels[i]))
+            self.wait()
+        self.play(RT(lines[-1], xi), RT(VGroup(braces[-1], labels[-1]), xi_label))
+        self.wait()
+        self.play(Write(xi_comment))
+        self.wait()
+        self.play(FadeOut(VGroup(ticks, dots, xi, xi_label, xi_comment, lines[:2])))
+        tick_extra = interval.get_tick((.5))
+        dot_extra = Dot(interval.n2p(.5))
+        self.play(FadeIn(tick_extra))
+        self.wait()
+        self.play(RT(seq[0].copy(), dot_extra))
+        self.wait()
+
+        lists = VGroup(
+            TexMobject("x_1","=","0.20134\\cdots"),
+            TexMobject("x_2","=","0.11111\\cdots"),
+            TexMobject("x_3","=","0.12345\\cdots"),
+            TexMobject("x_4","=","0.67676\\cdots"),
+            TexMobject("\\vdots")
+        ).arrange(DOWN, aligned_edge=LEFT)
+        lists2 = VGroup(
+            TexMobject("x_1","=","0.00110\\cdots"),
+            TexMobject("x_2","=","0.01000\\cdots"),
+            TexMobject("x_3","=","0.11001\\cdots"),
+            TexMobject("x_4","=","0.10101\\cdots"),
+            TexMobject("\\vdots")
+        ).arrange(DOWN, aligned_edge=LEFT)
+        lists[-1].set_x(lists[0][0].get_x())
+        lists2[-1].set_x(lists[0][0].get_x())
+        h_line = Line().set_width(FRAME_WIDTH-2).next_to(lists, DOWN)
+        number = TexMobject("0.1211\\cdots").next_to(h_line, DOWN).align_to(lists[0][2], LEFT)
+        number2 = TexMobject("0.3248\\cdots").next_to(number, DOWN)
+        number3 = TexMobject("0.1011\\cdots").next_to(number2, DOWN)
+        self.play(FadeOut(VGroup(*[seq[i] for i in [1,3,5,6]], interval, dot_extra, tick_extra)),
+                  *[RT(seq[i], lists[j][0]) for i, j in zip([0,2,4], [0,1,2])])
+        self.play(*[FadeIn(lists[i][1:]) for i in range(3)],
+                  FadeIn(lists[3]),
+                  FadeIn(lists[4])
+                  )
+        self.wait()
+        self.play(GrowFromCenter(h_line))
+        self.wait()
+        self.play(Write(number[0][:2]))
+        self.wait()
+        to_focus = VGroup(
+            lists[0][2][2],
+            lists[1][2][3],
+            lists[2][2][4],
+            lists[3][2][5],
+        )
+        to_focus2 = VGroup(
+            lists2[0][2][2],
+            lists2[1][2][3],
+            lists2[2][2][4],
+            lists2[3][2][5],
+        )
+        for i in to_focus:
+            i.save_state()
+        self.play(*list(it.chain(*[[i.scale, 1.2, i.set_color, YELLOW] for i in to_focus])))
+        self.wait()
+        self.play(AnimationGroup(*[RT(to_focus[i].copy(), number[0][j]) for i, j in zip([0,2,3], [2,4,5])], lag_ratio=.4))
+        self.wait()
+        self.play(RT(to_focus[1].copy(), number[0][3]))
+        self.wait()
+        self.play(Write(number[0][6:]))
+        self.wait()
+        self.play(*[Restore(i) for i in to_focus])
+        self.wait()
+        for i in range(4):
+            self.play(Indicate(to_focus[i]), Indicate(number[0][i+2]))
+        self.wait()
+
+        self.play(*list(it.chain(*[[i.scale, 1.2, i.set_color, YELLOW] for i in to_focus])))
+        self.play(Write(number2[0][:2]))
+        self.play(*[RT(to_focus[i].copy(), number2[0][i+2]) for i in range(4)])
+        self.play(Write(number2[0][6:]))
+        self.wait()
+
+        prob = TexMobject("1.000\\cdots","=0.999\\cdots", color=YELLOW).to_edge(LEFT).shift(UP)
+        cross = Cross(prob[1])
+        self.play(Write(prob))
+        self.wait()
+        self.play(ShowCreation(cross))
+        self.play(RT(consider, consider2), RT(proof, proof2))
+        self.wait()
+        self.play(RT(lists, lists2), FadeOut(VGroup(prob, cross)))
+        self.wait()
+        self.play(*list(it.chain(*[[i.scale, 1.2, i.set_color, YELLOW] for i in to_focus2])))
+        self.play(Write(number3[0][:2]))
+        self.play(*[RT(to_focus2[i].copy(), number3[0][i + 2]) for i in range(4)])
+        self.play(Write(number3[0][6:]))
+
+        cantor = TextMobject("Cantor's diagonal argument", color=YELLOW).next_to(title, RIGHT, buff=.7)
+        self.wait()
+        self.play(Write(cantor))
+        self.wait()
+
+
+
+
+
+
+
+
+

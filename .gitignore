@@ -26,3 +26,8 @@ manim.egg-info/
 
 primes.py
 /media_dir.txt
+
+*.log
+*.aux
+*.svg
+*.xdv

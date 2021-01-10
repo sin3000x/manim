@@ -183,6 +183,9 @@ class GraphScene(Scene):
         result += self.y_axis.number_to_point(y)[1] * UP
         return result
 
+    def c2p(self, x, y):
+        return self.coords_to_point(x, y)
+
     def point_to_coords(self, point):
         """
         The scene is smaller than the graph.
@@ -428,6 +431,7 @@ class GraphScene(Scene):
         x_max=None,
         dx=0.1,
         input_sample_type="left",
+        bounded_graph=None,
         stroke_width=1,
         stroke_color=BLACK,
         fill_opacity=1,
@@ -510,9 +514,13 @@ class GraphScene(Scene):
             else:
                 raise Exception("Invalid input sample type")
             graph_point = self.input_to_graph_point(sample_input, graph)
+            if bounded_graph == None:
+                y_point = 0
+            else:
+                y_point = bounded_graph.underlying_function(x)
             points = VGroup(*list(map(VectorizedPoint, [
-                self.coords_to_point(x, 0),
-                self.coords_to_point(x + width_scale_factor * dx, 0),
+                self.coords_to_point(x, y_point),
+                self.coords_to_point(x + width_scale_factor * dx, y_point),
                 graph_point
             ])))
 
@@ -577,7 +585,7 @@ class GraphScene(Scene):
             for n in range(n_iterations)
         ]
 
-    def get_area(self, graph, t_min, t_max):
+    def get_area(self, graph, t_min, t_max, bounded=None):
         """
         Returns a VGroup of Riemann rectangles
         sufficiently small enough to visually
@@ -607,6 +615,7 @@ class GraphScene(Scene):
             x_max=t_max,
             dx=dx,
             stroke_width=0,
+            bounded_graph=bounded
         ).set_fill(opacity=self.area_opacity)
 
     def transform_between_riemann_rects(self, curr_rects, new_rects, **kwargs):
