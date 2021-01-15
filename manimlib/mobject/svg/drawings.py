@@ -1123,3 +1123,17 @@ class Favo(SVGMobject):
     def __init__(self, **kwargs):
         digest_config(self, kwargs)
         SVGMobject.__init__(self, file_name="favo", **kwargs)
+
+
+class BranchCut(VGroup):
+    CONFIG = {
+        "color": YELLOW,
+        "num": 20,
+        "angle": np.pi
+    }
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        triag = VGroup(Line(DR, ORIGIN), Line(ORIGIN, DL))
+        triag = VGroup(*[triag.copy() for _ in range(self.num)]).arrange(buff=0)\
+            .scale(.2).next_to(ORIGIN, RIGHT, buff=0).set_color(self.color).rotate(self.angle, about_point=ORIGIN)
+        VGroup.__init__(self, triag)
