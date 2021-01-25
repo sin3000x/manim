@@ -23,32 +23,9 @@
 \usepackage{mathtools}
 \usepackage{tipa}
 \usepackage{bm}
-\makeatletter
-\newcommand{\cemph}[1]{\@tfor\i:=#1\do{\textsubdot{\i}}}
-\makeatother
-
-\linespread{1}
-\newcommand{\A}{\mathbb{A}} % annulus
-\newcommand{\ud}{\mathbb{D}} % unit disk
 \newcommand{\C}{\mathbb C} % complex numbers
 \newcommand{\cC}{\overline{\mathbb C}} % Riemann sphere
 \newcommand{\R}{\mathbb R} % real numbers
-
-\DeclareMathOperator{\diag}{diag} %
-\DeclareMathOperator{\exter}{ext}
-\DeclareMathOperator{\inter}{int} %
-\DeclareMathOperator{\Span}{span} %
-\DeclareMathOperator{\dist}{dist}
-\DeclareMathOperator{\sign}{sgn} %
-\DeclareMathOperator{\sinc}{sinc} %
-\DeclareMathOperator{\capa}{cap} %
-\DeclareMathOperator{\supp}{supp} %
-\DeclareMathOperator{\dint}{\int\!\!\int}%
-\DeclareMathOperator{\fov}{\mathbb{W}}%
-\DeclareMathOperator{\cond}{cond}%
-\newcommand{\divdif}{\mathord{\kern.43em{\vrule width.6pt height7pt depth-.28pt} \kern-.41em\Delta}}
-
-% some other commands
 \renewcommand{\d}{\,\mathrm{d}} % differential
 \newcommand{\with}{\,:\,}
 \newcommand{\eps}{\varepsilon}
@@ -56,6 +33,13 @@
 \newcommand{\const}{\mathrm{const.}}
 \renewcommand{\i}{\mathrm{i}}
 \newcommand{\e}{\mathrm{e}}
+
+\makeatletter
+\newcommand{\cemph}[1]{\@tfor\i:=#1\do{\textsubdot{\i}}}
+\makeatother
+
+\linespread{1}
+
 
 \begin{document}
 

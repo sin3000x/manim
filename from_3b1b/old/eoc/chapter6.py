@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-SPACE_UNIT_TO_PLANE_UNIT = 0.75
+SPACE_UNIT_TO_PLANE_UNIT = 1
 
 class Chapter6OpeningQuote(OpeningQuote):
     CONFIG = {
@@ -58,14 +58,14 @@ class SlopeOfCircleExample(ZoomedScene):
         self.draw_example_slope()
         self.show_perpendicular_radius()
         self.show_dx_and_dy()
-        self.write_slope_as_dy_dx()
-        self.point_out_this_is_not_a_graph()
-        self.perform_implicit_derivative()
-        self.show_final_slope()
+        # self.write_slope_as_dy_dx()
+        # self.point_out_this_is_not_a_graph()
+        # self.perform_implicit_derivative()
+        # self.show_final_slope()
 
     def setup_plane(self):
         self.plane = NumberPlane(**self.plane_kwargs)
-        self.planes.fade()
+        # self.planes.fade()
         self.plane.add(self.plane.get_axis_labels())
         self.plane.add_coordinates()
 
@@ -92,7 +92,7 @@ class SlopeOfCircleExample(ZoomedScene):
         self.circle_equation = equation
 
     def talk_through_pythagorean_theorem(self):
-        point = self.plane.num_pair_to_point(self.example_point)
+        point = self.plane.coords_to_point(*self.example_point)
         x_axis_point = point[0]*RIGHT
         dot = Dot(point, color = self.example_color)
 
@@ -263,6 +263,7 @@ class SlopeOfCircleExample(ZoomedScene):
             line.label = label
 
         self.activate_zooming()
+        self.little_rectangle = ScreenRectangle()
         self.little_rectangle.move_to(step_line.get_center())
         self.little_rectangle.save_state()
         self.little_rectangle.scale_in_place(self.zoom_factor)
