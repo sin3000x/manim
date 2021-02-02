@@ -160,11 +160,16 @@ class AreaTest(GraphScene, Scene):
     def func1(self, x):
         return (x)
 
+class T(GraphScene):
+    CONFIG = {
+        "x_min": 0,
+        "x_max": 1.2,
+        "y_max": 1.2,
+        "graph_origin": ORIGIN
+    }
     def construct(self):
         self.setup_axes(animate = True)
-        func_graph = self.get_graph(self.func1, self.function_color)
-        graph_area = self.get_area(func_graph, 0, 10)
-
-        self.play(ShowCreation(func_graph))
-        self.play(ShowCreation(graph_area))
-        self.wait(1)
+        graph = self.get_graph(lambda t: np.sin(1000/t), x_min=1e-6, x_max=1)
+        self.add(graph)
+        label = TexMobject("\\sin\\frac 1x").next_to(graph, LEFT, buff=1)
+        self.add(label)

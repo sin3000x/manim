@@ -5,13 +5,18 @@ from manimlib.mobject.svg.tex_mobject import TextMobject
 from manimlib.utils.config_ops import digest_config
 
 class Heiti(TextMobject):
+    CONFIG = {
+        "underline": True,
+        "color": YELLOW
+    }
     def __init__(self, *tex_strings, **kwargs):
-        if kwargs.get("underline") is True:
+        digest_config(self, kwargs)
+        if self.underline is True:
             tmp = [r"\underline{\textbf{\heiti %s}}" % string for string in tex_strings]
-            super.__init__(*tmp, **kwargs)
+            super().__init__(*tmp, **kwargs)
         else:
             tmp = [r"\textbf{\heiti %s}" % string for string in tex_strings]
-            super().__init__(*tmp, **kwargs)
+            super().__init__(self, *tmp, **kwargs)
 
 
 # 下面的仅仅是将它封装成类，或许可以便于操作

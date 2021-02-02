@@ -1,1 +1,1 @@
-*list(it.chain(*[[i.set_y, line.get_y()] for i in [max_tick, min_tick, M_label, m_label, max_dot, min_dot]]))
+*list(it.chain(*[[i.set_y, line.get_y()] for i in []]))
