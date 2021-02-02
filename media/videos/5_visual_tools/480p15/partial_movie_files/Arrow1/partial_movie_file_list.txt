@@ -1,0 +1,5 @@
+file 'file:/Users/jeremy/Documents/manim/media/videos/5_visual_tools/480p15/partial_movie_files/Arrow1/00000.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/5_visual_tools/480p15/partial_movie_files/Arrow1/00001.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/5_visual_tools/480p15/partial_movie_files/Arrow1/00002.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/5_visual_tools/480p15/partial_movie_files/Arrow1/00003.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/5_visual_tools/480p15/partial_movie_files/Arrow1/00004.mp4'

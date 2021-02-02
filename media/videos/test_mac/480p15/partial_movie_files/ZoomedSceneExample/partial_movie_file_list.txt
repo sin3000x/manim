@@ -1,0 +1,7 @@
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00000.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00001.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00002.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00003.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00004.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00005.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/480p15/partial_movie_files/ZoomedSceneExample/00006.mp4'

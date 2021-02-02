@@ -18,6 +18,491 @@ class Heiti(TextMobject):
             tmp = [r"\textbf{\heiti %s}" % string for string in tex_strings]
             super().__init__(self, *tmp, **kwargs)
 
+class Logo(VMobject):
+    CONFIG = {
+        "pupil_radius": 1.0,
+        "outer_radius": 2.0,
+        "iris_background_blue": "#74C0E3",
+        "iris_background_brown": "#8C6239",
+        "blue_spike_colors": [
+            "#528EA3",
+            "#3E6576",
+            "#224C5B",
+            BLACK,
+        ],
+        "brown_spike_colors": [
+            "#754C24",
+            "#603813",
+            "#42210b",
+            BLACK,
+        ],
+        "n_spike_layers": 4,
+        "n_spikes": 28,
+        "spike_angle": TAU / 28,
+    }
+
+    def __init__(self, **kwargs):
+        VMobject.__init__(self, **kwargs)
+        self.add_iris_back()
+        self.add_spikes()
+        self.add_pupil()
+
+    def add_iris_back(self):
+        blue_iris_back = AnnularSector(
+            inner_radius=self.pupil_radius,
+            outer_radius=self.outer_radius,
+            angle=270 * DEGREES,
+            start_angle=180 * DEGREES,
+            fill_color=self.iris_background_blue,
+            fill_opacity=1,
+            stroke_width=0,
+        )
+        brown_iris_back = AnnularSector(
+            inner_radius=self.pupil_radius,
+            outer_radius=self.outer_radius,
+            angle=90 * DEGREES,
+            start_angle=90 * DEGREES,
+            fill_color=self.iris_background_brown,
+            fill_opacity=1,
+            stroke_width=0,
+        )
+        self.iris_background = VGroup(
+            blue_iris_back,
+            brown_iris_back,
+        )
+        self.add(self.iris_background)
+
+    def add_spikes(self):
+        layers = VGroup()
+        radii = np.linspace(
+            self.outer_radius,
+            self.pupil_radius,
+            self.n_spike_layers,
+            endpoint=False,
+        )
+        radii[:2] = radii[1::-1]  # Swap first two
+        if self.n_spike_layers > 2:
+            radii[-1] = interpolate(
+                radii[-1], self.pupil_radius, 0.25
+            )
+
+        for radius in radii:
+            tip_angle = self.spike_angle
+            half_base = radius * np.tan(tip_angle)
+            triangle, right_half_triangle = [
+                Polygon(
+                    radius * UP,
+                    half_base * RIGHT,
+                    vertex3,
+                    fill_opacity=1,
+                    stroke_width=0,
+                )
+                for vertex3 in (half_base * LEFT, ORIGIN,)
+            ]
+            left_half_triangle = right_half_triangle.copy()
+            left_half_triangle.flip(UP, about_point=ORIGIN)
+
+            n_spikes = self.n_spikes
+            full_spikes = [
+                triangle.copy().rotate(
+                    -angle,
+                    about_point=ORIGIN
+                )
+                for angle in np.linspace(
+                    0, TAU, n_spikes, endpoint=False
+                )
+            ]
+            index = (3 * n_spikes) // 4
+            if radius == radii[0]:
+                layer = VGroup(*full_spikes)
+                layer.rotate(
+                    -TAU / n_spikes / 2,
+                    about_point=ORIGIN
+                )
+                layer.brown_index = index
+            else:
+                half_spikes = [
+                    right_half_triangle.copy(),
+                    left_half_triangle.copy().rotate(
+                        90 * DEGREES, about_point=ORIGIN,
+                    ),
+                    right_half_triangle.copy().rotate(
+                        90 * DEGREES, about_point=ORIGIN,
+                    ),
+                    left_half_triangle.copy()
+                ]
+                layer = VGroup(*it.chain(
+                    half_spikes[:1],
+                    full_spikes[1:index],
+                    half_spikes[1:3],
+                    full_spikes[index + 1:],
+                    half_spikes[3:],
+                ))
+                layer.brown_index = index + 1
+
+            layers.add(layer)
+
+        # Color spikes
+        blues = self.blue_spike_colors
+        browns = self.brown_spike_colors
+        for layer, blue, brown in zip(layers, blues, browns):
+            index = layer.brown_index
+            layer[:index].set_color(blue)
+            layer[index:].set_color(brown)
+
+        self.spike_layers = layers
+        self.add(layers)
+
+    def add_pupil(self):
+        self.pupil = Circle(
+            radius=self.pupil_radius,
+            fill_color=BLACK,
+            fill_opacity=1,
+            stroke_width=0,
+            sheen=0.0,
+        )
+        self.pupil.rotate(90 * DEGREES)
+        self.add(self.pupil)
+
+    def cut_pupil(self):
+        pupil = self.pupil
+        center = pupil.get_center()
+        new_pupil = VGroup(*[
+            pupil.copy().pointwise_become_partial(pupil, a, b)
+            for (a, b) in [(0.25, 1), (0, 0.25)]
+        ])
+        for sector in new_pupil:
+            sector.add_cubic_bezier_curve_to([
+                sector.points[-1],
+                *[center] * 3,
+                *[sector.points[0]] * 2
+            ])
+        self.remove(pupil)
+        self.add(new_pupil)
+        self.pupil = new_pupil
+
+    def get_blue_part_and_brown_part(self):
+        if len(self.pupil) == 1:
+            self.cut_pupil()
+        # circle = Circle()
+        # circle.set_stroke(width=0)
+        # circle.set_fill(BLACK, opacity=1)
+        # circle.match_width(self)
+        # circle.move_to(self)
+        blue_part = VGroup(
+            self.iris_background[0],
+            *[
+                layer[:layer.brown_index]
+                for layer in self.spike_layers
+            ],
+            self.pupil[0],
+        )
+        brown_part = VGroup(
+            self.iris_background[1],
+            *[
+                layer[layer.brown_index:]
+                for layer in self.spike_layers
+            ],
+            self.pupil[1],
+        )
+        return blue_part, brown_part
+
+
+# Cards
+class DeckOfCards(VGroup):
+    def __init__(self, **kwargs):
+        possible_values = list(map(str, list(range(1, 11)))) + ["J", "Q", "K"]
+        possible_suits = ["hearts", "diamonds", "spades", "clubs"]
+        VGroup.__init__(self, *[
+            PlayingCard(value=value, suit=suit, **kwargs)
+            for value in possible_values
+            for suit in possible_suits
+        ])
+
+
+class PlayingCard(VGroup):
+    CONFIG = {
+        "value": None,
+        "suit": None,
+        "key": None,  # String like "8H" or "KS"
+        "height": 2,
+        "height_to_width": 3.5 / 2.5,
+        "card_height_to_symbol_height": 7,
+        "card_width_to_corner_num_width": 10,
+        "card_height_to_corner_num_height": 10,
+        "color": LIGHT_GREY,
+        "turned_over": False,
+        "possible_suits": ["hearts", "diamonds", "spades", "clubs"],
+        "possible_values": list(map(str, list(range(2, 11)))) + ["J", "Q", "K", "A"],
+    }
+
+    def __init__(self, key=None, **kwargs):
+        VGroup.__init__(self, key=key, **kwargs)
+
+    def generate_points(self):
+        self.add(Rectangle(
+            height=self.height,
+            width=self.height / self.height_to_width,
+            stroke_color=WHITE,
+            stroke_width=2,
+            fill_color=self.color,
+            fill_opacity=1,
+        ))
+        if self.turned_over:
+            self.set_fill(DARK_GREY)
+            self.set_stroke(LIGHT_GREY)
+            contents = VectorizedPoint(self.get_center())
+        else:
+            value = self.get_value()
+            symbol = self.get_symbol()
+            design = self.get_design(value, symbol)
+            corner_numbers = self.get_corner_numbers(value, symbol)
+            contents = VGroup(design, corner_numbers)
+            self.design = design
+            self.corner_numbers = corner_numbers
+        self.add(contents)
+
+    def get_value(self):
+        value = self.value
+        if value is None:
+            if self.key is not None:
+                value = self.key[:-1]
+            else:
+                value = random.choice(self.possible_values)
+        value = str(value).upper()
+        if value == "1":
+            value = "A"
+        if value not in self.possible_values:
+            raise Exception("Invalid card value")
+
+        face_card_to_value = {
+            "J": 11,
+            "Q": 12,
+            "K": 13,
+            "A": 14,
+        }
+        try:
+            self.numerical_value = int(value)
+        except:
+            self.numerical_value = face_card_to_value[value]
+        return value
+
+    def get_symbol(self):
+        suit = self.suit
+        if suit is None:
+            if self.key is not None:
+                suit = dict([
+                    (string.upper(s[0]), s)
+                    for s in self.possible_suits
+                ])[string.upper(self.key[-1])]
+            else:
+                suit = random.choice(self.possible_suits)
+        if suit not in self.possible_suits:
+            raise Exception("Invalud suit value")
+        self.suit = suit
+        symbol_height = float(self.height) / self.card_height_to_symbol_height
+        symbol = SuitSymbol(suit, height=symbol_height)
+        return symbol
+
+    def get_design(self, value, symbol):
+        if value == "A":
+            return self.get_ace_design(symbol)
+        if value in list(map(str, list(range(2, 11)))):
+            return self.get_number_design(value, symbol)
+        else:
+            return self.get_face_card_design(value, symbol)
+
+    def get_ace_design(self, symbol):
+        design = symbol.copy().scale(1.5)
+        design.move_to(self)
+        return design
+
+    def get_number_design(self, value, symbol):
+        num = int(value)
+        n_rows = {
+            2: 2,
+            3: 3,
+            4: 2,
+            5: 2,
+            6: 3,
+            7: 3,
+            8: 3,
+            9: 4,
+            10: 4,
+        }[num]
+        n_cols = 1 if num in [2, 3] else 2
+        insertion_indices = {
+            5: [0],
+            7: [0],
+            8: [0, 1],
+            9: [1],
+            10: [0, 2],
+        }.get(num, [])
+
+        top = self.get_top() + symbol.get_height() * DOWN
+        bottom = self.get_bottom() + symbol.get_height() * UP
+        column_points = [
+            interpolate(top, bottom, alpha)
+            for alpha in np.linspace(0, 1, n_rows)
+        ]
+
+        design = VGroup(*[
+            symbol.copy().move_to(point)
+            for point in column_points
+        ])
+        if n_cols == 2:
+            space = 0.2 * self.get_width()
+            column_copy = design.copy().shift(space * RIGHT)
+            design.shift(space * LEFT)
+            design.add(*column_copy)
+        design.add(*[
+            symbol.copy().move_to(
+                center_of_mass(column_points[i:i + 2])
+            )
+            for i in insertion_indices
+        ])
+        for symbol in design:
+            if symbol.get_center()[1] < self.get_center()[1]:
+                symbol.rotate_in_place(np.pi)
+        return design
+
+    def get_face_card_design(self, value, symbol):
+        from for_3b1b_videos.pi_creature import PiCreature
+        sub_rect = Rectangle(
+            stroke_color=BLACK,
+            fill_opacity=0,
+            height=0.9 * self.get_height(),
+            width=0.6 * self.get_width(),
+        )
+        sub_rect.move_to(self)
+
+        # pi_color = average_color(symbol.get_color(), GREY)
+        pi_color = symbol.get_color()
+        pi_mode = {
+            "J": "plain",
+            "Q": "thinking",
+            "K": "hooray"
+        }[value]
+        pi_creature = PiCreature(
+            mode=pi_mode,
+            color=pi_color,
+        )
+        pi_creature.set_width(0.8 * sub_rect.get_width())
+        if value in ["Q", "K"]:
+            prefix = "king" if value == "K" else "queen"
+            crown = SVGMobject(file_name=prefix + "_crown")
+            crown.set_stroke(width=0)
+            crown.set_fill(YELLOW, 1)
+            crown.stretch_to_fit_width(0.5 * sub_rect.get_width())
+            crown.stretch_to_fit_height(0.17 * sub_rect.get_height())
+            crown.move_to(pi_creature.eyes.get_center(), DOWN)
+            pi_creature.add_to_back(crown)
+            to_top_buff = 0
+        else:
+            to_top_buff = SMALL_BUFF * sub_rect.get_height()
+        pi_creature.next_to(sub_rect.get_top(), DOWN, to_top_buff)
+        # pi_creature.shift(0.05*sub_rect.get_width()*RIGHT)
+
+        pi_copy = pi_creature.copy()
+        pi_copy.rotate(np.pi, about_point=sub_rect.get_center())
+
+        return VGroup(sub_rect, pi_creature, pi_copy)
+
+    def get_corner_numbers(self, value, symbol):
+        value_mob = TextMobject(value)
+        width = self.get_width() / self.card_width_to_corner_num_width
+        height = self.get_height() / self.card_height_to_corner_num_height
+        value_mob.set_width(width)
+        value_mob.stretch_to_fit_height(height)
+        value_mob.next_to(
+            self.get_corner(UP + LEFT), DOWN + RIGHT,
+            buff=MED_LARGE_BUFF * width
+        )
+        value_mob.set_color(symbol.get_color())
+        corner_symbol = symbol.copy()
+        corner_symbol.set_width(width)
+        corner_symbol.next_to(
+            value_mob, DOWN,
+            buff=MED_SMALL_BUFF * width
+        )
+        corner_group = VGroup(value_mob, corner_symbol)
+        opposite_corner_group = corner_group.copy()
+        opposite_corner_group.rotate(
+            np.pi, about_point=self.get_center()
+        )
+
+        return VGroup(corner_group, opposite_corner_group)
+
+
+class SuitSymbol(SVGMobject):
+    CONFIG = {
+        "height": 0.5,
+        "fill_opacity": 1,
+        "stroke_width": 0,
+        "red": "#D02028",
+        "black": BLACK,
+    }
+
+    def __init__(self, suit_name, **kwargs):
+        digest_config(self, kwargs)
+        suits_to_colors = {
+            "hearts": self.red,
+            "diamonds": self.red,
+            "spades": self.black,
+            "clubs": self.black,
+        }
+        if suit_name not in suits_to_colors:
+            raise Exception("Invalid suit name")
+        SVGMobject.__init__(self, file_name=suit_name, **kwargs)
+
+        color = suits_to_colors[suit_name]
+        self.set_stroke(width=0)
+        self.set_fill(color, 1)
+        self.set_height(self.height)
+
+
+class Like(SVGMobject):
+    CONFIG = {
+        "color": "#fb7199"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="good", **kwargs)
+
+
+class Coin(SVGMobject):
+    CONFIG = {
+        "color": "#03b5e5"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="coin", **kwargs)
+
+
+class Favo(SVGMobject):
+    CONFIG = {
+        "color": "#f3a034"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="favo", **kwargs)
+
+
+class BranchCut(VGroup):
+    CONFIG = {
+        "color": YELLOW,
+        "num": 20,
+        "angle": np.pi
+    }
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        triag = VGroup(Line(DR, ORIGIN), Line(ORIGIN, DL))
+        triag = VGroup(*[triag.copy() for _ in range(self.num)]).arrange(buff=0)\
+            .scale(.2).next_to(ORIGIN, RIGHT, buff=0).set_color(self.color).rotate(self.angle, about_point=ORIGIN)
+        VGroup.__init__(self, triag)
 
 # 下面的仅仅是将它封装成类，或许可以便于操作
 # 将数字的显示改成使用Integer，以避免生成过多的TextSVG
