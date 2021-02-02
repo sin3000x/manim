@@ -1,3 +1,5 @@
+import os
+
 from manimlib.animation.animation import Animation
 from manimlib.animation.rotation import Rotating
 from manimlib.constants import *
@@ -20,6 +22,7 @@ from manimlib.utils.space_ops import angle_of_vector
 from manimlib.utils.space_ops import complex_to_R3
 from manimlib.utils.space_ops import rotate_vector
 
+MEDIA_DIR="/Users/jeremy/Documents/manim/media"
 pi_creature_dir_maybe = os.path.join(MEDIA_DIR, "assets", "PiCreature")
 if os.path.exists(pi_creature_dir_maybe):
     PI_CREATURE_DIR = pi_creature_dir_maybe

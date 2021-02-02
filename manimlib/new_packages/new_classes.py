@@ -1,10 +1,10 @@
 import os
 from manimlib.imports import *
 from manimlib.mobject.svg.svg_mobject import SVGMobject
-from manimlib.mobject.svg.tex_mobject import TextMobject
+from manimlib.mobject.svg.tex_mobject import Text
 from manimlib.utils.config_ops import digest_config
 
-class Heiti(TextMobject):
+class Heiti(Text):
     CONFIG = {
         "underline": True,
         "color": YELLOW

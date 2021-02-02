@@ -31,440 +31,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/docs.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.github/workflows/docs_test.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/custom_defaults.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/example.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/colors.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/custom.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/AnimatingMethods.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/SquareToCircle.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/SurfaceExample.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/TexTransformExample.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/TextExample.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/UpdatersExample.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/manim_shaders_process_en.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/manim_shaders_structure.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/quickstart/SquareToCircle.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/quickstart/SquareToCircle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/quickstart/SquareToCircleEmbed.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/development/about.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/development/changelog.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/development/contributing.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/animation/index.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/camera/index.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/constants.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/custom_default.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/mobject/index.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/scene/index.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/shaders/index.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/documentation/utils/index.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/getting_started/config.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/getting_started/installation.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/getting_started/quickstart.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/getting_started/structure.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/manim_example_ext.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logo/transparent_graph.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logo/white_with_name.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/animation/transform_matching_parts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/mobject/interactive.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/mobject/types/dot_cloud.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/mobject/types/surface.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shader_wrapper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/image/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/image/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/NOTE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/add_light.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/camera_uniform_declarations.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/finalize_color.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/get_gl_Position.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/get_rotated_surface_unit_normal_vector.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/get_unit_normal.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/position_point_into_frame.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/quadratic_bezier_distance.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/quadratic_bezier_geometry_functions.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/geom.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_stroke/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_stroke/geom.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_stroke/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/simple_vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/surface/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/surface/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/textured_surface/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/textured_surface/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/true_dot/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/true_dot/geom.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/shaders/true_dot/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/utils/customization.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/utils/directories.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/utils/family_ops.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/make.bat" beforeDir="false" afterPath="$PROJECT_DIR$/docs/make.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/about.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/animation.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeIn.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeInFrom.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeInFromDiagonal.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeInFromLarge.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeInFromPoint.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeInFromSmall.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeOut.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationFadeOutAndShift.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationGrowFromCenter.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/AnimationGrowFromEdge.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/SquareToCircle.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/coordinate/CoorAlias.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/coordinate/CoorArithmetic.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/coordinate/CoorPolygon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/assets/coordinate/DotMap.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/constants.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/coordinate.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/animating_mobjects.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/learning_by_example.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/making_a_scene.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/mathematical_objects.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/installation/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/installation/linux.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/installation/mac.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/installation/windows.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_defaults.yml" beforeDir="false" afterPath="$PROJECT_DIR$/custom_defaults.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example_scenes.py" beforeDir="false" afterPath="$PROJECT_DIR$/example_scenes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/bayes/footnote.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/bayes/part1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/all_part1_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/all_part2_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/all_part3_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/all_part4_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/all_part5_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/fourier_montage_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part1/pendulum.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part1/phase_space.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part1/pi_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part1/shared_constructs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part1/staging.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part1/wordy_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/fourier_series.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/fourier_series.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/heat_equation.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/heat_equation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/pi_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/shared_constructs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/staging.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part2/wordy_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part3/discrete_case.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part3/pi_creature_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part3/staging.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part3/temperature_graphs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part3/wordy_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/complex_functions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/fourier_series_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/long_fourier_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/pi_creature_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/staging.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/temperature_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part4/three_d_graphs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/part5/staging.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/active/diffyq/solve_pendulum_ode_sample_code.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/256.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/WindingNumber.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_3b1b/old/WindingNumber.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/WindingNumber_G.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/alt_calc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/basel/basel.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_3b1b/old/basel/basel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/basel/basel2.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_3b1b/old/basel/basel2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/bell.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/borsuk.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/borsuk_addition.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/curves.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/cycloid.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/drawing_images.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/graveyard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/light.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/misc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/multilayered.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/brachistochrone/wordplay.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/cba.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/all_s2_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/name_bump.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/question.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution2/block_collision_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution2/mirror_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution2/pi_creature_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution2/position_phase_space.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution2/simple_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/clacks/solution2/wordy_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/complex_multiplication_article.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/counting_in_binary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/crypto.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dandelin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/div_curl.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/domino_play.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data01.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data02.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data05.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data08.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data09.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data16.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data18.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/dominos/data19.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/efvgt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter10.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter6.py" beforeDir="false" afterPath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter6.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter7.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter8.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/chapter9.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/footnote.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eoc/old_chapter1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter0.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter10.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter11.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter7.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter8.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter8p2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/chapter9.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/footnote.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/footnote2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eola/thumbnails.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/eulers_characteristic_formula.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/fc1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/for_flammy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/fourier.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/fractal_charm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/fractal_dimension.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/generate_logo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/gradient.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/hanoi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/highD.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/hilbert/fractal_porn.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/hilbert/section1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/hilbert/section2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/hilbert/section3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/hyperdarts.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/inventing_math.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/inventing_math_images.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/leibniz.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/lost_lecture.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/matrix_as_transform_2d.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/moser_intro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/moser_main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/mug.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/music_and_measure.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/mvcr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/image_map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/mnist_loader.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/network.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/part1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/part2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/part3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/pretrained_weights_and_biases" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/pretrained_weights_and_biases_36" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/nn/pretrained_weights_and_biases_on_zero" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/number_line_scene.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/patreon.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/pi_day.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/playground_counting_in_binary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/putnam.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/pythagorean_proof.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/qa_round_two.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/quat3d.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/quaternions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/sphere_area.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/spirals.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/tattoo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/tau_poem.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/three_dimensions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/triangle_of_power/end.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/triangle_of_power/intro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/triangle_of_power/triangle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/triples.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/turbulence.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/uncertainty.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/wallis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/waves.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/wcat.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/windmill.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/old/zeta.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/aliquot.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eola2/cramer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eola2/determinant_puzzle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eola2/gauss.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/bayes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/bayes_footnote.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/birthday.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter0.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter0/intro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/all_sequences.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/area_model_bayes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/area_model_erf.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/area_model_expectation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/brick_row_scene.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/entire_brick_wall.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/intro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/just_randy_flipping_coin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/million_flips.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/morph_brick_row_into_histogram.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/prob_dist_visuals.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/quiz_result.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/show_proportion.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/show_uncertainty_darts.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/show_uncertainty_dice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/show_uncertainty_disease.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/stacking_coins.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/think_about_coin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/various_intro_visuals.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter1/what_does_probability_mean.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/chapter2/permutation_grid.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/combinations.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/independence.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/pascal.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusable_imports.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/binary_option.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/brick_row.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/coin_flip_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/coin_flipping_pi_creature.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/coin_stacks.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/dice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/eop_constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/eop_helpers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/histograms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/sick_pi_creature.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/reusables/upright_coins.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/eop/what_does_probability_mean.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/holomorphic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/moduli.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/from_3b1b/on_hold/shadows.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/logo.py" beforeDir="false" afterPath="$PROJECT_DIR$/logo/logo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/animation.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/animation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/composition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/creation.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/creation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/fading.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/fading.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/growing.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/growing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/indication.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/indication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/movement.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/movement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/numbers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/rotation.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/rotation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/specialized.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/specialized.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/transform.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/camera/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/camera/camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/camera/mapping_camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/camera/moving_camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/camera/multi_camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/camera/three_d_camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/container/container.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/ctex_template.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/extract_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/extract_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/files/Bubbles_speech.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/files/Bubbles_thought.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/files/PiCreatures_plain.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/for_3b1b_videos/common_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/for_3b1b_videos/pi_class.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/for_3b1b_videos/pi_creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/for_3b1b_videos/pi_creature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/for_3b1b_videos/pi_creature_animations.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/for_3b1b_videos/pi_creature_scene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jeremy/test_mac.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/test_mac.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/imports.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/imports.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/media_dir.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/changing.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/changing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/coordinate_systems.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/coordinate_systems.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/geometry.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/mobject_update_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/mobject_update_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/number_line.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/number_line.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/numbers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/probability.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/probability.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/shape_matchers.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/shape_matchers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/brace.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/brace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/code_mobject.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/svg_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/svg_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/text_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/text_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/three_d_shading_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/three_d_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/three_dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/three_dimensions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/image_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/image_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/point_cloud_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/point_cloud_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/value_tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/value_tracker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/vector_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/vector_field.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/arithmetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/arithmetic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/combinatorics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/counting.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/counting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/fractals.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/fractals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/graph_theory.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/graph_theory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/light.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/light.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/once_useful_constructs/matrix_multiplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/once_useful_constructs/matrix_multiplication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/graph_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/graph_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/media_dir.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/moving_camera_scene.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/scene/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/scene_file_writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/scene_file_writer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/scene_from_video.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/three_d_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/three_d_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/vector_space_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/vector_space_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/scene/zoomed_scene.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/tex_template.tex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/tex_templates/ctex_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/tex_templates/ctex_template.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/tex_templates/tex_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/tex_templates/tex_template.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/bezier.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/bezier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/color.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/color.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/debug.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/debug.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/file_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/file_ops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/images.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/iterables.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/iterables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/paths.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/paths.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/rate_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/rate_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/simple_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/simple_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/sounds.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/sounds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/space_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/space_ops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/strings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/tex_file_writing.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/tex_file_writing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage_scenes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/travis/build_docs.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/travis/crypt.enc" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -626,7 +201,7 @@
       <workItem from="1611636094920" duration="15000" />
       <workItem from="1611758982176" duration="4356000" />
       <workItem from="1611901004559" duration="13492000" />
-      <workItem from="1612236041426" duration="1184000" />
+      <workItem from="1612236041426" duration="5992000" />
     </task>
     <servers />
   </component>
@@ -666,12 +241,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="408" y="163" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1604847411097" />
-    <state x="155" y="670" width="1240" height="870" key="DiffContextDialog" timestamp="1612247019304">
+    <state x="92" y="30" width="1240" height="870" key="DiffContextDialog" timestamp="1612256562127">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="155" y="670" width="1240" height="870" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1612247019304" />
+    <state x="92" y="30" width="1240" height="870" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1612256562127" />
     <state x="51" y="167" width="1240" height="700" key="DiffContextDialog/0.23.1440.806@0.23.1440.806" timestamp="1603716343351" />
     <state x="51" y="118" width="1240" height="782" key="DiffContextDialog/0.25.1440.809@0.25.1440.809" timestamp="1608000437281" />
+    <state x="92" y="30" width="1240" height="870" key="DiffContextDialog/0.25.1440.815@0.25.1440.815" timestamp="1612248322428" />
     <state width="1396" height="245" key="GridCell.Tab.0.bottom" timestamp="1609901510965">
       <screen x="0" y="25" width="1440" height="817" />
     </state>
@@ -700,10 +276,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1603716468358" />
-    <state x="473" y="191" key="VcsDiffUtil.ChangesDialog" timestamp="1603715882052">
+    <state x="468" y="145" key="VcsDiffUtil.ChangesDialog" timestamp="1612256073952">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="473" y="191" key="VcsDiffUtil.ChangesDialog/0.0.1440.900@0.0.1440.900" timestamp="1603715882052" />
+    <state x="468" y="145" key="VcsDiffUtil.ChangesDialog/0.0.1440.900@0.0.1440.900" timestamp="1612256073952" />
     <state x="343" y="64" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609645406924">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -712,10 +288,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="508" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1608000206024" />
-    <state x="19" y="161" width="598" height="735" key="find.popup" timestamp="1611910591968">
+    <state x="19" y="161" width="598" height="735" key="find.popup" timestamp="1612256465546">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="19" y="161" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1611910591968" />
+    <state x="19" y="161" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1612256465546" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1605425917717">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
