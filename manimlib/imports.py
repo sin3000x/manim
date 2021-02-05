@@ -91,7 +91,7 @@ from manimlib.utils.sounds import *
 from manimlib.utils.space_ops import *
 from manimlib.utils.strings import *
 
-# from manimlib.new_packages.new_classes import *
+from manimlib.new_packages.new_classes import *
 # from jeremy.ref.debugTex import *
 
 # Non manim libraries that are also nice to have without thinking

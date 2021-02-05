@@ -11,4 +11,3 @@ class SquareToCircle(Scene):
         self.wait()
         self.play(ReplacementTransform(square, circle))
         self.wait()
-        self.embed()
