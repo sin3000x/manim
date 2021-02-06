@@ -147,7 +147,7 @@ dmypy.json
 
 primes.py
 /media_dir.txt
-
+/media
 *.log
 *.aux
 *.svg
