@@ -31,8 +31,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/bug_report.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/error-when-using.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/publish.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manimlib/defaults.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manimlib/event_handler/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manimlib/event_handler/event_dispatcher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manimlib/event_handler/event_listner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manimlib/event_handler/event_type.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/PULL_REQUEST_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/PULL_REQUEST_TEMPLATE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_defaults.yml" beforeDir="false" afterPath="$PROJECT_DIR$/custom_defaults.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example_scenes.py" beforeDir="false" afterPath="$PROJECT_DIR$/example_scenes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/animation/creation.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/creation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/animation/transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/transform.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/extract_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/extract_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/imports.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/imports.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/coordinate_systems.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/coordinate_systems.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/number_line.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/number_line.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/svg_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/svg_mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/three_dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/three_dimensions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/dot_cloud.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/dot_cloud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/surface.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/surface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/value_tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/value_tracker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/scene/graph_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/graph_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/scene/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/geom.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_fill/geom.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_stroke/geom.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/quadratic_bezier_stroke/geom.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/utils/bezier.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/bezier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/utils/directories.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/directories.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/utils/file_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/file_ops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/utils/space_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/space_ops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/setup.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +239,7 @@
       <workItem from="1612277031588" duration="778000" />
       <workItem from="1612280901713" duration="382000" />
       <workItem from="1612518041787" duration="660000" />
-      <workItem from="1612520279810" duration="2253000" />
+      <workItem from="1612520279810" duration="2615000" />
     </task>
     <servers />
   </component>

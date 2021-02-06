@@ -35,9 +35,9 @@ class NumberLine(Line):
         },
         "decimal_number_config": {
             "num_decimal_places": 0,
-            "height": 0.25,
+            "font_size": 36,
         },
-        "exclude_zero_from_default_numbers": False,
+        "numbers_to_exclude": None
     }
 
     def __init__(self, x_range=None, **kwargs):
@@ -70,7 +70,7 @@ class NumberLine(Line):
         if self.include_ticks:
             self.add_ticks()
         if self.include_numbers:
-            self.add_numbers()
+            self.add_numbers(excluding=self.numbers_to_exclude)
 
     def get_tick_range(self):
         if self.include_tip:
@@ -99,7 +99,7 @@ class NumberLine(Line):
         return result
 
     def get_tick_marks(self):
-        return self.tick_marks
+        return self.ticks
 
     def number_to_point(self, number):
         alpha = float(number - self.x_min) / (self.x_max - self.x_min)

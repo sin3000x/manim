@@ -3,6 +3,7 @@ import itertools as it
 import random
 import sys
 import moderngl
+from functools import wraps
 
 import numpy as np
 
@@ -27,6 +28,9 @@ from manimlib.utils.space_ops import get_norm
 from manimlib.utils.space_ops import rotation_matrix_transpose
 from manimlib.shader_wrapper import ShaderWrapper
 from manimlib.shader_wrapper import get_colormap_code
+from manimlib.event_handler import EVENT_DISPATCHER
+from manimlib.event_handler.event_listner import EventListner
+from manimlib.event_handler.event_type import EventType
 
 
 class Mobject(object):
@@ -68,6 +72,7 @@ class Mobject(object):
         self.init_data()
         self.init_uniforms()
         self.init_updaters()
+        self.init_event_listners()
         self.init_points()
         self.init_colors()
         self.init_shader_data()
@@ -186,10 +191,12 @@ class Mobject(object):
         return self.get_num_points() > 0
 
     def get_bounding_box(self):
-        if not self.needs_new_bounding_box:
-            return self.data["bounding_box"]
+        if self.needs_new_bounding_box:
+            self.data["bounding_box"] = self.compute_bounding_box()
+            self.needs_new_bounding_box = False
+        return self.data["bounding_box"]
 
-        # all_points = self.get_all_points()
+    def compute_bounding_box(self):
         all_points = np.vstack([
             self.get_points(),
             *(
@@ -199,15 +206,13 @@ class Mobject(object):
             )
         ])
         if len(all_points) == 0:
-            self.data["bounding_box"] = np.zeros((3, self.dim))
+            return np.zeros((3, self.dim))
         else:
             # Lower left and upper right corners
             mins = all_points.min(0)
             maxs = all_points.max(0)
             mids = (mins + maxs) / 2
-            self.data["bounding_box"] = np.array([mins, mids, maxs])
-        self.needs_new_bounding_box = False
-        return self.data["bounding_box"]
+            return np.array([mins, mids, maxs])
 
     def refresh_bounding_box(self, recurse_down=False, recurse_up=True):
         for mob in self.get_family(recurse_down):
@@ -998,7 +1003,7 @@ class Mobject(object):
 
     def length_over_dim(self, dim):
         bb = self.get_bounding_box()
-        return (bb[2] - bb[0])[dim]
+        return abs((bb[2] - bb[0])[dim])
 
     def get_width(self):
         return self.length_over_dim(0)
@@ -1283,6 +1288,7 @@ class Mobject(object):
     # Operations touching shader uniforms
 
     def affects_shader_info_id(func):
+        @wraps(func)
         def wrapper(self):
             for mob in self.get_family():
                 func(mob)
@@ -1436,39 +1442,92 @@ class Mobject(object):
         return self.shader_indices
 
     # Event Handlers
-    """ 
+    """
         Event handling follows the Event Bubbling model of DOM in javascript.
         Return false to stop the event bubbling.
         To learn more visit https://www.quirksmode.org/js/events_order.html
+
+        Event Callback Argument is a callable function taking two arguments:
+            1. Mobject
+            2. EventData
     """
 
-    def on_mouse_motion(self, point, d_point):
-        # To be implemented in subclasses
-        pass
+    def init_event_listners(self):
+        self.event_listners = []
 
-    def on_mouse_drag(self, point, d_point, buttons, modifiers):
-        # To be implemented in subclasses
-        pass
+    def add_event_listner(self, event_type, event_callback):
+        event_listner = EventListner(self, event_type, event_callback)
+        self.event_listners.append(event_listner)
+        EVENT_DISPATCHER.add_listner(event_listner)
+        return self
 
-    def on_mouse_press(self, point, button, mods):
-        # To be implemented in subclasses
-        pass
+    def remove_event_listner(self, event_type, event_callback):
+        event_listner = EventListner(self, event_type, event_callback)
+        while event_listner in self.event_listners:
+            self.event_listners.remove(event_listner)
+        EVENT_DISPATCHER.remove_listner(event_listner)
+        return self
 
-    def on_mouse_release(self, point, button, mods):
-        # To be implemented in subclasses
-        pass
+    def clear_event_listners(self, recurse=True):
+        self.event_listners = []
+        if recurse:
+            for submob in self.submobjects:
+                submob.clear_event_listners(recurse=recurse)
+        return self
 
-    def on_mouse_scroll(self, point, offset):
-        # To be implemented in subclasses
-        pass
+    def get_event_listners(self):
+        return self.event_listners
 
-    def on_key_release(self, symbol, modifiers):
-        # To be implemented in subclasses
-        pass
+    def get_family_event_listners(self):
+        return list(it.chain(*[sm.get_event_listners() for sm in self.get_family()]))
 
-    def on_key_press(self, symbol, modifiers):
-        # To be implemented in subclasses
-        pass
+    def get_has_event_listner(self):
+        return any(
+            mob.get_event_listners()
+            for mob in self.get_family()
+        )
+
+    def add_mouse_motion_listner(self, callback):
+        self.add_event_listner(EventType.MouseMotionEvent, callback)
+
+    def remove_mouse_motion_listner(self, callback):
+        self.remove_event_listner(EventType.MouseMotionEvent, callback)
+
+    def add_mouse_press_listner(self, callback):
+        self.add_event_listner(EventType.MousePressEvent, callback)
+
+    def remove_mouse_press_listner(self, callback):
+        self.remove_event_listner(EventType.MousePressEvent, callback)
+
+    def add_mouse_release_listner(self, callback):
+        self.add_event_listner(EventType.MouseReleaseEvent, callback)
+
+    def remove_mouse_release_listner(self, callback):
+        self.remove_event_listner(EventType.MouseReleaseEvent, callback)
+
+    def add_mouse_drag_listner(self, callback):
+        self.add_event_listner(EventType.MouseDragEvent, callback)
+
+    def remove_mouse_drag_listner(self, callback):
+        self.remove_event_listner(EventType.MouseDragEvent, callback)
+
+    def add_mouse_scroll_listner(self, callback):
+        self.add_event_listner(EventType.MouseScrollEvent, callback)
+
+    def remove_mouse_scroll_listner(self, callback):
+        self.remove_event_listner(EventType.MouseScrollEvent, callback)
+
+    def add_key_press_listner(self, callback):
+        self.add_event_listner(EventType.KeyPressEvent, callback)
+
+    def remove_key_press_listner(self, callback):
+        self.remove_event_listner(EventType.KeyPressEvent, callback)
+
+    def add_key_release_listner(self, callback):
+        self.add_event_listner(EventType.KeyReleaseEvent, callback)
+
+    def remove_key_release_listner(self, callback):
+        self.remove_event_listner(EventType.KeyReleaseEvent, callback)
 
     # Errors
 
