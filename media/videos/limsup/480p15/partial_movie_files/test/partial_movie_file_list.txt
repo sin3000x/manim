@@ -1,3 +1,0 @@
-file 'file:/Users/jeremy/Documents/manim/media/videos/limsup/480p15/partial_movie_files/test/00000.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/limsup/480p15/partial_movie_files/test/00001.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/limsup/480p15/partial_movie_files/test/00002.mp4'
