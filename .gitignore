@@ -145,7 +145,6 @@ dmypy.json
 # Custom exclusions:
 .DS_Store
 
-<<<<<<< HEAD
 primes.py
 /media_dir.txt
 
@@ -153,7 +152,7 @@ primes.py
 *.aux
 *.svg
 *.xdv
+jeremy/test_mac.py
 =======
 # 
 /videos
->>>>>>> fbb0d76f4f3db46c1374e29eba30433e5dbfa9c1
