@@ -1,7 +1,0 @@
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00010.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00011.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00012.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00013.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00014.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00015.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/cardinal/480p15/partial_movie_files/z2z/00016.mp4'

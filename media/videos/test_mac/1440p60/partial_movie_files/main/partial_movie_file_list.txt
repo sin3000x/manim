@@ -1,2 +1,0 @@
-file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/1440p60/partial_movie_files/main/00000.mp4'
-file 'file:/Users/jeremy/Documents/manim/media/videos/test_mac/1440p60/partial_movie_files/main/00001.mp4'
