@@ -243,6 +243,9 @@ class Tex(SingleStringTex):
             self.set_color_by_tex(tex, color, **kwargs)
         return self
 
+    def tm(self, tex_to_color_map, **kwargs):
+        return self.set_color_by_tex_to_color_map(self, tex_to_color_map, **kwargs)
+
     def index_of_part(self, part, start=0):
         return self.submobjects.index(part, start)
 
