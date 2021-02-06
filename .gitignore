@@ -31,3 +31,5 @@ primes.py
 *.aux
 *.svg
 *.xdv
+images
+videos
