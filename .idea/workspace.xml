@@ -33,7 +33,6 @@
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jeremy/cexp.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/cexp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,6 +199,10 @@
       <workItem from="1612280901713" duration="382000" />
       <workItem from="1612518041787" duration="660000" />
       <workItem from="1612520279810" duration="6534000" />
+      <workItem from="1612621698246" duration="2336000" />
+      <workItem from="1612658883072" duration="8368000" />
+      <workItem from="1612793156813" duration="12909000" />
+      <workItem from="1612960524414" duration="16110000" />
     </task>
     <servers />
   </component>
@@ -231,10 +234,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606891599771">
+    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612621888734">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1606891599771" />
+    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1612621888734" />
     <state x="408" y="163" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1604847411097">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -265,10 +268,10 @@
     </state>
     <state width="1396" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1609551638947" />
     <state width="1396" height="245" key="GridCell.Tab.0.right/0.25.1440.817@0.25.1440.817" timestamp="1609901510962" />
-    <state x="118" y="108" key="SettingsEditor" timestamp="1606713543490">
+    <state x="118" y="108" key="SettingsEditor" timestamp="1612970853974">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="118" y="108" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606713543490" />
+    <state x="118" y="108" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1612970853974" />
     <state x="468" y="145" key="VcsDiffUtil.ChangesDialog" timestamp="1612578293510">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -281,10 +284,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="508" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1608000206024" />
-    <state x="19" y="161" width="598" height="735" key="find.popup" timestamp="1612256465546">
+    <state x="19" y="161" width="598" height="735" key="find.popup" timestamp="1612873158998">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="19" y="161" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1612256465546" />
+    <state x="19" y="161" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1612873158998" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1605425917717">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
