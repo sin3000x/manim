@@ -50,7 +50,7 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*.cover
+*.coverl
 *.py,cover
 .hypothesis/
 .pytest_cache/
@@ -148,12 +148,12 @@ dmypy.json
 primes.py
 /media_dir.txt
 /media
-*.log
 *.aux
 *.svg
 *.xdv
 jeremy/test_mac.py
-=======
-# 
-/videos
 /images
+
+# For manim
+/videos
+/custom_config.yml

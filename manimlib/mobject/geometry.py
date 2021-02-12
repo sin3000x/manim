@@ -472,6 +472,14 @@ class Line(TipableVMobject):
     def get_angle(self):
         return angle_of_vector(self.get_vector())
 
+    def get_projection(self, point):
+        """
+        Return projection of a point onto the line
+        """
+        unit_vect = self.get_unit_vector()
+        start = self.get_start()
+        return start + np.dot(point - start, unit_vect) * unit_vect
+
     def get_slope(self):
         return np.tan(self.get_angle())
 
@@ -636,6 +644,10 @@ class Arrow(Line):
             super().scale(length / self.get_length())
 
         self.rotate(angle_of_vector(vect) - self.get_angle())
+        self.rotate(
+            PI / 2 - np.arccos(normalize(vect)[2]),
+            axis=rotate_vector(self.get_unit_vector(), -PI / 2),
+        )
         self.shift(start - self.get_start())
         self.refresh_triangulation()
 

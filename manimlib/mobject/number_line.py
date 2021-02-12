@@ -57,6 +57,7 @@ class NumberLine(Line):
         super().__init__(self.x_min * RIGHT, self.x_max * RIGHT, **kwargs)
         if self.width:
             self.set_width(self.width)
+            self.unit_size = self.get_unit_size()
         else:
             self.scale(self.unit_size)
         self.center()
@@ -123,14 +124,12 @@ class NumberLine(Line):
         return self.point_to_number(point)
 
     def get_unit_size(self):
-        return (self.x_max - self.x_min) / self.get_length()
+        return self.get_length() / (self.x_max - self.x_min)
 
     def get_number_mobject(self, x,
-                           number_config=None,
                            direction=None,
-                           buff=None):
-        if number_config is None:
-            number_config = {}
+                           buff=None,
+                           **number_config):
         number_config = merge_dicts_recursively(
             self.decimal_number_config, number_config
         )
@@ -150,17 +149,22 @@ class NumberLine(Line):
             num_mob.shift(num_mob[0].get_width() * LEFT / 2)
         return num_mob
 
-    def add_numbers(self, x_values=None, excluding=None, **kwargs):
+    def add_numbers(self, x_values=None, excluding=None, font_size=24, **kwargs):
         if x_values is None:
             x_values = self.get_tick_range()
-        if excluding is not None:
-            x_values = list_difference_update(x_values, excluding)
 
-        self.numbers = VGroup()
+        kwargs["font_size"] = font_size
+
+        numbers = VGroup()
         for x in x_values:
-            self.numbers.add(self.get_number_mobject(x, **kwargs))
-        self.add(self.numbers)
-        return self.numbers
+            if x in self.numbers_to_exclude:
+                continue
+            if excluding is not None and x in excluding:
+                continue
+            numbers.add(self.get_number_mobject(x, **kwargs))
+        self.add(numbers)
+        self.numbers = numbers
+        return numbers
 
 
 class UnitInterval(NumberLine):
