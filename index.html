@@ -8,8 +8,8 @@
       <link rel="stylesheet" href="_static/copybutton.css" />
     <link rel="stylesheet" href="_static/custom.css" />
     <link rel="stylesheet" href="_static/colors.css" />
-    <link rel="stylesheet" href="_static/styles/default.css?19142c11b99685b75e8d475c">
-    <link rel="stylesheet" href="_static/pygments.css?19142c11b99685b75e8d475c">
+    <link rel="stylesheet" href="_static/styles/default.css?e92f20a5544cd2b1bf741af6">
+    <link rel="stylesheet" href="_static/pygments.css?e92f20a5544cd2b1bf741af6">
     
 <style>
   :root {
@@ -26,7 +26,7 @@
         <script src="_static/language_data.js" defer></script>
       
         <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script><script src="_static/scripts/main.js?19142c11b99685b75e8d475c"></script></head>
+        <script src="_static/copybutton.js"></script><script src="_static/scripts/main.js?e92f20a5544cd2b1bf741af6"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -95,11 +95,12 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started/example_scenes.html">Example Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/config.html">CONFIG dictionary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/structure.html">Manim’s structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/whatsnew.html">What’s new</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="documentation/constants.html">constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation/custom_default.html">custom_default</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/custom_config.html">custom_config</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Development</span></p>
 <ul>
@@ -132,7 +133,6 @@ at <a class="reference external" href="https://www.3blue1brown.com/">3Blue1Brown
 <li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html#directly">Directly</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html#directly-windows">Directly (Windows)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html#for-anaconda">For Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html#using-virtualenv-and-virtualenvwrapper">Using virtualenv and virtualenvwrapper</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/quickstart.html">Quick Start</a><ul>
@@ -144,15 +144,17 @@ at <a class="reference external" href="https://www.3blue1brown.com/">3Blue1Brown
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/configuration.html">CLI flags and configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/configuration.html#command-line-interface">Command Line Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/configuration.html#custom-default">custom_default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/configuration.html#custom-config">custom_config</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/example_scenes.html">Example Scenes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#squaretocircle">SquareToCircle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#interactivedevlopment">InteractiveDevlopment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#animatingmethods">AnimatingMethods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#textexample">TextExample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#textransformexample">TexTransformExample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#updatersexample">UpdatersExample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#coordinatesystemexample">CoordinateSystemExample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#graphexample">GraphExample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#surfaceexample">SurfaceExample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/example_scenes.html#openingmanimexample">OpeningManimExample</a></li>
 </ul>
@@ -167,6 +169,10 @@ at <a class="reference external" href="https://www.3blue1brown.com/">3Blue1Brown
 <li class="toctree-l2"><a class="reference internal" href="getting_started/structure.html#manim-s-directory-structure">Manim’s directory structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/structure.html#inheritance-structure-of-manim-s-classes">Inheritance structure of manim’s classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started/structure.html#manim-execution-process">Manim execution process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/whatsnew.html">What’s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/whatsnew.html#usage-changes-of-new-version-manim">Usage changes of new version manim</a></li>
 </ul>
 </li>
 </ul>
@@ -185,14 +191,14 @@ at <a class="reference external" href="https://www.3blue1brown.com/">3Blue1Brown
 <li class="toctree-l2"><a class="reference internal" href="documentation/constants.html#colours">Colours</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="documentation/custom_default.html">custom_default</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#directories"><code class="docutils literal notranslate"><span class="pre">directories</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#tex"><code class="docutils literal notranslate"><span class="pre">tex</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#universal-import-line"><code class="docutils literal notranslate"><span class="pre">universal_import_line</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#style"><code class="docutils literal notranslate"><span class="pre">style</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#window-position"><code class="docutils literal notranslate"><span class="pre">window_position</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#break-into-partial-movies"><code class="docutils literal notranslate"><span class="pre">break_into_partial_movies</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/custom_default.html#camera-qualities"><code class="docutils literal notranslate"><span class="pre">camera_qualities</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/custom_config.html">custom_config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#directories"><code class="docutils literal notranslate"><span class="pre">directories</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#tex"><code class="docutils literal notranslate"><span class="pre">tex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#universal-import-line"><code class="docutils literal notranslate"><span class="pre">universal_import_line</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#style"><code class="docutils literal notranslate"><span class="pre">style</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#window-position"><code class="docutils literal notranslate"><span class="pre">window_position</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#break-into-partial-movies"><code class="docutils literal notranslate"><span class="pre">break_into_partial_movies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/custom_config.html#camera-qualities"><code class="docutils literal notranslate"><span class="pre">camera_qualities</span></code></a></li>
 </ul>
 </li>
 </ul>
