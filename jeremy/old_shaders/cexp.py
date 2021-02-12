@@ -1,4 +1,5 @@
-from manimlib.imports import *
+from manimlib import *
+# from manimlib.constants import *
 
 m = {"z": YELLOW, r"\i": BLUE}
 m2 = {"z_1": YELLOW, "z_2": BLUE}
@@ -153,7 +154,7 @@ class UnitCircle(Scene):
         )
         plane.add_coordinate_labels()
         self.add(plane)
-        x_unit = 1 / plane.get_x_unit_size()
+        x_unit = plane.get_x_unit_size()
         circle = Circle(radius=x_unit)
         self.add(circle)
         tracker = ValueTracker(30)

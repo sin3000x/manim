@@ -22,17 +22,10 @@ tex:
 #  intermediate_filetype: "dvi"
   text_to_replace: "[tex_expression]"
   # For ctex, use the following configuration
-<<<<<<< HEAD:custom_defaults.yml
   executable: "xelatex -no-pdf"
   template_file: "ctex_template.tex"
   intermediate_filetype: "xdv"
 universal_import_line: "from manimlib.imports import *"
-=======
-  # executable: "xelatex -no-pdf"
-  # template_file: "ctex_template.tex"
-  # intermediate_filetype: "xdv"
-universal_import_line: "from manimlib import *"
->>>>>>> 96d9a66faf59bc97f709ebdd8a10685e1e141da5:manimlib/default_config.yml
 style:
   font: "Consolas"
   background_color: "#000000"

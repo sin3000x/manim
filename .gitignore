@@ -157,3 +157,4 @@ jeremy/test_mac.py
 # For manim
 /videos
 /custom_config.yml
+/.idea
