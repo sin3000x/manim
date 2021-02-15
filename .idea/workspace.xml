@@ -31,8 +31,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/jeremy/clog.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jeremy/sets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jeremy/clog.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/clog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/geometry.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,6 +206,8 @@
       <workItem from="1612658883072" duration="8368000" />
       <workItem from="1612793156813" duration="12909000" />
       <workItem from="1612960524414" duration="19583000" />
+      <workItem from="1613225825768" duration="4097000" />
+      <workItem from="1613274969374" duration="1140000" />
     </task>
     <servers />
   </component>

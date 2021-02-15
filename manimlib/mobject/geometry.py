@@ -720,6 +720,14 @@ class Polygon(VMobject):
     def get_vertices(self):
         return self.get_start_anchors()
 
+    def get_edges(self):
+        vertices = self.get_vertices()
+        edges = []
+        for i in range(len(vertices)-1):
+            edges.append(Line(vertices[i], vertices[i+1]))
+        edges.append(Line(vertices[-1], vertices[0]))
+        return VGroup(*edges)
+
     def round_corners(self, radius=0.5):
         vertices = self.get_vertices()
         arcs = []

@@ -39,25 +39,78 @@ class Def(Scene):
         self.play(Write(polar))
         self.wait()
 
+        r_theta = Tex(r"r~\e^{\i\theta}", color=GREEN).next_to(polar[-1], DOWN)
+        self.play(Write(r_theta))
+        self.wait()
+
+        m2 = {r"\ln": GREEN, "r": GREEN, "x": YELLOW, "y": YELLOW, "theta": GREEN, "Longrightarrow": WHITE,
+              "|z|": GREEN, "arg": GREEN}
+        cor = VGroup(Tex(r"\Longrightarrow {{x}}={{\ln}} {{r}},"), Tex(r"{{y}}={{\theta+2k\pi}}")).arrange(buff=.5).to_edge(DOWN)
+        cor2 = VGroup(Tex(r"\Longrightarrow {{x}}={{\ln}} {{|z|}},").move_to(cor[0]),
+                      Tex(r"{{y}}={{\arg z}}").move_to(cor[1]).align_to(cor[1], DL))
+
+        for c in [*cor]+[*cor2]:
+            c.tm(m2)
+
+        self.play(Write(cor[0]))
+        self.wait()
+        self.play(Write(cor[1]))
+        self.wait()
+        self.play(
+            TransformMatchingTex(cor[0], cor2[0], key_map={'r': '|z|', r'\theta+2k\pi': r'\arg z'}),
+            TransformMatchingTex(cor[1], cor2[1]),
+        )
+
 class Polar(Scene):
     def construct(self):
-        m = {"r": GREEN, "theta": YELLOW}
+        m = {"r": GREEN, "theta": YELLOW, "sqrt": GREEN, "frac": YELLOW}
 
         plane = ComplexPlane().add_coordinate_labels()
         self.add(plane)
         point = Dot(plane.n2p("3+3j"), color=GREEN)
-        label = Tex(r"r\e^{\i\theta}", isolate=["\\e", "\\theta"]).tm(m).next_to(point).add_background_rectangle()
+        label = Tex(r"{{r}}\e^{\i\theta}", isolate=["\\e", "\\theta"]).tm(m).next_to(point)
+        bg = BackgroundRectangle(label)
         line = Line(ORIGIN, point)
         r = Brace(line, UL)
         r = VGroup(r.set_color(m['r']), r.get_tex("r").set_color(m['r']).add_background_rectangle())
+        mod = VGroup(
+            TexText("modulus"),
+            Tex("|z|")
+        ).arrange(DOWN).next_to(r[-1], LEFT, buff=1.5).set_color(r[-1].get_color())
+        for mo in mod:
+            mo.add_background_rectangle()
         theta = Arc(angle=PI/4, color=m['theta'], radius=.7)
         theta = VGroup(theta, Tex(r"\theta", color=m['theta']).next_to(theta).shift(UP*.2).add_background_rectangle())
+        arg = VGroup(
+            TexText("argument"),
+            Tex("\\arg (z)")
+        ).arrange(DOWN).next_to(theta[-1], buff=1).set_color(theta[-1].get_color()).shift(UP*.3)
+        for a in arg:
+            a.add_background_rectangle()
+        three = Tex(r"{{3\sqrt2}}\,\e^{\i{{\frac\pi 4}}}", isolate=["\\e"]).tm(m).next_to(point)
+
+        
         self.play(GrowFromCenter(point))
         self.play(ShowCreation(line))
         self.wait()
+        self.add(bg)
         self.play(Write(label))
         self.wait()
         self.play(GrowFromCenter(r))
         self.wait()
         self.play(GrowFromCenter(theta))
+        self.wait()
+        self.play(TransformMatchingTex(label, three, key_map={'r': r'3\sqrt2', r'\theta': r'\frac\pi 4'}))
+        three.add_background_rectangle()
+        self.wait()
+        self.play(Write(mod))
+        self.wait()
+        self.play(Write(arg))
+        self.wait()
+
+        point2 = Dot(plane.n2p("-5"),color=RED)
+        label2 = Tex(r"5\e^{\i\pi}")\
+            .set_color(point2.get_color()).next_to(point2, DOWN, buff=.5).add_background_rectangle()
+        self.play(GrowFromCenter(point2))
+        self.play(Write(label2))
         self.wait()
