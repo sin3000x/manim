@@ -1,8 +1,6 @@
 import os
-from manimlib.imports import *
-from manimlib.mobject.svg.svg_mobject import SVGMobject
-# from manimlib.mobject.svg.tex_mobject import Text
-from manimlib.utils.config_ops import digest_config
+import numpy as np
+from manimlib import *
 
 
 class Heiti(Text):
@@ -498,14 +496,15 @@ class BranchCut(VGroup):
     CONFIG = {
         "color": YELLOW,
         "num": 20,
-        "angle": np.pi
+        "angle": np.pi,
+        "factor": .2
     }
 
     def __init__(self, **kwargs):
         digest_config(self, kwargs)
         triag = VGroup(Line(DR, ORIGIN), Line(ORIGIN, DL))
         triag = VGroup(*[triag.copy() for _ in range(self.num)]).arrange(buff=0) \
-            .scale(.2).next_to(ORIGIN, RIGHT, buff=0).set_color(self.color).rotate(self.angle, about_point=ORIGIN)
+            .scale(self.factor).next_to(ORIGIN, RIGHT, buff=0).set_color(self.color).rotate(self.angle, about_point=ORIGIN)
         VGroup.__init__(self, triag)
 
 

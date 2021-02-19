@@ -63,3 +63,5 @@ from manimlib.utils.simple_functions import *
 from manimlib.utils.sounds import *
 from manimlib.utils.space_ops import *
 from manimlib.utils.strings import *
+
+from manimlib.new_packages.new_classes import *
