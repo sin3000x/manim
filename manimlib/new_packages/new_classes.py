@@ -3,7 +3,7 @@ import numpy as np
 from manimlib import *
 
 
-class Heiti(Text):
+class Heiti(TexText):
     CONFIG = {
         "underline": True,
         "color": YELLOW
@@ -12,10 +12,10 @@ class Heiti(Text):
     def __init__(self, *tex_strings, **kwargs):
         digest_config(self, kwargs)
         if self.underline is True:
-            tmp = [r"\underline{\textbf{\heiti %s}}" % string for string in tex_strings]
+            tmp = [r"\underline{\textbf{\heiti %s}}" % s for s in tex_strings]
             super().__init__(*tmp, **kwargs)
         else:
-            tmp = [r"\textbf{\heiti %s}" % string for string in tex_strings]
+            tmp = [r"\textbf{\heiti %s}" % s for s in tex_strings]
             super().__init__(self, *tmp, **kwargs)
 
 
@@ -497,13 +497,16 @@ class BranchCut(VGroup):
         "color": YELLOW,
         "num": 20,
         "angle": np.pi,
-        "factor": .2
+        "factor": .2,
+        "reverse": False
     }
 
     def __init__(self, **kwargs):
         digest_config(self, kwargs)
         triag = VGroup(Line(DR, ORIGIN), Line(ORIGIN, DL))
-        triag = VGroup(*[triag.copy() for _ in range(self.num)]).arrange(buff=0) \
+        triag_lis = [triag.copy() for _ in range(self.num)]
+        direc = LEFT if self.reverse else RIGHT
+        triag = VGroup(*triag_lis).arrange(buff=0, direction=direc) \
             .scale(self.factor).next_to(ORIGIN, RIGHT, buff=0).set_color(self.color).rotate(self.angle, about_point=ORIGIN)
         VGroup.__init__(self, triag)
 

@@ -22,9 +22,8 @@
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jeremy/clog.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/clog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/geometry.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/tex_templates/ctex_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/tex_templates/ctex_template.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +196,7 @@
       <workItem from="1612793156813" duration="12909000" />
       <workItem from="1612960524414" duration="19583000" />
       <workItem from="1613225825768" duration="4097000" />
-      <workItem from="1613274969374" duration="11767000" />
+      <workItem from="1613274969374" duration="36545000" />
     </task>
     <servers />
   </component>
@@ -220,10 +219,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612621888734">
+    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613877210011">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1612621888734" />
+    <state x="440" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1613877210011" />
     <state x="408" y="163" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1604847411097">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -277,10 +276,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="508" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1608000206024" />
-    <state x="19" y="161" width="598" height="735" key="find.popup" timestamp="1613735392102">
+    <state x="19" y="161" width="598" height="735" key="find.popup" timestamp="1613877231186">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="19" y="161" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1613735392102" />
+    <state x="19" y="161" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1613877231186" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1605425917717">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

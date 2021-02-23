@@ -150,7 +150,11 @@ class Branch(Scene):
         bg2 = BackgroundRectangle(ln2)
         bg3 = BackgroundRectangle(ln3)
         line = Line(ORIGIN, one_point, color=YELLOW, stroke_width=8)
-        one_point.add_updater(lambda t: t.move_to(plane.n2p(complex(np.cos(th.get_value()), np.sin(th.get_value())))))
+
+        def update_point(a):
+            return a.move_to(plane.n2p(complex(np.cos(th.get_value()), np.sin(th.get_value()))))
+
+        one_point.add_updater(update_point)
         arc = Arc().add_tip(fill_opacity=0)
 
         def update_arc(a):
@@ -174,7 +178,11 @@ class Branch(Scene):
         self.wait()
 
         self.play(GrowArrow(line))
-        line.add_updater(lambda t: t.become(Line(ORIGIN, one_point, color=YELLOW, stroke_width=8)))
+
+        def update_line(a):
+            return a.become(Line(ORIGIN, one_point, color=one_point.get_color(), stroke_width=8))
+
+        line.add_updater(update_line)
         arc.add_updater(
             # lambda t: t.become(
             #     Arc(radius=0.4, angle=th.get_value())
@@ -221,31 +229,252 @@ class Branch(Scene):
         self.wait()
 
         # -pi < arg <= pi
-        scope = Tex("-\\pi<\\arg z\\leq\\pi", color=YELLOW)\
+        scope = Tex("-\\pi<\\arg z\\leq\\pi", color=YELLOW) \
             .to_edge(UL, buff=1).shift(RIGHT).scale(1.5).add_background_rectangle()
         self.play(Write(scope))
         self.wait()
         th.set_value(-1e-5)
         arc.add_updater(update_arc)
         self.add(arc)
-        self.play(th.set_value, -PI+1e-5, run_time=3)
-        self.play(th.set_value, PI-1e-5, run_time=3)
+        self.play(th.set_value, -PI + 1e-5, run_time=3)
+        self.play(th.set_value, PI - 1e-5, run_time=3)
         self.wait()
 
+        # introduce branch cut
         arc.clear_updaters()
         one_point.clear_updaters()
         line.clear_updaters()
         self.play(FadeOut(multi), FadeOut(ln3), FadeOut(VGroup(arc, one_point, line)))
         self.remove(bg3)
         cut = BranchCut(factor=.1, num=40)
+        cut.save_state()
         self.play(ShowCreation(cut))
         self.wait()
 
         cut_label = Arrow(ORIGIN, UP).next_to(cut, DOWN).shift(RIGHT)
-        cut_label = VGroup(cut_label, TexText("Branch Cut").next_to(cut_label, DOWN).add_background_rectangle()).set_color(YELLOW)
+        cut_label = VGroup(cut_label, TexText("branch cut").next_to(cut_label, DOWN)).set_color(YELLOW)
+        cut_label[1].add_background_rectangle()
         self.play(GrowArrow(cut_label[0]), GrowFromCenter(cut_label[1]))
         self.wait()
 
-        i_point, m1_point, mi_point = [Dot().move_to(_) for _ in [plane.n2p('j'), plane.n2p(-1), plane.n2p('-j')]]
+        # three examples
+        i_point, m1_point, mi_point = points = [Dot().move_to(_) for _ in
+                                                [plane.n2p('j'), plane.n2p(-1), plane.n2p('-j')]]
+        for i, c in zip([i_point, m1_point, mi_point], [PINK, TEAL, GOLD]):
+            i.set_color(c)
+        lines = [Line(ORIGIN, p, stroke_width=8).set_color(p.get_color()) for p in points]
+        self.play(FadeOut(cut_label))
+        self.play(cut.fade, .7)
+        self.play(AnimationGroup(*[GrowFromCenter(i) for i in points]))
+        self.play(AnimationGroup(*[ShowCreation(l) for l in lines], lag_ratio=.3))
+        self.wait()
 
+        lni = Tex(r"{{\ln(\i)=}}{{\ln(|\i|)+}}{{\i\arg(\i)}}").set_color(i_point.get_color()).next_to(i_point, )
+        bg = BackgroundRectangle(lni)
+        lni2 = Tex(r"{{\ln(\i)=}}{{\i\arg(\i)}}").set_color(i_point.get_color()).next_to(i_point)
+        lni22 = Tex(r"\ln(\i)=\i{{\arg(\i)}}").set_color(i_point.get_color()).replace(lni2)
+        lni3 = Tex(r"\ln(\i)=\i{{\frac \pi2}}").set_color(i_point.get_color()).next_to(i_point)
+        bg2 = BackgroundRectangle(lni2)
+        bg3 = BackgroundRectangle(lni3)
+        # self.add(bg)
+        self.play(Write(VGroup(bg, lni)))
+        self.wait()
+        self.play(RT(bg, bg2), TransformMatchingTex(lni, lni2))
+        self.add(lni22)
+        self.remove(lni2)
+        self.wait()
+
+        lnm1 = Tex(r"\ln(-1)=\i{{\arg(-1)}}").set_color(m1_point.get_color()).next_to(m1_point, UP).shift(LEFT * .1)
+        lnm12 = Tex(r"\ln(-1)=\i{{\pi}}").set_color(m1_point.get_color()).move_to(lnm1)
+        bgm1 = BackgroundRectangle(lnm1)
+        bgm2 = BackgroundRectangle(lnm12)
+
+        lnmi = Tex(r"\ln(-\i)=\i{{\arg(-\i)}}").set_color(mi_point.get_color()).next_to(mi_point)
+        lnmi2 = Tex(r"\ln(-\i)=\i{{\left(-\frac \pi2\right)}}").set_color(mi_point.get_color()).next_to(mi_point)
+        bgmi = BackgroundRectangle(lnmi)
+        bgmi2 = BackgroundRectangle(lnmi2)
+
+        self.play(Write(VGroup(bgm1, lnm1)))
+        self.play(Write(VGroup(bgmi, lnmi)))
+        self.wait()
+
+        self.play(RT(bg2, bg3), TransformMatchingTex(lni22, lni3))
+        self.play(RT(bgm1, bgm2), TransformMatchingTex(lnm1, lnm12))
+        self.play(RT(bgmi, bgmi2), TransformMatchingTex(lnmi, lnmi2))
+        self.wait()
+
+        # not equal
+        not_i = Tex(r"\ln{{(-\i)}}\neq\ln{{(-1)}}+\ln{{(\i)}}", color=YELLOW).scale(1.2).to_edge(DOWN)
+        not_all = Tex(r"\ln{{(zw)}}\neq\ln{{(z)}}+\ln{{(w)}}", color=YELLOW).scale(1.2).to_edge(DOWN)
+        bg_not = BackgroundRectangle(not_i)
+        bg_not2 = BackgroundRectangle(not_all)
+        box = SurroundingRectangle(not_all, buff=.2)
+        self.play(Write(VGroup(bg_not, not_i)))
+        self.play(ShowCreation(box))
+        self.wait()
+        self.play(RT(bg_not, bg_not2),
+                  TransformMatchingTex(not_i, not_all,
+                                       key_map={r"(-\i)": "(zw)",
+                                                r"(-1)": "(z)",
+                                                r"(\i)": "(w)"
+                                                }))
+        # self.play(ShowCreation(box))
+        self.wait()
+
+        # discuss about continuity
+        self.remove(bg3, bgm2, bgmi2, bg_not2)
+        self.play(
+            FadeOut(VGroup(
+                VGroup(*points), VGroup(*lines),
+                lni3, lnm12, lnmi2,
+                not_all, box
+            )),
+            Restore(cut)
+        )
+        th.set_value(-1e-5)
+        arc.add_updater(update_arc)
+        one_point.add_updater(update_point)
+        line.add_updater(update_line)
+        VGroup(one_point, line).set_color(PINK)
+        self.add(one_point, line, arc)
+        self.wait()
+
+        thetaeq = Tex("\\theta=").to_corner(UR, buff=1).shift(LEFT * 2).scale(1.2).add_background_rectangle()
+        theta = DecimalNumber(0, unit="^\\circ").add_background_rectangle().next_to(thetaeq)
+        self.play(Write(VGroup(thetaeq, theta)))
+        theta.add_updater(lambda t: t.set_value(th.get_value() / DEGREES))
+        theta.add_updater(lambda t: t.next_to(thetaeq))
+        self.play(th.set_value, -PI + 1e-5, run_time=3, rate_func=linear)
+        th.set_value(PI - 1e-5)
+        self.play(th.set_value, PI * .95, run_time=1, rate_func=linear)
+        self.play(th.set_value, PI - 1e-5, run_time=1, rate_func=linear)
+        th.set_value(-PI + 1e-5)
+        self.play(th.set_value, -0.95 * PI, run_time=1, rate_func=linear)
+        self.play(th.set_value, -PI + 1e-5, run_time=1, rate_func=linear)
+        th.set_value(PI-1e-5)
+        self.play(th.set_value, PI*.95, run_time=1, rate_func=linear)
+        self.wait()
+
+        to_clear = [arc, one_point, line, theta]
+        for c in to_clear:
+            c.clear_updaters()
+        self.play(FadeOut(VGroup(scope, thetaeq, *to_clear)))
+
+        cut_plane = TexText("在去掉了负实轴(和0)的复平面上,", color=YELLOW).to_edge(UP).add_background_rectangle()
+        analytic = TexText("$\\ln z$解析,且$(\\ln z)'=\\frac 1z$", color=YELLOW).next_to(cut_plane, DOWN).add_background_rectangle()
+        self.play(Write(cut_plane))
+        self.wait()
+        self.play(Write(analytic))
+        self.wait()
+
+        # other cuts
+        self.play(FadeOut(cut_plane), FadeOut(analytic))
+        self.wait()
+        self.play(Rotating(cut, angle=PI, run_time=1))
+        two_pi = Tex(r"0\leq\arg z<2\pi", color=YELLOW).scale(1.5).move_to(scope)
+        pi_3 = Tex(r"\frac \pi3<\arg z\leq\frac 73\pi", color=YELLOW).scale(1.5).move_to(scope)
+        bg = BackgroundRectangle(two_pi)
+        self.play(Write(VGroup(bg, two_pi)))
+        self.wait()
+        self.play(Rotating(cut, angle=PI/3, run_time=1))
+        self.play(TransformMatchingTex(two_pi, pi_3))
+        self.wait()
+
+        self.remove(bg)
+        self.play(FadeOut(pi_3), FadeOut(cut))
+        cut1 = BranchCut(factor=.1, num=40, color=RED).shift(LEFT*plane.get_x_unit_size())
+        cut2 = BranchCut(factor=.1, num=50, color=YELLOW, reverse=True).shift(RIGHT*plane.get_x_unit_size())
+        cut2.rotate(PI).fade(.3)
+        # cut2.reverse_points()
+        self.wait()
+        f = Tex(r"f(z)=\ln(z+1)-\ln(z-1)", color=YELLOW).add_background_rectangle().to_edge(UP, buff=1)
+        self.play(Write(f))
+        self.wait()
+        self.play(ShowCreation(cut1),
+                  ShowCreation(cut2)
+                  )
+        self.wait()
+        # for i, c in enumerate(cut2[0]):
+        #     self.add(Text(str(i), color=PINK).scale(.5).move_to(c))
+        self.play(FadeOut(cut1), FadeOut(cut2[0][20:]))
+        self.wait()
+
+
+class Note(Scene):
+    def construct(self):
+        title = TexText(r"\textbf{\heiti 关于记号...}", color=YELLOW).to_edge(UP, buff=.5)
+        self.play(Write(title))
+        self.wait()
+
+        arg = VGroup(Tex("\\mathrm{Arg}"), Tex("\\arg"), ).arrange(DOWN, buff=.5).next_to(title, DOWN, buff=1).shift(
+            LEFT * 3)
+        ln = VGroup(Tex("\\mathrm{Ln}"), Tex("\\ln")).arrange(DOWN, buff=.5).next_to(arg, DOWN, buff=1)
+        self.play(Write(arg))
+        self.play(Write(ln))
+
+        label_arg = VGroup(TexText("多值的").next_to(arg[0], buff=1),
+                           TexText("单值的 (principal value)").next_to(arg[1], buff=1))
+        label_ln = label_arg.copy().next_to(ln, buff=1)
+        self.play(Write(label_arg[0]), Write(label_ln[0]))
+        self.play(Write(label_arg[1]), Write(label_ln[1]))
+        self.wait()
+        self.play(
+            label_arg[0].set_y, label_arg[1].get_y(),
+            label_arg[1].set_y, label_arg[0].get_y(),
+            label_ln[0].set_y, label_ln[1].get_y(),
+            label_ln[1].set_y, label_ln[0].get_y(),
+        )
+        self.wait()
+
+        self.play(FadeOut(VGroup(arg, ln, label_arg, label_ln)))
+        my = TexText("\\heiti 视频中只采用$\\ln$的写法.", color=YELLOW).next_to(title, DOWN, buff=1.5)
+        multi = TexText("在给出支割线之前是多值的,").next_to(my, DOWN, buff=1)
+        single = TexText("之后是单值的.").next_to(multi, DOWN)
+        self.play(Write(my))
+        self.wait()
+        self.play(Write(multi))
+        self.play(Write(single))
+        self.wait()
+
+
+class DLog(Scene):
+    def construct(self):
+        lim1 = Tex(r"{{f'(z_0)}} {{=}} {{\lim_{ {{z}}\to {{z_0}} } }} {\ln {{z}}-\ln {{z_0}} \over {{z}}-{{z_0}}}",
+                   ).tm({'z': YELLOW, 'z_0': WHITE}).to_edge(UP, buff=1).shift(LEFT)
+        lim2 = Tex(r"\xlongequal{ w =\ln z} \lim_{w\to w_0} {w-w_0\over \e^w-\e^{w_0}}")\
+            .tm({'w': BLUE, 'w_0': WHITE}).next_to(lim1[4], DOWN, buff=1).shift(RIGHT*1)
+
+        VGroup(lim2[0][0], lim2[0][14], lim2[0][18], lim2[0][24]).set_color(BLUE)
+        lim2[0][4].set_color(YELLOW)
+        lim3 = Tex(r"=\lim_{w\to w_0}\frac{1}{\frac{\e^w-\e^{w_0} }{w-w_0} }")\
+            .next_to(lim2, DOWN, buff=.5).align_to(lim1[1], LEFT)
+        # for i, l in enumerate(lim3[0]):
+        #     i = Text(str(i), color=PINK).scale(.5).move_to(l)
+        #     self.add(i)
+        VGroup(lim3[0][4],lim3[0][11],lim3[0][17]).set_color(BLUE)
+        lim4 = Tex(r"={1\over \exp'(w_0)}").next_to(lim3, DOWN, aligned_edge=LEFT)
+        lim5 = Tex(r"={1\over \e^{w_0} } ={1\over z_0}").next_to(lim4, buff=.2)
+
+        self.play(Write(lim1))
+        self.wait()
+        self.play(Write(lim2))
+        self.wait()
+        self.play(Write(lim3))
+        self.wait()
+        self.play(Write(lim4))
+        self.wait()
+        self.play(Write(lim5))
+        self.wait()
+
+
+class pic(Scene):
+    def construct(self):
+        l = Tex("\\ln(\\i)").scale(7)
+        self.add(l)
+
+
+class exp(Scene):
+    def construct(self):
+        e = Tex("\\e^{\\i\\pi}").scale(7)
+        self.add(e)
 
