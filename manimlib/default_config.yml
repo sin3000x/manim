@@ -6,10 +6,10 @@ directories:
   # Where should manim output video and image files?
   output: ""
   # If you want to use images, manim will look to these folders to find them
-  raster_images: ""
-  vector_images: ""
+  raster_images: "/Users/jeremy/Documents/manim/assets/raster_images"
+  vector_images: "/Users/jeremy/Documents/manim/assets/svg_images"
   # If you want to use sounds, manim will look here to find it.
-  sounds: ""
+  sounds: "/Users/jeremy/Documents/manim/assets/sounds"
   # Manim often generates tex_files or other kinds of serialized data
   # to keep from having to generate the same thing too many times.  By
   # default, these will be stored at tempfile.gettempdir(), e.g. this might

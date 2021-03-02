@@ -1,7 +1,29 @@
 import os
 import numpy as np
 from manimlib import *
+from manimlib import Scene
 
+
+class BunnyEars(SVGMobject):
+    CONFIG = {
+        "color": "#faf697"
+    }
+
+    def __init__(self, **kwargs):
+        digest_config(self, kwargs)
+        SVGMobject.__init__(self, file_name="bunnyears", **kwargs)
+        self.set_stroke(width=1)
+
+
+class Vocabulary(VGroup):
+    def __init__(self):
+        title = TexText("轩兔的单词表")
+        title.scale(1.5)
+        title[0][:2].set_color("#faf697")
+        ears = BunnyEars().scale(.5).next_to(title[0][:2], UP, buff=.1)
+        ears.shift(RIGHT*.05)
+        VGroup.__init__(self, title, ears)
+        self.to_edge(UP)
 
 class Heiti(TexText):
     CONFIG = {
@@ -495,9 +517,9 @@ class Favo(SVGMobject):
 class BranchCut(VGroup):
     CONFIG = {
         "color": YELLOW,
-        "num": 20,
+        "num": 40,
         "angle": np.pi,
-        "factor": .2,
+        "factor": .1,
         "reverse": False
     }
 
