@@ -16,8 +16,7 @@ class Tu(Scene):
 
 class Test(Scene):
     def construct(self):
-        creature = BunnyEars()
-        # for i in range(len(creature)):
-        #     creature[i].set_stroke(width=2)
-        creature.set_stroke(width=1)
-        self.add(creature)
+        plane = NumberPlane(axis_config={"unit_size": 2})
+        self.add(plane)
+        self.play(plane.apply_matrix, [[1,1],[0,1]], run_time=2)
+        self.wait()
