@@ -160,16 +160,8 @@ class AreaTest(GraphScene, Scene):
     def func1(self, x):
         return (x)
 
-class T(GraphScene):
-    CONFIG = {
-        "x_min": 0,
-        "x_max": 1.2,
-        "y_max": 1.2,
-        "graph_origin": ORIGIN
-    }
+class T(LinearTransformationScene):
     def construct(self):
-        self.setup_axes(animate = True)
-        graph = self.get_graph(lambda t: np.sin(1000/t), x_min=1e-6, x_max=1)
-        self.add(graph)
-        label = TexMobject("\\sin\\frac 1x").next_to(graph, LEFT, buff=1)
-        self.add(label)
+        self.setup()
+        self.apply_matrix([[2,1],[1,2]])
+        self.wait()

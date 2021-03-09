@@ -31,13 +31,13 @@ def matrix_to_mobject(matrix):
 
 
 def vector_coordinate_label(vector_mob, integer_labels=True,
-                            n_dim=2, color=WHITE):
+                            n_dim=2, color=WHITE, nudge=ORIGIN):
     vect = np.array(vector_mob.get_end())
     if integer_labels:
         vect = np.round(vect).astype(int)
     vect = vect[:n_dim]
     vect = vect.reshape((n_dim, 1))
-    label = Matrix(vect, add_background_rectangles_to_entries=True)
+    label = Matrix(vect, add_background_rectangles_to_entries=False)
     label.scale(VECTOR_LABEL_SCALE_FACTOR)
 
     shift_dir = np.array(vector_mob.get_end())
@@ -45,8 +45,10 @@ def vector_coordinate_label(vector_mob, integer_labels=True,
         shift_dir -= label.get_left() + DEFAULT_MOBJECT_TO_MOBJECT_BUFFER * LEFT
     else:  # Pointing left
         shift_dir -= label.get_right() + DEFAULT_MOBJECT_TO_MOBJECT_BUFFER * RIGHT
-    label.shift(shift_dir)
+    label.shift(shift_dir + nudge)
     label.set_color(color)
+    for ele in label.get_entries():
+        ele.add_background_rectangle()
     label.rect = BackgroundRectangle(label)
     label.add_to_back(label.rect)
     return label
