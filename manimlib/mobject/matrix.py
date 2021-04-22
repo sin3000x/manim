@@ -57,14 +57,13 @@ class Matrix(VMobject):
     CONFIG = {
         "v_buff": 0.8,
         "h_buff": 1.3,
-        "bracket_h_buff": MED_SMALL_BUFF,
-        "bracket_v_buff": MED_SMALL_BUFF,
+        "bracket_h_buff": 0.2,
+        "bracket_v_buff": 0.25,
         "add_background_rectangles_to_entries": False,
         "include_background_rectangle": False,
         "element_to_mobject": Tex,
         "element_to_mobject_config": {},
-        "element_alignment_corner": ORIGIN,
-        "bracket": 'p'
+        "element_alignment_corner": DOWN,
     }
 
     def __init__(self, matrix, **kwargs):
@@ -135,20 +134,14 @@ class Matrix(VMobject):
 
     def get_rows(self):
         return VGroup(*[
-            VGroup(*self.mob_matrix[i, :])
-            for i in range(self.mob_matrix.shape[0])
+            VGroup(*row)
+            for row in self.mob_matrix
         ])
 
     def set_column_colors(self, *colors):
         columns = self.get_columns()
         for color, column in zip(colors, columns):
             column.set_color(color)
-        return self
-
-    def set_row_colors(self, *colors):
-        rows = self.get_rows()
-        for color, row in zip(colors, rows):
-            row.set_color(color)
         return self
 
     def add_background_to_entries(self):
@@ -176,6 +169,7 @@ class DecimalMatrix(Matrix):
 class IntegerMatrix(Matrix):
     CONFIG = {
         "element_to_mobject": Integer,
+        "element_alignment_corner": UP,
     }
 
 
