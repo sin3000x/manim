@@ -130,6 +130,7 @@ class Cross(VGroup):
     }
 
     def __init__(self, mobject, **kwargs):
+        digest_config(self, kwargs)
         super().__init__(
             Line(UL, DR),
             Line(UR, DL),
