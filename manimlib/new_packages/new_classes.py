@@ -1,7 +1,114 @@
 import os
 import numpy as np
 from manimlib import *
-from manimlib import Scene, VGroup
+from manimlib import Scene, VGroup, Line
+
+
+class IntervalChart(VGroup):
+    CONFIG = {
+        "height": 2,
+        "depth": 2,
+        "width": 6,
+        "n_ticks": 4,
+        "tick_width": 0.2,
+        "label_y_axis": True,
+        "y_axis_label_height": 0.25,
+        "max_value": 1,
+        "min_value": -1,
+        "bar_colors": [BLUE, YELLOW],
+        "bar_fill_opacity": 0.8,
+        "bar_stroke_width": 3,
+        "bar_names": [],
+        "bar_label_scale_val": 0.75,
+        "remove_bottom": True
+    }
+
+    def __init__(self, values, **kwargs):
+        """
+        values are list of tuples: [(-1,1), (-1/2,1/2), (-1/3,1/4)], as sequence of intervals
+        height and depth: the maximum and minimum of y
+        """
+        VGroup.__init__(self, **kwargs)
+        uppers = np.array([interval[1] for interval in values])
+        lowers = np.array([interval[0] for interval in values])
+        self.y_unit = self.height/self.max_value
+        if self.max_value is None:
+            self.max_value = max(uppers-lowers)
+
+        self.add_axes()
+        self.add_bars(uppers, lowers)
+        self.center()
+
+    def add_axes(self):
+        x_axis = Line(self.tick_width * LEFT / 2, self.width * RIGHT)
+        y_axis = Line(self.depth * DOWN, self.height * UP)
+        ticks = VGroup()
+        heights = np.linspace(-self.depth, self.height, self.n_ticks + 1)
+        values = np.linspace(self.min_value, self.max_value, self.n_ticks + 1)
+        for y, value in zip(heights, values):
+            tick = Line(LEFT, RIGHT)
+            tick.set_width(self.tick_width)
+            tick.move_to(y * UP)
+            ticks.add(tick)
+        y_axis.add(ticks)
+
+        self.add(x_axis, y_axis)
+        self.x_axis, self.y_axis = x_axis, y_axis
+        self.axes = VGroup(self.x_axis, self.y_axis)
+
+        if self.label_y_axis:
+            labels = VGroup()
+            for tick, value in zip(ticks, values):
+                label = Tex(str(np.round(value, 2)))
+                label.set_height(self.y_axis_label_height)
+                label.next_to(tick, LEFT, SMALL_BUFF)
+                labels.add(label)
+            self.y_axis_labels = labels
+            self.add(labels)
+
+    def add_bars(self, uppers, lowers):
+        buff = float(self.width) / (2 * len(uppers) + 1)
+        bars = VGroup()
+        bottoms = VGroup()
+        for i in range(len(uppers)):
+            bar = Rectangle(
+                height=((uppers[i]-lowers[i]) / (self.max_value-self.min_value)) * (self.height+self.depth),
+                width=buff,
+                stroke_width=self.bar_stroke_width,
+                fill_opacity=self.bar_fill_opacity,
+            )
+
+            bar.move_to((2 * i + 1) * buff * RIGHT, DOWN + LEFT).shift(UP*lowers[i]*self.y_unit)
+            if self.remove_bottom:
+                # bottom = Line(bar.get_edges()[2].get_left(), bar.get_edges()[2].get_right(), stroke_width=18).set_color(BLACK)
+                bottom = bar.get_edges()[2].set_color(BLACK).set_stroke(width=5).stretch(0.9,0).shift(UP*0.02)
+                # self.add(bottom)
+                bottoms.add(bottom)
+            bars.add(bar)
+        bars.set_color_by_gradient(*self.bar_colors)
+
+        bar_labels = VGroup()
+        for bar, name in zip(bars, self.bar_names):
+            label = Tex(str(name))
+            label.scale(self.bar_label_scale_val)
+            label.next_to(bar, DOWN, SMALL_BUFF)
+            bar_labels.add(label)
+
+        self.add(bars, bar_labels, bottoms)
+        self.bars = bars
+        self.bar_labels = bar_labels
+        self.bottoms = bottoms
+
+    def change_bar_values(self, values):
+        for bar, value in zip(self.bars, values):
+            bar_bottom = bar.get_bottom()
+            bar.stretch_to_fit_height(
+                (value / self.max_value) * self.height
+            )
+            bar.move_to(bar_bottom, DOWN)
+
+    def copy(self):
+        return self.deepcopy()
 
 
 class Debug(VGroup):

@@ -65,3 +65,4 @@ from manimlib.utils.space_ops import *
 from manimlib.utils.strings import *
 
 from manimlib.new_packages.new_classes import *
+from manimlib.new_packages.intersection import *
