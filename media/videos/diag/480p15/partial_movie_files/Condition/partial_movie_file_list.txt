@@ -1,0 +1,6 @@
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Condition/00000.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Condition/00001.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Condition/00002.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Condition/00003.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Condition/00004.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Condition/00005.mp4'

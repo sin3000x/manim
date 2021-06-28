@@ -21,13 +21,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/jeremy/limset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manimlib/new_packages/intersection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Prop.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Prop.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jeremy/ypm.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/old/ypm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/InteractiveDevelopment.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/AnimatingMethods.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/AnimatingMethods.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/GraphExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/GraphExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/InteractiveDevlopment.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/SurfaceExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/SurfaceExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/TexTransformExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/TexTransformExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/TextExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/TextExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/UpdatersExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/UpdatersExample.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/development/changelog.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/development/changelog.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/documentation/custom_config.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/documentation/custom_config.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/quickstart.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/quickstart.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/structure.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/structure.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example_scenes.py" beforeDir="false" afterPath="$PROJECT_DIR$/example_scenes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/animation/animation.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/animation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/camera/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/camera/camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/geometry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/text_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/text_mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/vector_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/vector_field.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/image/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/image/frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/inserts/finalize_color.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/finalize_color.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/surface/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/surface/frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/textured_surface/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/textured_surface/frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/shaders/true_dot/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/true_dot/frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/utils/init_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/init_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/utils/space_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/space_ops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,15 +109,15 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/jeremy/old" />
-      <recent name="$PROJECT_DIR$/jeremy/old_shaders" />
-      <recent name="$PROJECT_DIR$/jeremy/finished" />
-      <recent name="$PROJECT_DIR$/jeremy/ref" />
-      <recent name="$PROJECT_DIR$/jeremy" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/manimlib/new_packages" />
+      <recent name="$PROJECT_DIR$/jeremy" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/jeremy/old_shaders" />
+      <recent name="$PROJECT_DIR$/jeremy/old" />
+      <recent name="$PROJECT_DIR$/jeremy/finished" />
+      <recent name="$PROJECT_DIR$/jeremy/ref" />
       <recent name="$PROJECT_DIR$/jeremy" />
     </key>
   </component>
@@ -213,7 +244,7 @@
       <workItem from="1622795350696" duration="21245000" />
       <workItem from="1623066236172" duration="19156000" />
       <workItem from="1623249184680" duration="5935000" />
-      <workItem from="1624784941078" duration="980000" />
+      <workItem from="1624784941078" duration="1390000" />
     </task>
     <servers />
   </component>

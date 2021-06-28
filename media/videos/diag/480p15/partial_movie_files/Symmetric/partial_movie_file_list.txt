@@ -1,0 +1,8 @@
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00065.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00066.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00067.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00068.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00069.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00070.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00071.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/diag/480p15/partial_movie_files/Symmetric/00072.mp4'

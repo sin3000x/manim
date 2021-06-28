@@ -1,0 +1,4 @@
+file 'file:/Users/jeremy/Documents/manim/media/videos/wcat/480p15/partial_movie_files/EndpointsGluedTogether/00000.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/wcat/480p15/partial_movie_files/EndpointsGluedTogether/00001.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/wcat/480p15/partial_movie_files/EndpointsGluedTogether/00002.mp4'
+file 'file:/Users/jeremy/Documents/manim/media/videos/wcat/480p15/partial_movie_files/EndpointsGluedTogether/00003.mp4'
