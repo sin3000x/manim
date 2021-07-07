@@ -3,7 +3,7 @@ from manimlib import *
 
 class Chang(Scene):
     def construct(self):
-        hello = Text("妈妈")
+        hello = Text("你好")
         self.play(Write(hello))
         self.wait()
         self.embed()

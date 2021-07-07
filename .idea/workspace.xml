@@ -21,44 +21,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/InteractiveDevelopment.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/AnimatingMethods.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/AnimatingMethods.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/GraphExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/GraphExample.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/InteractiveDevlopment.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/OpeningManimExample.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/SurfaceExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/SurfaceExample.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/TexTransformExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/TexTransformExample.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/TextExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/TextExample.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/_static/example_scenes/UpdatersExample.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_static/example_scenes/UpdatersExample.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/development/changelog.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/development/changelog.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/documentation/custom_config.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/documentation/custom_config.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/example_scenes.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/quickstart.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/quickstart.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/structure.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/structure.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_scenes.py" beforeDir="false" afterPath="$PROJECT_DIR$/example_scenes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/animation/animation.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/animation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/camera/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/camera/camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/geometry.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/tex_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/text_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/text_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/mobject/vector_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/vector_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/shaders/image/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/image/frag.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/shaders/inserts/finalize_color.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/inserts/finalize_color.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/shaders/surface/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/surface/frag.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/shaders/textured_surface/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/textured_surface/frag.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/shaders/true_dot/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/shaders/true_dot/frag.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/init_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/init_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/utils/space_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/utils/space_ops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manimlib/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/CompleteSquare.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Eigenvalues.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Symmetry.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jeremy/chol.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jeremy/test_mac.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/test_mac.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/matrix.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +39,17 @@
       <list>
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -89,6 +69,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1h08EHWIGMOg815VXu1TnlfKhSX" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -106,7 +94,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/manimlib/new_packages" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -145,6 +133,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -244,12 +233,14 @@
       <workItem from="1622795350696" duration="21245000" />
       <workItem from="1623066236172" duration="19156000" />
       <workItem from="1623249184680" duration="5935000" />
-      <workItem from="1624784941078" duration="1390000" />
+      <workItem from="1624784941078" duration="2418000" />
+      <workItem from="1625118337775" duration="252000" />
+      <workItem from="1625564725583" duration="5648000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -268,10 +259,9 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_WIDTH">
+              <option name="COLUMN_ID_WIDTH">
                 <map>
-                  <entry key="2" value="87" />
-                  <entry key="3" value="86" />
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="87" />
                 </map>
               </option>
             </State>
@@ -283,29 +273,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="92" y="30" width="1240" height="870" key="DiffContextDialog" timestamp="1619684811849">
-      <screen x="0" y="25" width="1440" height="807" />
-    </state>
-    <state x="92" y="30" width="1240" height="870" key="DiffContextDialog/0.25.1440.807@0.25.1440.807" timestamp="1619684811849" />
-    <state x="92" y="30" width="1240" height="870" key="DiffContextDialog/0.25.1440.817@0.25.1440.817" timestamp="1614704657985" />
-    <state x="118" y="108" key="SettingsEditor" timestamp="1620373585557">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="118" y="108" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1620373585557" />
-    <state width="500" height="445" key="SwitcherDM" timestamp="1620370387191">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="500" height="445" key="SwitcherDM/0.0.1440.900@0.0.1440.900" timestamp="1620370387191" />
-    <state x="675" y="165" width="598" height="735" key="find.popup" timestamp="1623076807593">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="675" y="165" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1623076807593" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1619683640369">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1619683640369" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/manim$pytest_in_test_mac_py.coverage" NAME="pytest in test_mac.py Coverage Results" MODIFIED="1609551452889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jeremy" />

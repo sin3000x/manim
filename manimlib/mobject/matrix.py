@@ -172,6 +172,13 @@ class IntegerMatrix(Matrix):
         "element_alignment_corner": UP,
     }
 
+class mIntegerMatrix(Matrix):
+    CONFIG = {
+        "h_buff": 1,
+        "element_to_mobject": lambda i: Tex(str(i)),
+        # "element_alignment_corner": UP,
+    }
+
 
 class MobjectMatrix(Matrix):
     CONFIG = {
