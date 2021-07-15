@@ -159,6 +159,112 @@ class Matrix(VMobject):
         return self.brackets
 
 
+class Det(VMobject):
+    CONFIG = {
+        "v_buff": 0.8,
+        "h_buff": 0.9,
+        "bracket_h_buff": 0.2,
+        "bracket_v_buff": 0.25,
+        "add_background_rectangles_to_entries": False,
+        "include_background_rectangle": False,
+        "element_to_mobject": lambda i: Tex(str(i)),
+        "element_to_mobject_config": {},
+        "element_alignment_corner": DOWN,
+    }
+
+    def __init__(self, matrix, **kwargs):
+        """
+        Matrix can either either include numbres, tex_strings,
+        or mobjects
+        """
+        VMobject.__init__(self, **kwargs)
+        matrix = self.matrix = np.array(matrix, ndmin=2)
+        mob_matrix = self.matrix_to_mob_matrix(matrix)
+        self.organize_mob_matrix(mob_matrix)
+        # self.elements = VGroup(*mob_matrix.flatten())
+        self.elements = VGroup(*it.chain(*mob_matrix))
+        self.add(self.elements)
+        self.add_brackets()
+        self.center()
+        self.mob_matrix = mob_matrix
+        if self.add_background_rectangles_to_entries:
+            for mob in self.elements:
+                mob.add_background_rectangle()
+        if self.include_background_rectangle:
+            self.add_background_rectangle()
+
+    def matrix_to_mob_matrix(self, matrix):
+        return [
+            [
+                self.element_to_mobject(item, **self.element_to_mobject_config)
+                for item in row
+            ]
+            for row in matrix
+        ]
+
+    def organize_mob_matrix(self, matrix):
+        for i, row in enumerate(matrix):
+            for j, elem in enumerate(row):
+                mob = matrix[i][j]
+                mob.move_to(
+                    i * self.v_buff * DOWN + j * self.h_buff * RIGHT,
+                    self.element_alignment_corner
+                )
+        return self
+
+    def add_brackets(self):
+        height = self.matrix.shape[0]
+        bracket_pair = Tex("".join([
+            "\\left|",
+            "\\begin{array}{c}",
+            *height * ["\\quad \\\\"],
+            "\\end{array}"
+            "\\right|",
+        ]))[0]
+        bracket_pair.set_height(
+            self.get_height() + 1 * self.bracket_v_buff
+        )
+        l_bracket = bracket_pair[:len(bracket_pair) // 2]
+        r_bracket = bracket_pair[len(bracket_pair) // 2:]
+        l_bracket.next_to(self, LEFT, self.bracket_h_buff)
+        r_bracket.next_to(self, RIGHT, self.bracket_h_buff)
+        self.add(l_bracket, r_bracket)
+        self.brackets = VGroup(l_bracket, r_bracket)
+        return self
+
+    def get_columns(self):
+        return VGroup(*[
+            VGroup(*[row[i] for row in self.mob_matrix])
+            for i in range(len(self.mob_matrix[0]))
+        ])
+
+    def get_rows(self):
+        return VGroup(*[
+            VGroup(*row)
+            for row in self.mob_matrix
+        ])
+
+    def set_column_colors(self, *colors):
+        columns = self.get_columns()
+        for color, column in zip(colors, columns):
+            column.set_color(color)
+        return self
+
+    def add_background_to_entries(self):
+        for mob in self.get_entries():
+            mob.add_background_rectangle()
+        return self
+
+    def get_mob_matrix(self):
+        return self.mob_matrix
+
+    def get_entries(self):
+        return self.elements
+
+    def get_brackets(self):
+        return self.brackets
+
+
 class DecimalMatrix(Matrix):
     CONFIG = {
         "element_to_mobject": DecimalNumber,
