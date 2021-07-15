@@ -25,7 +25,6 @@
       <change afterPath="$PROJECT_DIR$/images/Cauchy.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/images/Cholesky.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/images/CholeskyExample.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Pic.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/images/Sylvester.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/Eigenvalues.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Eigenvalues.png" afterDir="false" />
@@ -240,7 +239,7 @@
       <workItem from="1625118337775" duration="252000" />
       <workItem from="1625564725583" duration="14048000" />
       <workItem from="1626057838490" duration="25741000" />
-      <workItem from="1626341192404" duration="600000" />
+      <workItem from="1626341192404" duration="1001000" />
     </task>
     <servers />
   </component>
