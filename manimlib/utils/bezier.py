@@ -138,8 +138,8 @@ def get_smooth_quadratic_bezier_handle_points(points):
         last_str = 0.25 * points[-2] + points[-1] - 0.25 * points[1]
         last_stl = 0.25 * points[1] + points[0] - 0.25 * points[-2]
     else:
-        last_str = smooth_to_left[0]
-        last_stl = smooth_to_right[0]
+        last_str = 0.25 * points[-2] + points[-1] - 0.25 * points[1]  # modify this line
+        last_stl = 0.25 * points[1] + points[0] - 0.25 * points[-2]  # modify this line
     handles = 0.5 * np.vstack([smooth_to_right, [last_str]])
     handles += 0.5 * np.vstack([last_stl, smooth_to_left[::-1]])
     return handles
