@@ -1,6 +1,7 @@
 from manimlib.imports import *
 # from jeremy.ref.debugTex import debugTeX
 
+# 函数的上下极限
 class fun(GraphScene):
     CONFIG = {"upper": BLUE, "middle": RED, "lower": GREEN,"color_map": {r"\sup": BLUE, r"k\geq": BLUE, "a_k": BLUE},
               "color_map_down": {r"\inf": GREEN, r"k\geq": GREEN, "a_k": GREEN},

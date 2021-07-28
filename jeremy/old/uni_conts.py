@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-
+# 一致连续性
 class continuous(GraphScene):
     def construct(self):
         title = TextMobject("\\underline{\\heiti 函数的一致连续性}", color=YELLOW).to_corner(UL)

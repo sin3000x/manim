@@ -1,6 +1,7 @@
 from manimlib.imports import *
 
-
+# Mean Value Theorem
+# 罗尔、拉格朗日、柯西中值定理
 class mvt(GraphScene):
     CONFIG = {
         "map": {"a": BLUE, "b": RED, "arrow": WHITE, "kaishu": WHITE, "forall": WHITE}

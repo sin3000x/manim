@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-
+# Heine定理
 class Heine(GraphScene):
     CONFIG = {
         "x_min": -5,

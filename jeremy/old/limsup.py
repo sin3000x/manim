@@ -1,7 +1,7 @@
 from manimlib.imports import *
 
-
-class limsup(PiCreatureScene):
+# 数列的上下极限
+class limsup(PiCreatureScene):  #pi小人场景
     CONFIG = {"upper": BLUE, "middle": RED, "lower": GREEN,"color_map": {r"\sup": BLUE, r"k\geq": BLUE, "a_k": BLUE},
               "color_map_down": {r"\inf": GREEN, r"k\geq": GREEN, "a_k": GREEN},
               "color_map_limit": {"limsup": BLUE, "liminf": GREEN,"大": BLUE,"小": GREEN}}
