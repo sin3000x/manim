@@ -55,6 +55,7 @@ class Rotation(LinearTransformationScene):
         # )
         self.apply_matrix(u)
         self.wait()
+        self.apply_inverse(u)
 
 
 
