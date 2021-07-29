@@ -105,7 +105,7 @@ class Matrix(VMobject):
 
     def add_brackets(self):
         if self.bracket == 'p':
-            bracket_pair = TexMobject("\\left(", "\\right)")
+            bracket_pair = TexMobject("\\left[", "\\right]")
             bracket_pair.scale(2)
             bracket_pair.stretch_to_fit_height(
                 self.get_height() + 2 * self.bracket_v_buff
