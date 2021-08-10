@@ -4,6 +4,37 @@ from manimlib.mobject.svg.svg_mobject import SVGMobject
 from manimlib.mobject.svg.tex_mobject import TextMobject
 from manimlib.utils.config_ops import digest_config
 
+
+def layer_to_image_array(layer, to_square=True):
+    if to_square:
+        w = int(np.ceil(np.sqrt(len(layer))))
+        if len(layer) < w**2:
+            layer = np.append(layer, np.zeros(w**2 - len(layer)))
+        layer = layer.reshape((w, w))
+        # return Image.fromarray((255*layer).astype('uint8'))
+    return (255*layer).astype('int')
+
+class PixelsAsSquares(VGroup):
+    CONFIG = {
+        "height" : 2,
+    }
+    def __init__(self, image_mobject, **kwargs):
+        VGroup.__init__(self, **kwargs)
+        for row in image_mobject.pixel_array:
+            for rgba in row:
+                square = Square(
+                    stroke_width = 0,
+                    fill_opacity = rgba[3]/255.0,
+                    fill_color = rgba_to_color(rgba/255.0),
+                )
+                self.add(square)
+                square.fill_rgb = rgba/255
+        self.arrange_in_grid(
+            *image_mobject.pixel_array.shape[:2],
+            buff = 0
+        )
+        self.replace(image_mobject)
+
 class Heiti(TextMobject):
     CONFIG = {
         "underline": True,
