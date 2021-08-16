@@ -392,7 +392,7 @@ class SingularValuesRank(Scene):
         self.add(title)
         self.wait()
 
-        a1 = np.array([[1, 1, 0], [0, 1, 0], [0, 0, 1]])
+        a1 = np.array([[1, 1, 0], [1, 1, 0], [0, 0, 1]])
         a2 = np.ones_like(a1, dtype=int)
         v1 = VGroup(
             TexMobject("\\text{rank}=", "2", ":").set_color_by_tex('2', BLUE),
