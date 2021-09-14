@@ -2,7 +2,7 @@ from manimlib import *
 import numpy as np
 
 # To watch one of these scenes, run the following:
-# python -m manim example_scenes.py SquareToCircle
+# manimgl example_scenes.py OpeningManimExample
 # Use -s to skip to the end and just save the final frame
 # Use -w to write the animation to a file
 # Use -o to write it to a file and open it once done
@@ -164,7 +164,7 @@ class TexTransformExample(Scene):
             # Passing in muliple arguments to Tex will result
             # in the same expression as if those arguments had
             # been joined together, except that the submobject
-            # heirarchy of the resulting mobject ensure that the
+            # hierarchy of the resulting mobject ensure that the
             # Tex mobject has a subject corresponding to
             # each of these strings.  For example, the Tex mobject
             # below will have 5 subjects, corresponding to the

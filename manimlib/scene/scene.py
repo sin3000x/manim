@@ -50,7 +50,7 @@ class Scene(object):
 
         self.camera = self.camera_class(**self.camera_config)
         self.file_writer = SceneFileWriter(self, **self.file_writer_config)
-        self.mobjects = []
+        self.mobjects = [self.camera.frame]
         self.num_plays = 0
         self.time = 0
         self.skip_time = 0
@@ -123,7 +123,7 @@ class Scene(object):
         # Have the frame update after each command
         shell.events.register('post_run_cell', lambda *a, **kw: self.update_frame())
         # Use the locals of the caller as the local namespace
-        # once embeded, and add a few custom shortcuts
+        # once embedded, and add a few custom shortcuts
         local_ns = inspect.currentframe().f_back.f_locals
         local_ns["touch"] = self.interact
         for term in ("play", "wait", "add", "remove", "clear", "save_state", "restore"):
@@ -570,7 +570,7 @@ class Scene(object):
         frame = self.camera.frame
         if self.window.is_key_pressed(ord("z")):
             factor = 1 + np.arctan(10 * offset[1])
-            frame.scale(factor, about_point=point)
+            frame.scale(1/factor, about_point=point)
         else:
             transform = frame.get_inverse_camera_rotation_matrix()
             shift = np.dot(np.transpose(transform), offset)
