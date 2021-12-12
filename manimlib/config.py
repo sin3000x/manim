@@ -5,10 +5,15 @@ import importlib
 import os
 import sys
 import yaml
+from contextlib import contextmanager
 from screeninfo import get_monitors
 
 from manimlib.utils.config_ops import merge_dicts_recursively
 from manimlib.utils.init_config import init_customization
+from manimlib.logger import log
+
+
+__config_file__ = "custom_config.yml"
 
 
 def parse_cli():
@@ -112,6 +117,12 @@ def parse_cli():
                  "the rendering at the second value",
         )
         parser.add_argument(
+            "-e", "--embed",
+            help="Takes a line number as an argument, and results"
+                 "in the scene being called as if the line `self.embed()`"
+                 "was inserted into the scene code at that line number."
+        )
+        parser.add_argument(
             "-r", "--resolution",
             help="Resolution, passed as \"WxH\", e.g. \"1920x1080\"",
         )
@@ -136,10 +147,19 @@ def parse_cli():
             "--config_file",
             help="Path to the custom configuration file",
         )
+        parser.add_argument(
+            "-v", "--version",
+            action="store_true",
+            help="Display the version of manimgl"
+        )
+        parser.add_argument(
+            "--log-level",
+            help="Level of messages to Display, can be DEBUG / INFO / WARNING / ERROR / CRITICAL"
+        )
         args = parser.parse_args()
         return args
     except argparse.ArgumentError as err:
-        print(str(err))
+        log.error(str(err))
         sys.exit(2)
 
 
@@ -152,14 +172,30 @@ def get_manim_dir():
 def get_module(file_name):
     if file_name is None:
         return None
-    else:
-        module_name = file_name.replace(os.sep, ".").replace(".py", "")
-        spec = importlib.util.spec_from_file_location(module_name, file_name)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        return module
+    module_name = file_name.replace(os.sep, ".").replace(".py", "")
+    spec = importlib.util.spec_from_file_location(module_name, file_name)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
-__config_file__ = "custom_config.yml"
+
+@contextmanager
+def insert_embed_line(file_name, lineno):
+    with open(file_name, 'r') as fp:
+        lines = fp.readlines()
+    line = lines[lineno - 1]
+    n_spaces = len(line) - len(line.lstrip())
+    lines.insert(lineno - 1, " " * n_spaces + "self.embed()\n")
+
+    alt_file = file_name.replace(".py", "_inserted_embed.py")
+    with open(alt_file, 'w') as fp:
+        fp.writelines(lines)
+
+    try:
+        yield alt_file
+    finally:
+        os.remove(alt_file)
+
 
 def get_custom_config():
     global __config_file__
@@ -185,36 +221,49 @@ def get_custom_config():
     return config
 
 
+def check_temporary_storage(config):
+    if config["directories"]["temporary_storage"] == "" and sys.platform == "win32":
+        log.warning(
+            "You may be using Windows platform and have not specified the path of"
+            " `temporary_storage`, which may cause OSError. So it is recommended"
+            " to specify the `temporary_storage` in the config file (.yml)"
+        )
+
+
 def get_configuration(args):
     global __config_file__
 
     # ensure __config_file__ always exists
     if args.config_file is not None:
         if not os.path.exists(args.config_file):
-            print(f"Can't find {args.config_file}.")
+            log.error(f"Can't find {args.config_file}.")
             if sys.platform == 'win32':
-                print(f"Copying default configuration file to {args.config_file}...")
+                log.info(f"Copying default configuration file to {args.config_file}...")
                 os.system(f"copy default_config.yml {args.config_file}")
             elif sys.platform in ["linux2", "darwin"]:
-                print(f"Copying default configuration file to {args.config_file}...")
+                log.info(f"Copying default configuration file to {args.config_file}...")
                 os.system(f"cp default_config.yml {args.config_file}")
             else:
-                print("Please create the configuration file manually.")
-            print("Read configuration from default_config.yml.")
+                log.info("Please create the configuration file manually.")
+            log.info("Read configuration from default_config.yml.")
         else:
             __config_file__ = args.config_file
 
     global_defaults_file = os.path.join(get_manim_dir(), "manimlib", "default_config.yml")
 
     if not (os.path.exists(global_defaults_file) or os.path.exists(__config_file__)):
-        print("There is no configuration file detected. Initial configuration:\n")
+        log.info("There is no configuration file detected. Switch to the config file initializer:")
         init_customization()
 
     elif not os.path.exists(__config_file__):
-        print(f"Warning: Using the default configuration file, which you can modify in {global_defaults_file}")
-        print(f"If you want to create a local configuration file, you can create a file named {__config_file__}, or run manimgl --config")
+        log.info(f"Using the default configuration file, which you can modify in `{global_defaults_file}`")
+        log.info(
+            "If you want to create a local configuration file, you can create a file named"
+            f" `{__config_file__}`, or run `manimgl --config`"
+        )
 
     custom_config = get_custom_config()
+    check_temporary_storage(custom_config)
 
     write_file = any([args.write_file, args.open, args.finder])
     if args.transparent:
@@ -241,7 +290,12 @@ def get_configuration(args):
         "quiet": args.quiet,
     }
 
-    module = get_module(args.file)
+    if args.embed is None:
+        module = get_module(args.file)
+    else:
+        with insert_embed_line(args.file, int(args.embed)) as alt_file:
+            module = get_module(alt_file)
+
     config = {
         "module": module,
         "scene_names": args.scene_names,
@@ -263,7 +317,7 @@ def get_configuration(args):
     mon_index = custom_config["window_monitor"]
     monitor = monitors[min(mon_index, len(monitors) - 1)]
     window_width = monitor.width
-    if not args.full_screen:
+    if not (args.full_screen or custom_config["full_screen"]):
         window_width //= 2
     window_height = window_width * 9 // 16
     config["window_config"] = {
@@ -319,9 +373,9 @@ def get_camera_configuration(args, custom_config):
     try:
         bg_color = args.color or custom_config["style"]["background_color"]
         camera_config["background_color"] = colour.Color(bg_color)
-    except AttributeError as err:
-        print("Please use a valid color")
-        print(err)
+    except ValueError as err:
+        log.error("Please use a valid color")
+        log.error(err)
         sys.exit(2)
 
     # If rendering a transparent image/move, make sure the

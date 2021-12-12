@@ -1,4 +1,5 @@
 import moderngl
+import math
 from colour import Color
 import OpenGL.GL as gl
 
@@ -67,7 +68,7 @@ class CameraFrame(Mobject):
         added_rot_T = rotation_matrix_transpose(angle, axis)
         new_rot_T = np.dot(curr_rot_T, added_rot_T)
         Fz = new_rot_T[2]
-        phi = np.arccos(Fz[2])
+        phi = np.arccos(clip(Fz[2], -1, 1))
         theta = angle_of_vector(Fz[:2]) + PI / 2
         partial_rot_T = np.dot(
             rotation_matrix_transpose(phi, RIGHT),
@@ -121,6 +122,15 @@ class CameraFrame(Mobject):
         self.refresh_rotation_matrix()
         return self
 
+    def get_theta(self):
+        return self.data["euler_angles"][0]
+
+    def get_phi(self):
+        return self.data["euler_angles"][1]
+
+    def get_gamma(self):
+        return self.data["euler_angles"][2]
+
     def get_shape(self):
         return (self.get_width(), self.get_height())
 
@@ -138,6 +148,16 @@ class CameraFrame(Mobject):
 
     def get_focal_distance(self):
         return self.focal_distance * self.get_height()
+
+    def get_implied_camera_location(self):
+        theta, phi, gamma = self.get_euler_angles()
+        dist = self.get_focal_distance()
+        x, y, z = self.get_center()
+        return (
+            x + dist * math.sin(theta) * math.sin(phi),
+            y - dist * math.cos(theta) * math.sin(phi),
+            z + dist * math.cos(phi)
+        )
 
     def interpolate(self, *args, **kwargs):
         super().interpolate(*args, **kwargs)
@@ -194,20 +214,30 @@ class Camera(object):
             fbo = self.get_fbo(ctx, 0)
         else:
             fbo = ctx.detect_framebuffer()
+        self.ctx = ctx
+        self.fbo = fbo
+        self.set_ctx_blending()
 
         # For multisample antialiasing
         fbo_msaa = self.get_fbo(ctx, self.samples)
         fbo_msaa.use()
+        self.fbo_msaa = fbo_msaa
 
-        ctx.enable(moderngl.BLEND)
-        ctx.blend_func = (
+    def set_ctx_blending(self, enable=True):
+        if enable:
+            self.ctx.enable(moderngl.BLEND)
+        else:
+            self.ctx.disable(moderngl.BLEND)
+        self.ctx.blend_func = (
             moderngl.SRC_ALPHA, moderngl.ONE_MINUS_SRC_ALPHA,
-            moderngl.ONE, moderngl.ONE
+            # moderngl.ONE, moderngl.ONE
         )
 
-        self.ctx = ctx
-        self.fbo = fbo
-        self.fbo_msaa = fbo_msaa
+    def set_ctx_depth_test(self, enable=True):
+        if enable:
+            self.ctx.enable(moderngl.DEPTH_TEST)
+        else:
+            self.ctx.disable(moderngl.DEPTH_TEST)
 
     def init_light_source(self):
         self.light_source = Point(self.light_source_position)
@@ -297,6 +327,9 @@ class Camera(object):
     def get_frame_center(self):
         return self.frame.get_center()
 
+    def get_location(self):
+        return self.frame.get_implied_camera_location()
+
     def resize_frame_shape(self, fixed_dimension=0):
         """
         Changes frame_shape to match the aspect ratio
@@ -316,17 +349,6 @@ class Camera(object):
         self.frame.set_height(frame_height)
         self.frame.set_width(frame_width)
 
-    def pixel_coords_to_space_coords(self, px, py, relative=False):
-        pw, ph = self.fbo.size
-        fw, fh = self.get_frame_shape()
-        fc = self.get_frame_center()
-        if relative:
-            return 2 * np.array([px / pw, py / ph, 0])
-        else:
-            # Only scale wrt one axis
-            scale = fh / ph
-            return fc + scale * np.array([(px - pw / 2), (py - ph / 2), 0])
-
     # Rendering
     def capture(self, *mobjects, **kwargs):
         self.refresh_perspective_uniforms()
@@ -338,16 +360,10 @@ class Camera(object):
         shader_wrapper = render_group["shader_wrapper"]
         shader_program = render_group["prog"]
         self.set_shader_uniforms(shader_program, shader_wrapper)
-        self.update_depth_test(shader_wrapper)
+        self.set_ctx_depth_test(shader_wrapper.depth_test)
         render_group["vao"].render(int(shader_wrapper.render_primitive))
         if render_group["single_use"]:
             self.release_render_group(render_group)
-
-    def update_depth_test(self, shader_wrapper):
-        if shader_wrapper.depth_test:
-            self.ctx.enable(moderngl.DEPTH_TEST)
-        else:
-            self.ctx.disable(moderngl.DEPTH_TEST)
 
     def get_render_group_list(self, mobject):
         try:
@@ -421,8 +437,10 @@ class Camera(object):
         for name, path in shader_wrapper.texture_paths.items():
             tid = self.get_texture_id(path)
             shader[name].value = tid
-        for name, value in it.chain(shader_wrapper.uniforms.items(), self.perspective_uniforms.items()):
+        for name, value in it.chain(self.perspective_uniforms.items(), shader_wrapper.uniforms.items()):
             try:
+                if isinstance(value, np.ndarray):
+                    value = tuple(value)
                 shader[name].value = value
             except KeyError:
                 pass
@@ -436,25 +454,32 @@ class Camera(object):
         anti_alias_width = self.anti_alias_width / (ph / fh)
         # Orient light
         rotation = frame.get_inverse_camera_rotation_matrix()
-        light_pos = self.light_source.get_location()
-        light_pos = np.dot(rotation, light_pos)
+        offset = frame.get_center()
+        light_pos = np.dot(
+            rotation, self.light_source.get_location() + offset
+        )
+        cam_pos = self.frame.get_implied_camera_location()  # TODO
 
         self.perspective_uniforms = {
             "frame_shape": frame.get_shape(),
             "anti_alias_width": anti_alias_width,
-            "camera_center": tuple(frame.get_center()),
+            "camera_offset": tuple(offset),
             "camera_rotation": tuple(np.array(rotation).T.flatten()),
+            "camera_position": tuple(cam_pos),
             "light_source_position": tuple(light_pos),
             "focal_distance": frame.get_focal_distance(),
         }
 
     def init_textures(self):
-        self.path_to_texture_id = {}
+        self.n_textures = 0
+        self.path_to_texture = {}
 
     def get_texture_id(self, path):
-        if path not in self.path_to_texture_id:
-            # A way to increase tid's sequentially
-            tid = len(self.path_to_texture_id)
+        if path not in self.path_to_texture:
+            if self.n_textures == 15:  # I have no clue why this is needed
+                self.n_textures += 1
+            tid = self.n_textures
+            self.n_textures += 1
             im = Image.open(path).convert("RGBA")
             texture = self.ctx.texture(
                 size=im.size,
@@ -462,12 +487,19 @@ class Camera(object):
                 data=im.tobytes(),
             )
             texture.use(location=tid)
-            self.path_to_texture_id[path] = tid
-        return self.path_to_texture_id[path]
+            self.path_to_texture[path] = (tid, texture)
+        return self.path_to_texture[path][0]
+
+    def release_texture(self, path):
+        tid_and_texture = self.path_to_texture.pop(path, None)
+        if tid_and_texture:
+            tid_and_texture[1].release()
+        return self
 
 
 # Mostly just defined so old scenes don't break
 class ThreeDCamera(Camera):
     CONFIG = {
         "samples": 4,
+        "anti_alias_width": 0,
     }

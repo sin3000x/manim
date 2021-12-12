@@ -1,3 +1,7 @@
+import pkg_resources
+
+__version__ = pkg_resources.get_distribution("manimgl").version
+
 from manimlib.constants import *
 
 from manimlib.animation.animation import *
@@ -18,6 +22,7 @@ from manimlib.camera.camera import *
 
 from manimlib.window import *
 
+from manimlib.mobject.boolean_ops import *
 from manimlib.mobject.coordinate_systems import *
 from manimlib.mobject.changing import *
 from manimlib.mobject.frame import *

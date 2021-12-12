@@ -12,6 +12,7 @@ from manimlib.utils.bezier import get_smooth_quadratic_bezier_handle_points
 from manimlib.utils.bezier import get_smooth_cubic_bezier_handle_points
 from manimlib.utils.bezier import get_quadratic_approximation_of_cubic
 from manimlib.utils.bezier import interpolate
+from manimlib.utils.bezier import inverse_interpolate
 from manimlib.utils.bezier import integer_interpolate
 from manimlib.utils.bezier import partial_quadratic_bezier_points
 from manimlib.utils.color import rgb_to_hex
@@ -74,7 +75,6 @@ class VMobject(Mobject):
         self.needs_new_triangulation = True
         self.triangulation = np.zeros(0, dtype='i4')
         super().__init__(**kwargs)
-        self.refresh_unit_normal()
 
     def get_group_class(self):
         return VGroup
@@ -127,12 +127,16 @@ class VMobject(Mobject):
                 if isinstance(width, np.ndarray):
                     arr = width.reshape((len(width), 1))
                 else:
-                    arr = np.array([[w] for w in listify(width)])
+                    arr = np.array([[w] for w in listify(width)], dtype=float)
                 mob.data['stroke_width'] = arr
 
         if background is not None:
             for mob in self.get_family(recurse):
                 mob.draw_stroke_behind_fill = background
+        return self
+
+    def set_backstroke(self, color=BLACK, width=3, background=True):
+        self.set_stroke(color, width, background=background)
         return self
 
     def align_stroke_width_data_to_points(self, recurse=True):
@@ -149,6 +153,8 @@ class VMobject(Mobject):
                   stroke_opacity=None,
                   stroke_rgba=None,
                   stroke_width=None,
+                  stroke_background=True,
+                  reflectiveness=None,
                   gloss=None,
                   shadow=None,
                   recurse=True):
@@ -163,15 +169,21 @@ class VMobject(Mobject):
 
         if stroke_rgba is not None:
             self.data['stroke_rgba'] = resize_with_interpolation(stroke_rgba, len(fill_rgba))
-            self.set_stroke(width=stroke_width)
+            self.set_stroke(
+                width=stroke_width,
+                background=stroke_background,
+            )
         else:
             self.set_stroke(
                 color=stroke_color,
                 width=stroke_width,
                 opacity=stroke_opacity,
                 recurse=recurse,
+                background=stroke_background,
             )
 
+        if reflectiveness is not None:
+            self.set_reflectiveness(reflectiveness, recurse=recurse)
         if gloss is not None:
             self.set_gloss(gloss, recurse=recurse)
         if shadow is not None:
@@ -180,9 +192,11 @@ class VMobject(Mobject):
 
     def get_style(self):
         return {
-            "fill_rgba": self.data['fill_rgba'],
-            "stroke_rgba": self.data['stroke_rgba'],
-            "stroke_width": self.data['stroke_width'],
+            "fill_rgba": self.data['fill_rgba'].copy(),
+            "stroke_rgba": self.data['stroke_rgba'].copy(),
+            "stroke_width": self.data['stroke_width'].copy(),
+            "stroke_background": self.draw_stroke_behind_fill,
+            "reflectiveness": self.get_reflectiveness(),
             "gloss": self.get_gloss(),
             "shadow": self.get_shadow(),
         }
@@ -212,16 +226,17 @@ class VMobject(Mobject):
         return self
 
     def fade(self, darkness=0.5, recurse=True):
-        factor = 1.0 - darkness
-        self.set_fill(
-            opacity=factor * self.get_fill_opacity(),
-            recurse=False,
-        )
-        self.set_stroke(
-            opacity=factor * self.get_stroke_opacity(),
-            recurse=False,
-        )
-        super().fade(darkness, recurse)
+        mobs = self.get_family() if recurse else [self]
+        for mob in mobs:
+            factor = 1.0 - darkness
+            mob.set_fill(
+                opacity=factor * mob.get_fill_opacity(),
+                recurse=False,
+            )
+            mob.set_stroke(
+                opacity=factor * mob.get_stroke_opacity(),
+                recurse=False,
+            )
         return self
 
     def get_fill_colors(self):
@@ -271,9 +286,9 @@ class VMobject(Mobject):
         return self.get_stroke_opacities()[0]
 
     def get_color(self):
-        if self.has_stroke():
-            return self.get_stroke_color()
-        return self.get_fill_color()
+        if self.has_fill():
+            return self.get_fill_color()
+        return self.get_stroke_color()
 
     def has_stroke(self):
         return self.get_stroke_widths().any() and self.get_stroke_opacities().any()
@@ -423,7 +438,10 @@ class VMobject(Mobject):
 
     def set_points_smoothly(self, points, true_smooth=False):
         self.set_points_as_corners(points)
-        self.make_smooth()
+        if true_smooth:
+            self.make_smooth()
+        else:
+            self.make_approximately_smooth()
         return self
 
     def change_anchor_mode(self, mode):
@@ -495,10 +513,10 @@ class VMobject(Mobject):
         nppc = self.n_points_per_curve
         remainder = len(points) % nppc
         points = points[:len(points) - remainder]
-        return [
+        return (
             points[i:i + nppc]
             for i in range(0, len(points), nppc)
-        ]
+        )
 
     def get_bezier_tuples(self):
         return self.get_bezier_tuples_from_points(self.get_points())
@@ -534,11 +552,34 @@ class VMobject(Mobject):
     def get_num_curves(self):
         return self.get_num_points() // self.n_points_per_curve
 
-    def point_from_proportion(self, alpha):
+    def quick_point_from_proportion(self, alpha):
+        # Assumes all curves have the same length, so is inaccurate
         num_curves = self.get_num_curves()
         n, residue = integer_interpolate(0, num_curves, alpha)
         curve_func = self.get_nth_curve_function(n)
         return curve_func(residue)
+
+    def point_from_proportion(self, alpha):
+        if alpha <= 0:
+            return self.get_start()
+        elif alpha >= 1:
+            return self.get_end()
+
+        partials = [0]
+        for tup in self.get_bezier_tuples():
+            # Approximate length with straight line from start to end
+            arclen = get_norm(tup[0] - tup[-1])
+            partials.append(partials[-1] + arclen)
+        full = partials[-1]
+        if full == 0:
+            return self.get_start()
+        # First index where the partial lenth is more alpha times the full length
+        i = next(
+            (i for i, x in enumerate(partials) if x >= full * alpha),
+            len(partials)  # Default
+        )
+        residue = inverse_interpolate(partials[i - 1] / full, partials[i] / full, alpha)
+        return self.get_nth_curve_function(i - 1)(residue)
 
     def get_anchors_and_handles(self):
         """
@@ -620,17 +661,19 @@ class VMobject(Mobject):
         area_vect = self.get_area_vector()
         area = get_norm(area_vect)
         if area > 0:
-            return area_vect / area
+            normal = area_vect / area
         else:
             points = self.get_points()
-            return get_unit_normal(
+            normal = get_unit_normal(
                 points[1] - points[0],
                 points[2] - points[1],
             )
+        self.data["unit_normal"][:] = normal
+        return normal
 
     def refresh_unit_normal(self):
         for mob in self.get_family():
-            mob.data["unit_normal"][:] = mob.get_unit_normal(recompute=True)
+            mob.get_unit_normal(recompute=True)
         return self
 
     # Alignment
@@ -692,7 +735,7 @@ class VMobject(Mobject):
         if len(points) == 1:
             return np.repeat(points, nppc * n, 0)
 
-        bezier_groups = self.get_bezier_tuples_from_points(points)
+        bezier_groups = list(self.get_bezier_tuples_from_points(points))
         norms = np.array([
             get_norm(bg[nppc - 1] - bg[0])
             for bg in bezier_groups
@@ -788,7 +831,7 @@ class VMobject(Mobject):
         # how to send the points as to the vertex shader.
         # First triangles come directly from the points
         if normal_vector is None:
-            normal_vector = self.get_unit_normal()
+            normal_vector = self.get_unit_normal(recompute=True)
 
         if not self.needs_new_triangulation:
             return self.triangulation
@@ -989,6 +1032,10 @@ class VGroup(VMobject):
             raise Exception("All submobjects must be of type VMobject")
         super().__init__(**kwargs)
         self.add(*vmobjects)
+    
+    def __add__(self:'VGroup', other : 'VMobject' or 'VGroup'):
+        assert(isinstance(other, VMobject))
+        return self.add(other)
 
 
 class VectorizedPoint(Point, VMobject):

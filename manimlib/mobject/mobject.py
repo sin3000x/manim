@@ -43,10 +43,13 @@ class Mobject(object):
         "opacity": 1,
         "dim": 3,  # TODO, get rid of this
         # Lighting parameters
-        # Positive gloss up to 1 makes it reflect the light.
-        "gloss": 0.0,
-        # Positive shadow up to 1 makes a side opposite the light darker
+        # ...
+        # Larger reflectiveness makes things brighter when facing the light
+        "reflectiveness": 0.0,
+        # Larger shadow makes faces opposite the light darker
         "shadow": 0.0,
+        # Makes parts bright where light gets reflected toward the camera
+        "gloss": 0.0,
         # For shaders
         "shader_folder": "",
         "render_primitive": moderngl.TRIANGLE_STRIP,
@@ -82,6 +85,14 @@ class Mobject(object):
     def __str__(self):
         return self.__class__.__name__
 
+    def __add__(self, other: 'Mobject') -> 'Mobject':
+        assert(isinstance(other, Mobject))
+        return self.get_group_class()(self, other)
+
+    def __mul__(self, other: 'int') -> 'Mobject':
+        assert(isinstance(other, int))
+        return self.replicate(other)
+
     def init_data(self):
         self.data = {
             "points": np.zeros((0, 3)),
@@ -94,6 +105,7 @@ class Mobject(object):
             "is_fixed_in_frame": float(self.is_fixed_in_frame),
             "gloss": self.gloss,
             "shadow": self.shadow,
+            "reflectiveness": self.reflectiveness,
         }
 
     def init_colors(self):
@@ -145,6 +157,7 @@ class Mobject(object):
         for mob in self.get_family():
             for key in mob.data:
                 mob.data[key] = mob.data[key][::-1]
+        self.refresh_unit_normal()
         return self
 
     def apply_points_function(self, func, about_point=None, about_edge=ORIGIN, works_on_bounding_box=False):
@@ -300,6 +313,11 @@ class Mobject(object):
         self.assemble_family()
         return self
 
+    def insert_submobject(self, index, new_submob):
+        self.submobjects.insert(index, new_submob)
+        self.assemble_family()
+        return self
+
     def set_submobjects(self, submobject_list):
         self.remove(*self.submobjects)
         self.add(*submobject_list)
@@ -365,14 +383,17 @@ class Mobject(object):
         self.center()
         return self
 
+    def replicate(self, n):
+        return self.get_group_class()(
+            *(self.copy() for x in range(n))
+        )
+
     def get_grid(self, n_rows, n_cols, height=None, **kwargs):
         """
         Returns a new mobject containing multiple copies of this one
         arranged in a grid
         """
-        grid = self.get_group_class()(
-            *(self.copy() for n in range(n_rows * n_cols))
-        )
+        grid = self.replicate(n_rows * n_cols)
         grid.arrange_in_grid(n_rows, n_cols, **kwargs)
         if height is not None:
             grid.set_height(height)
@@ -383,6 +404,7 @@ class Mobject(object):
             self.submobjects.sort(key=submob_func)
         else:
             self.submobjects.sort(key=lambda m: point_to_num_func(m.get_center()))
+        self.assemble_family()
         return self
 
     def shuffle(self, recurse=False):
@@ -390,6 +412,7 @@ class Mobject(object):
             for submob in self.submobjects:
                 submob.shuffle(recurse=True)
         random.shuffle(self.submobjects)
+        self.assemble_family()
         return self
 
     # Copying
@@ -408,8 +431,10 @@ class Mobject(object):
         for key in self.data:
             copy_mobject.data[key] = self.data[key].copy()
 
-        # TODO, are uniforms ever numpy arrays?
         copy_mobject.uniforms = dict(self.uniforms)
+        for key in self.uniforms:
+            if isinstance(self.uniforms[key], np.ndarray):
+                copy_mobject.uniforms[key] = self.uniforms[key].copy()
 
         copy_mobject.submobjects = []
         copy_mobject.add(*[sm.copy() for sm in self.submobjects])
@@ -572,14 +597,14 @@ class Mobject(object):
         respect to that point.
         """
         scale_factor = max(scale_factor, min_scale_factor)
-        for mob in self.get_family():
-            mob._handle_scale_side_effects(scale_factor)
         self.apply_points_function(
             lambda points: scale_factor * points,
             about_point=about_point,
             about_edge=about_edge,
             works_on_bounding_box=True,
         )
+        for mob in self.get_family():
+            mob._handle_scale_side_effects(scale_factor)
         return self
 
     def _handle_scale_side_effects(self, scale_factor):
@@ -762,7 +787,7 @@ class Mobject(object):
         return self.rescale_to_fit(height, 1, stretch=True, **kwargs)
 
     def stretch_to_fit_depth(self, depth, **kwargs):
-        return self.rescale_to_fit(depth, 1, stretch=True, **kwargs)
+        return self.rescale_to_fit(depth, 2, stretch=True, **kwargs)
 
     def set_width(self, width, stretch=False, **kwargs):
         return self.rescale_to_fit(width, 0, stretch=stretch, **kwargs)
@@ -772,6 +797,21 @@ class Mobject(object):
 
     def set_depth(self, depth, stretch=False, **kwargs):
         return self.rescale_to_fit(depth, 2, stretch=stretch, **kwargs)
+
+    def set_max_width(self, max_width, **kwargs):
+        if self.get_width() > max_width:
+            self.set_width(max_width, **kwargs)
+        return self
+
+    def set_max_height(self, max_height, **kwargs):
+        if self.get_height() > max_height:
+            self.set_height(max_height, **kwargs)
+        return self
+
+    def set_max_depth(self, max_depth, **kwargs):
+        if self.get_depth() > max_depth:
+            self.set_depth(max_depth, **kwargs)
+        return self
 
     def set_coord(self, value, dim, direction=ORIGIN):
         curr = self.get_coord(dim, direction)
@@ -844,8 +884,8 @@ class Mobject(object):
             angle_of_vector(target_vect) - angle_of_vector(curr_vect),
         )
         self.rotate(
-            np.arctan2(curr_vect[2], get_norm(curr_vect[:2])) - np.arctan2(target_vect[2], get_norm(target_vect[:2])), 
-            axis = np.array([-target_vect[1], target_vect[0], 0]),
+            np.arctan2(curr_vect[2], get_norm(curr_vect[:2])) - np.arctan2(target_vect[2], get_norm(target_vect[:2])),
+            axis=np.array([-target_vect[1], target_vect[0], 0]),
         )
         self.shift(start - self.get_start())
         return self
@@ -946,12 +986,12 @@ class Mobject(object):
     def fade(self, darkness=0.5, recurse=True):
         self.set_opacity(1.0 - darkness, recurse=recurse)
 
-    def get_gloss(self):
-        return self.uniforms["gloss"]
+    def get_reflectiveness(self):
+        return self.uniforms["reflectiveness"]
 
-    def set_gloss(self, gloss, recurse=True):
+    def set_reflectiveness(self, reflectiveness, recurse=True):
         for mob in self.get_family(recurse):
-            mob.uniforms["gloss"] = gloss
+            mob.uniforms["reflectiveness"] = reflectiveness
         return self
 
     def get_shadow(self):
@@ -960,6 +1000,14 @@ class Mobject(object):
     def set_shadow(self, shadow, recurse=True):
         for mob in self.get_family(recurse):
             mob.uniforms["shadow"] = shadow
+        return self
+
+    def get_gloss(self):
+        return self.uniforms["gloss"]
+
+    def set_gloss(self, gloss, recurse=True):
+        for mob in self.get_family(recurse):
+            mob.uniforms["gloss"] = gloss
         return self
 
     # Background rectangle
@@ -1073,14 +1121,16 @@ class Mobject(object):
 
     def get_start(self):
         self.throw_error_if_no_points()
-        return np.array(self.get_points()[0])
+        return self.get_points()[0].copy()
 
     def get_end(self):
         self.throw_error_if_no_points()
-        return np.array(self.get_points()[-1])
+        return self.get_points()[-1].copy()
 
     def get_start_and_end(self):
-        return self.get_start(), self.get_end()
+        self.throw_error_if_no_points()
+        points = self.get_points()
+        return (points[0].copy(), points[-1].copy())
 
     def point_from_proportion(self, alpha):
         points = self.get_points()
@@ -1341,11 +1391,13 @@ class Mobject(object):
     @affects_shader_info_id
     def fix_in_frame(self):
         self.uniforms["is_fixed_in_frame"] = 1.0
+        self.is_fixed_in_frame = True
         return self
 
     @affects_shader_info_id
     def unfix_from_frame(self):
         self.uniforms["is_fixed_in_frame"] = 0.0
+        self.is_fixed_in_frame = False
         return self
 
     @affects_shader_info_id
@@ -1587,6 +1639,10 @@ class Group(Mobject):
             raise Exception("All submobjects must be of type Mobject")
         Mobject.__init__(self, **kwargs)
         self.add(*mobjects)
+
+    def __add__(self, other: 'Mobject' or 'Group'):
+        assert(isinstance(other, Mobject))
+        return self.add(other)
 
 
 class Point(Mobject):

@@ -9,8 +9,11 @@ mapbox-earcut
 matplotlib
 moderngl
 moderngl_window
+skia-pathops
 pydub
+pygments
 pyyaml
+rich
 screeninfo
 pyreadline; sys_platform == 'win32'
 validators
