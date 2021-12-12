@@ -21,11 +21,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/svg_images/pi.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Compare.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Rotation.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/CalcExample.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Continuous.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Frechet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Introduction.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/LinearMap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/NaiveWay.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Partial.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/TwoD.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jeremy/frechet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jeremy/svd.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/svd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/c9f366dadbc6524e.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c9f366dadbc6524e.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c9f366dadbc6524e.xdv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/tex_templates/ctex_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/tex_templates/ctex_template.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,6 +247,9 @@
       <workItem from="1626341192404" duration="1521000" />
       <workItem from="1626848207249" duration="525000" />
       <workItem from="1627450799956" duration="9117000" />
+      <workItem from="1631633239437" duration="39386000" />
+      <workItem from="1631844447428" duration="985000" />
+      <workItem from="1638112584813" duration="60000" />
     </task>
     <servers />
   </component>
