@@ -8,6 +8,7 @@ class Chang(Scene):
         self.wait()
         self.embed()
 
+
 class Tu(Scene):
     def construct(self):
         v = Vocabulary()
@@ -16,7 +17,20 @@ class Tu(Scene):
 
 class Test(Scene):
     def construct(self):
-        plane = NumberPlane(axis_config={"unit_size": 2})
+        plane = NumberPlane()
         self.add(plane)
-        self.play(plane.apply_matrix, [[1,1],[0,1]], run_time=2)
+        line = Line(LEFT, RIGHT).set_color(RED)
+        self.add(line)
         self.wait()
+        x = np.linspace(-1, 1, 1000)
+        y = np.linspace(0, 1, 1000)
+
+        curve = ComplexContour(
+            lambda zz: np.abs(((zz+1)*np.log(zz+1) - (zz-1)*np.log(zz-1)).real),
+            2*np.log(2),
+            x_unit = 3,
+            y_unit = 3
+        ).set_color(RED)
+        self.play(RT(line, curve))
+        self.wait()
+

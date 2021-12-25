@@ -3,6 +3,25 @@ import numpy as np
 from manimlib import *
 from manimlib import Scene, VGroup, Line
 
+class ComplexContour(VGroup):
+    CONFIG = {
+        "tol": 1e-4,
+        "x": np.linspace(-1.1, 1.1, 1000),
+        "y": np.linspace(0, 1, 1000),
+        "x_unit": 1,
+        "y_unit": 1
+    }
+    def __init__(self, func, level, **kwargs):
+        super().__init__(**kwargs)
+        [xx, yy] = np.meshgrid(self.x, self.y)
+        zz = xx + 1j * yy
+        zz = zz.flatten()
+        points = zz[np.abs(func(zz)-level) < self.tol]
+        points = sorted(points, key=lambda z: z.real)
+        points = [(i.real*self.x_unit, i.imag*self.y_unit, 0) for i in points]
+        self.points = points
+        self.set_points_as_corners(points)
+
 
 class IntervalChart(VGroup):
     CONFIG = {

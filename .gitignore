@@ -151,3 +151,5 @@ dmypy.json
 /videos
 /custom_config.yml
 /media
+
+jeremy/test_mac.py
