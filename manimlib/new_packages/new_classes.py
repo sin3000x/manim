@@ -1,7 +1,14 @@
+import cmath
 import os
 import numpy as np
 from manimlib import *
 from manimlib import Scene, VGroup, Line
+
+def poly(coords, deg):
+    xs = [i[0] for i in coords]
+    ys = [i[1] for i in coords]
+    coeffs = np.polyfit(xs,ys,deg=deg)
+    return np.poly1d(coeffs)
 
 class ComplexContour(VGroup):
     CONFIG = {
@@ -9,7 +16,8 @@ class ComplexContour(VGroup):
         "x": np.linspace(-1.1, 1.1, 1000),
         "y": np.linspace(0, 1, 1000),
         "x_unit": 1,
-        "y_unit": 1
+        "y_unit": 1,
+        "close": False
     }
     def __init__(self, func, level, **kwargs):
         super().__init__(**kwargs)
@@ -17,9 +25,12 @@ class ComplexContour(VGroup):
         zz = xx + 1j * yy
         zz = zz.flatten()
         points = zz[np.abs(func(zz)-level) < self.tol]
-        points = sorted(points, key=lambda z: z.real)
-        points = [(i.real*self.x_unit, i.imag*self.y_unit, 0) for i in points]
+        points = sorted(points, key=lambda z: cmath.phase(z))
         self.points = points
+        if self.close:
+            points = [*points, points[0]]
+        points = [(i.real*self.x_unit, i.imag*self.y_unit, 0) for i in points]
+
         self.set_points_as_corners(points)
 
 

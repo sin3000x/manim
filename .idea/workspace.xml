@@ -21,26 +21,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de832da-fd5a-4261-bb64-dbefe4c38d82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/from_3b1b/old/wcat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Consistent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Frobenius.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Induced.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/InfNorm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/NotConsistent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/OneNorm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Properties.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Radius.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Trans.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Tree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/TwoNorm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jeremy/old_shaders/norm_mat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jeremy/runge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Analysis.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Contours.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Hermite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Interpolation.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Limit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/LimitContour.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Physics.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Potential.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Runge.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Soccer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Solve.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Weierstrass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manimlib/mobject/svg/mtex_mobject.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Norms.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Norms.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Test.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jeremy/test_mac.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/test_mac.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/development/changelog.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/development/changelog.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/config.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/config.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/getting_started/configuration.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Opening.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Opening.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jeremy/runge.py" beforeDir="false" afterPath="$PROJECT_DIR$/jeremy/runge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/animation/transform_matching_parts.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/animation/transform_matching_parts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/extract_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/extract_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/geometry.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/geometry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/probability.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/probability.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/svg/drawings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/three_dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/three_dimensions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/dot_cloud.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/dot_cloud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/mobject/types/vectorized_mobject.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/new_packages/new_classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/scene/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manimlib/scene/scene_file_writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/manimlib/scene/scene_file_writer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/setup.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +275,8 @@
       <workItem from="1639597978112" duration="326000" />
       <workItem from="1639669273680" duration="32591000" />
       <workItem from="1640273245634" duration="6233000" />
-      <workItem from="1640447420507" duration="97000" />
+      <workItem from="1640447420507" duration="39491000" />
+      <workItem from="1640553037657" duration="11254000" />
     </task>
     <servers />
   </component>
