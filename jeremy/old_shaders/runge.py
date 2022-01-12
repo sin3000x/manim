@@ -40,7 +40,7 @@ class Opening(Scene):
         coords = [
             [(-3,2), (1,-2), (4,1)],
             [(-3,-3.5), (1,0.5), (4,3.5)],
-            [(-3,0), (1,0), (4,0)],
+            [(-3,1), (1,1), (4,1)],
         ]
         dots = [VGroup(*[Dot(plane.c2p(*i)) for i in coord]).set_color(YELLOW) for coord in coords]
         self.play(LaggedStartMap(GrowFromCenter, dots[0]))
