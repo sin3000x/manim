@@ -40,11 +40,3 @@ class ColorMatrix(Scene):
 
         self.add(mat)
         self.wait()
-
-
-class Map(Scene):
-    def construct(self):
-        plane = NumberPlane(y_range=[-PI,PI]).set_color(BLACK)
-        self.add(plane)
-        self.play(plane.animate.apply_complex_function(lambda z: z+np.exp(z)))
-        self.wait()
