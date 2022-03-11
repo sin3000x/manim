@@ -4,9 +4,11 @@ import numpy as np
 from manimlib import *
 from manimlib import Scene, VGroup, Line
 
-def poly(coords, deg):
+def poly(coords, deg=None):
     xs = [i[0] for i in coords]
     ys = [i[1] for i in coords]
+    if deg is None:
+        deg = len(coords)-1
     coeffs = np.polyfit(xs,ys,deg=deg)
     return np.poly1d(coeffs)
 
