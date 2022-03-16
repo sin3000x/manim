@@ -306,6 +306,11 @@ class Mobject(object):
         self.set_submobjects(list_update(mobjects, self.submobjects))
         return self
 
+    def add_to_front(self, *mobjects):
+        for mob in mobjects:
+            mob.add_updater(self.add(mob))
+        return self
+
     def replace_submobject(self, index, new_submob):
         old_submob = self.submobjects[index]
         if self in old_submob.parents:
