@@ -265,14 +265,10 @@ class Tex(SingleStringTex):
             self.set_color_by_tex(tex, color, **kwargs)
         return self
 
-<<<<<<< HEAD
     def tm(self, tex_to_color_map, **kwargs):
         return self.set_color_by_tex_to_color_map(self, tex_to_color_map, **kwargs)
-
-    def index_of_part(self, part, start=0):
-=======
+        
     def index_of_part(self, part: SingleStringTex, start: int = 0) -> int:
->>>>>>> 9d7db7aacd7116a8dbce0781f64ba44f065a7e39
         return self.submobjects.index(part, start)
 
     def index_of_part_by_tex(self, tex: str, start: int = 0, **kwargs) -> int:

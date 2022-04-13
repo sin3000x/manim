@@ -116,6 +116,64 @@ def get_sample_points_from_coordinate_system(
 
 
 # Mobjects
+class VF(VGroup):
+    CONFIG = {
+        "step_multiple": 0.5,
+        "magnitude_range": (0, 2),
+        "color_map": "3b1b_colormap",
+        # Takes in actual norm, spits out displayed norm
+        "length_func": lambda norm: 0.45 * sigmoid(norm),
+        "opacity": 1.0,
+        "vector_config": {},
+        "factor": None,
+    }
+
+    def __init__(
+        self,
+        func: Callable[[float, float], Sequence[float]],
+        coordinate_system: CoordinateSystem,
+        **kwargs
+    ):
+        super().__init__(**kwargs)
+        self.func = func
+        self.coordinate_system = coordinate_system
+        # self.value_to_rgb = get_rgb_gradient_function(
+        #     *self.magnitude_range, self.color_map,
+        # )
+
+        samples = get_sample_points_from_coordinate_system(
+            coordinate_system, self.step_multiple
+        )
+        self.add(*(
+            self.get_vector(coords)
+            for coords in samples
+        ))
+
+    def get_vector(self, coords: Iterable[float], **kwargs) -> Arrow:
+        vector_config = merge_dicts_recursively(
+            self.vector_config,
+            kwargs
+        )
+
+        output = np.array(self.func(*coords))
+        norm = get_norm(output)
+        if self.factor is None:
+            if norm>0:
+                output *= self.length_func(norm) / norm
+        else:
+            output *= self.factor
+
+        origin = self.coordinate_system.get_origin()
+        _input = self.coordinate_system.c2p(*coords)
+        _output = self.coordinate_system.c2p(*output)
+
+        vect = Arrow(
+            origin, _output, buff=0,
+            **vector_config
+        )
+        vect.shift(_input - origin)
+        # vect.set_rgba_array([[*self.value_to_rgb(norm), self.opacity]])
+        return vect
 
 class VectorField(VGroup):
     CONFIG = {
@@ -265,7 +323,7 @@ class StreamLines(VGroup):
                 ]
                 rgbs = values_to_rgbs(norms)
                 rgbas = np.zeros((len(rgbs), 4))
-                rgbas[:, :3] = rgbs
+                rgbas[:, :3] = rgbs[0][0]
                 rgbas[:, 3] = self.stroke_opacity
                 line.set_rgba_array(rgbas, "stroke_rgba")
         else:

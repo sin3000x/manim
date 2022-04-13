@@ -36,6 +36,7 @@ class ImageMobject(Mobject):
             "points": np.array([UL, DL, UR, DR]),
             "im_coords": np.array([(0, 0), (0, 1), (1, 0), (1, 1)]),
             "opacity": np.array([[self.opacity]], dtype=np.float32),
+            "rgbas": np.zeros((1, 4)),
         }
 
     def init_points(self) -> None:

@@ -65,11 +65,7 @@ class TipableVMobject(VMobject):
     }
 
     # Adding, Creating, Modifying tips
-<<<<<<< HEAD
-    def add_tip(self, at_start=False, reset=True, **kwargs):
-=======
     def add_tip(self, at_start: bool = False, **kwargs):
->>>>>>> 9d7db7aacd7116a8dbce0781f64ba44f065a7e39
         """
         Adds a tip to the TipableVMobject instance, recognising
         that the endpoints might need to be switched if it's
@@ -893,19 +889,7 @@ class Polygon(VMobject):
     def get_vertices(self) -> list[np.ndarray]:
         return self.get_start_anchors()
 
-<<<<<<< HEAD
-    def get_edges(self):
-        vertices = self.get_vertices()
-        edges = []
-        for i in range(len(vertices)-1):
-            edges.append(Line(vertices[i], vertices[i+1]))
-        edges.append(Line(vertices[-1], vertices[0]))
-        return VGroup(*edges)
-
-    def round_corners(self, radius=0.5):
-=======
     def round_corners(self, radius: float = 0.5):
->>>>>>> 9d7db7aacd7116a8dbce0781f64ba44f065a7e39
         vertices = self.get_vertices()
         arcs = []
         for v1, v2, v3 in adjacent_n_tuples(vertices, 3):

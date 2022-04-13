@@ -720,7 +720,7 @@ class Like(SVGMobject):
 
 class Coin(SVGMobject):
     CONFIG = {
-        "color": "#03b5e5"
+        "color": "#03b5e5",
     }
 
     def __init__(self, **kwargs):

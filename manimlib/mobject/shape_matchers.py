@@ -9,19 +9,6 @@ from manimlib.utils.color import Color
 from manimlib.utils.customization import get_customization
 from manimlib.utils.config_ops import digest_config
 
-<<<<<<< HEAD
-class SurroundingEllipse(Ellipse):
-    CONFIG = {
-        "color": YELLOW,
-        "buff": LARGE_BUFF,
-    }
-    def __init__(self, mobject, **kwargs):
-        digest_config(self, kwargs)
-        kwargs["width"] = mobject.get_width() + 2 * self.buff
-        kwargs["height"] = mobject.get_height() + 2 * self.buff
-        Ellipse.__init__(self, **kwargs)
-        self.move_to(mobject)
-=======
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -29,7 +16,6 @@ if TYPE_CHECKING:
     from manimlib.mobject.mobject import Mobject
     ManimColor = Union[str, Color, Sequence[float]]
 
->>>>>>> 9d7db7aacd7116a8dbce0781f64ba44f065a7e39
 
 class SurroundingRectangle(Rectangle):
     CONFIG = {
@@ -142,12 +128,7 @@ class Cross(VGroup):
         "stroke_width": [0, 6, 0],
     }
 
-<<<<<<< HEAD
-    def __init__(self, mobject, **kwargs):
-        digest_config(self, kwargs)
-=======
     def __init__(self, mobject: Mobject, **kwargs):
->>>>>>> 9d7db7aacd7116a8dbce0781f64ba44f065a7e39
         super().__init__(
             Line(UL, DR),
             Line(UR, DL),

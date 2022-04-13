@@ -176,19 +176,12 @@ class MTex(LabelledString):
             )
         ]
 
-<<<<<<< HEAD
+    # Parsing
     def tm(self, tex_to_color_map):
         for tex, color in list(tex_to_color_map.items()):
             self.set_color_by_tex(tex, color)
         return self
-
-    def indices_of_part(self, part):
-        indices = [
-            index for index, submob in enumerate(self.submobjects)
-            if submob in part
-=======
-    # Parsing
-
+        
     def get_command_repl_items(self) -> list[tuple[Span, str]]:
         color_related_command_dict = {
             "color": (1, False),
@@ -202,7 +195,6 @@ class MTex(LabelledString):
         right_brace_indices = [
             right_index
             for left_index, right_index in self.brace_index_pairs
->>>>>>> 9d7db7aacd7116a8dbce0781f64ba44f065a7e39
         ]
         pattern = "".join([
             r"\\",

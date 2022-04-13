@@ -267,6 +267,12 @@ class Det(VMobject):
             column.set_color(color)
         return self
 
+    def set_row_colors(self, *colors):
+        rows = self.get_rows()
+        for color, row in zip(colors, rows):
+            row.set_color(color)
+        return self
+
     def add_background_to_entries(self):
         for mob in self.get_entries():
             mob.add_background_rectangle()
