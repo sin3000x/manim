@@ -1,15 +1,23 @@
 from __future__ import annotations
 
+import copy
 import os
 import re
-import copy
-from typing import Iterable
 
 import moderngl
 import numpy as np
 
+from functools import lru_cache
+
 from manimlib.utils.directories import get_shader_dir
 from manimlib.utils.file_ops import find_file
+from manimlib.utils.iterables import resize_array
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Iterable
+
 
 # Mobjects that should be rendered with
 # the same shader will be organized and
@@ -21,7 +29,7 @@ from manimlib.utils.file_ops import find_file
 class ShaderWrapper(object):
     def __init__(
         self,
-        vert_data: np.ndarray | None = None,
+        vert_data: np.ndarray,
         vert_indices: np.ndarray | None = None,
         shader_folder: str | None = None,
         uniforms: dict[str, float] | None = None,  # A dictionary mapping names of uniform variables
@@ -40,13 +48,30 @@ class ShaderWrapper(object):
         self.init_program_code()
         self.refresh_id()
 
+    def __eq__(self, shader_wrapper: ShaderWrapper):
+        return all((
+            np.all(self.vert_data == shader_wrapper.vert_data),
+            np.all(self.vert_indices == shader_wrapper.vert_indices),
+            self.shader_folder == shader_wrapper.shader_folder,
+            all(
+                np.all(self.uniforms[key] == shader_wrapper.uniforms[key])
+                for key in self.uniforms
+            ),
+            all(
+                self.texture_paths[key] == shader_wrapper.texture_paths[key]
+                for key in self.texture_paths
+            ),
+            self.depth_test == shader_wrapper.depth_test,
+            self.render_primitive == shader_wrapper.render_primitive,
+        ))
+
     def copy(self):
         result = copy.copy(self)
         result.vert_data = np.array(self.vert_data)
         if result.vert_indices is not None:
             result.vert_indices = np.array(self.vert_indices)
         if self.uniforms:
-            result.uniforms = dict(self.uniforms)
+            result.uniforms = {key: np.array(value) for key, value in self.uniforms.items()}
         if self.texture_paths:
             result.texture_paths = dict(self.texture_paths)
         return result
@@ -107,29 +132,36 @@ class ShaderWrapper(object):
             code_map[name] = re.sub(old, new, code_map[name])
         self.refresh_id()
 
-    def combine_with(self, *shader_wrappers: ShaderWrapper):
-        # Assume they are of the same type
-        if len(shader_wrappers) == 0:
-            return
+    def combine_with(self, *shader_wrappers: ShaderWrapper) -> ShaderWrapper:
+        if len(shader_wrappers) > 0:
+            self.read_in(self.copy(), *shader_wrappers)
+        return self
+
+    def read_in(self, *shader_wrappers: ShaderWrapper) -> ShaderWrapper:
+        # Assume all are of the same type
+        total_len = sum(len(sw.vert_data) for sw in shader_wrappers)
+        self.vert_data = resize_array(self.vert_data, total_len)
         if self.vert_indices is not None:
-            num_verts = len(self.vert_data)
-            indices_list = [self.vert_indices]
-            data_list = [self.vert_data]
-            for sw in shader_wrappers:
-                indices_list.append(sw.vert_indices + num_verts)
-                data_list.append(sw.vert_data)
-                num_verts += len(sw.vert_data)
-            self.vert_indices = np.hstack(indices_list)
-            self.vert_data = np.hstack(data_list)
-        else:
-            self.vert_data = np.hstack([self.vert_data, *[sw.vert_data for sw in shader_wrappers]])
+            total_verts = sum(len(sw.vert_indices) for sw in shader_wrappers)
+            self.vert_indices = resize_array(self.vert_indices, total_verts)
+
+        n_points = 0
+        n_verts = 0
+        for sw in shader_wrappers:
+            new_n_points = n_points + len(sw.vert_data)
+            self.vert_data[n_points:new_n_points] = sw.vert_data
+            if self.vert_indices is not None and sw.vert_indices is not None:
+                new_n_verts = n_verts + len(sw.vert_indices)
+                self.vert_indices[n_verts:new_n_verts] = sw.vert_indices + n_points
+                n_verts = new_n_verts
+            n_points = new_n_points
         return self
 
 
 # For caching
 filename_to_code_map: dict[str, str] = {}
 
-
+@lru_cache(maxsize=12)
 def get_shader_code_from_file(filename: str) -> str | None:
     if not filename:
         return None

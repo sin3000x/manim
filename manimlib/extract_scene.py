@@ -1,13 +1,14 @@
+import copy
 import inspect
 import sys
-import copy
 
-from manimlib.scene.scene import Scene
 from manimlib.config import get_custom_config
 from manimlib.logger import log
+from manimlib.scene.interactive_scene import InteractiveScene
+from manimlib.scene.scene import Scene
 
 
-class BlankScene(Scene):
+class BlankScene(InteractiveScene):
     def construct(self):
         exec(get_custom_config()["universal_import_line"])
         self.embed()
@@ -34,8 +35,8 @@ def prompt_user_for_choice(scene_classes):
         name_to_class[name] = scene_class
     try:
         user_input = input(
-            "\nThat module has multiple scenes, "
-            "which ones would you like to render?"
+            "\nThat module has multiple scenes, " + \
+            "which ones would you like to render?" + \
             "\nScene Name or Number: "
         )
         return [
@@ -53,21 +54,11 @@ def prompt_user_for_choice(scene_classes):
 
 
 def get_scene_config(config):
-    return dict([
-        (key, config[key])
-        for key in [
-            "window_config",
-            "camera_config",
-            "file_writer_config",
-            "skip_animations",
-            "start_at_animation_number",
-            "end_at_animation_number",
-            "leave_progress_bars",
-            "preview",
-            "presenter_mode",
-        ]
-    ])
-
+    scene_parameters = inspect.signature(Scene).parameters.keys()
+    return {
+        key: config[key]
+        for key in set(scene_parameters).intersection(config.keys())
+    }
 
 def compute_total_frames(scene_class, scene_config):
     """
@@ -86,7 +77,7 @@ def compute_total_frames(scene_class, scene_config):
     pre_scene = scene_class(**pre_config)
     pre_scene.run()
     total_time = pre_scene.time - pre_scene.skip_time
-    return int(total_time * scene_config["camera_config"]["frame_rate"])
+    return int(total_time * scene_config["camera_config"]["fps"])
 
 
 def get_scenes_to_render(scene_classes, scene_config, config):
@@ -109,11 +100,20 @@ def get_scenes_to_render(scene_classes, scene_config, config):
             log.error(f"No scene named {scene_name} found")
     if result:
         return result
+    
+    # another case
+    result=[]
     if len(scene_classes) == 1:
-        result = [scene_classes[0]]
+        scene_classes = [scene_classes[0]]
     else:
-        result = prompt_user_for_choice(scene_classes)
-    return [scene_class(**scene_config) for scene_class in result]
+        scene_classes = prompt_user_for_choice(scene_classes)
+    for scene_class in scene_classes:
+        fw_config = scene_config["file_writer_config"]
+        if fw_config["write_to_movie"]:
+            fw_config["total_frames"] = compute_total_frames(scene_class, scene_config)
+        scene = scene_class(**scene_config)
+        result.append(scene)
+    return result
 
 
 def get_scene_classes_from_module(module):

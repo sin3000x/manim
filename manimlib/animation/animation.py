@@ -1,17 +1,18 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Callable
 
 from manimlib.mobject.mobject import _AnimationBuilder
 from manimlib.mobject.mobject import Mobject
-from manimlib.utils.config_ops import digest_config
 from manimlib.utils.rate_functions import smooth
+from manimlib.utils.rate_functions import squish_rate_func
 from manimlib.utils.simple_functions import clip
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from typing import Callable
+
     from manimlib.scene.scene import Scene
 
 
@@ -20,38 +21,51 @@ DEFAULT_ANIMATION_LAG_RATIO = 0
 
 
 class Animation(object):
-    CONFIG = {
-        "run_time": DEFAULT_ANIMATION_RUN_TIME,
-        "rate_func": smooth,
-        "name": None,
-        # Does this animation add or remove a mobject form the screen
-        "remover": False,
-        # What to enter into the update function upon completion
-        "final_alpha_value": 1,
-        # If 0, the animation is applied to all submobjects
-        # at the same time
+    def __init__(
+        self,
+        mobject: Mobject,
+        run_time: float = DEFAULT_ANIMATION_RUN_TIME,
+        # Tuple of times, between which the animation will run
+        time_span: tuple[float, float] | None = None,
+        # If 0, the animation is applied to all submobjects at the same time
         # If 1, it is applied to each successively.
-        # If 0 < lag_ratio < 1, its applied to each
-        # with lagged start times
-        "lag_ratio": DEFAULT_ANIMATION_LAG_RATIO,
-        "suspend_mobject_updating": True,
-    }
-
-    def __init__(self, mobject: Mobject, **kwargs):
-        assert(isinstance(mobject, Mobject))
-        digest_config(self, kwargs)
+        # If 0 < lag_ratio < 1, its applied to each with lagged start times
+        lag_ratio: float = DEFAULT_ANIMATION_LAG_RATIO,
+        rate_func: Callable[[float], float] = smooth,
+        name: str = "",
+        # Does this animation add or remove a mobject form the screen
+        remover: bool = False,
+        # What to enter into the update function upon completion
+        final_alpha_value: float = 1.0,
+        suspend_mobject_updating: bool = True,
+    ):
         self.mobject = mobject
+        self.run_time = run_time
+        self.time_span = time_span
+        self.rate_func = rate_func
+        self.name = name or self.__class__.__name__ + str(self.mobject)
+        self.remover = remover
+        self.final_alpha_value = final_alpha_value
+        self.lag_ratio = lag_ratio
+        self.suspend_mobject_updating = suspend_mobject_updating
+
+        assert(isinstance(mobject, Mobject))
 
     def __str__(self) -> str:
-        if self.name:
-            return self.name
-        return self.__class__.__name__ + str(self.mobject)
+        return self.name
 
     def begin(self) -> None:
         # This is called right as an animation is being
         # played.  As much initialization as possible,
         # especially any mobject copying, should live in
         # this method
+        if self.time_span is not None:
+            start, end = self.time_span
+            self.run_time = max(end, self.run_time)
+            self.rate_func = squish_rate_func(
+                self.rate_func, start / self.run_time, end / self.run_time,
+            )
+        self.mobject.set_animating_status(True)
         self.starting_mobject = self.create_starting_mobject()
         if self.suspend_mobject_updating:
             # All calls to self.mobject's internal updaters
@@ -66,6 +80,7 @@ class Animation(object):
 
     def finish(self) -> None:
         self.interpolate(self.final_alpha_value)
+        self.mobject.set_animating_status(False)
         if self.suspend_mobject_updating:
             self.mobject.resume_updating()
 
@@ -112,14 +127,20 @@ class Animation(object):
     def copy(self):
         return deepcopy(self)
 
-    def update_config(self, **kwargs):
-        digest_config(self, kwargs)
+    def update_rate_info(
+        self,
+        run_time: float | None = None,
+        rate_func: Callable[[float], float] | None = None,
+        lag_ratio: float | None = None,
+    ):
+        self.run_time = run_time or self.run_time
+        self.rate_func = rate_func or self.rate_func
+        self.lag_ratio = lag_ratio or self.lag_ratio
         return self
 
     # Methods for interpolation, the mean of an Animation
     def interpolate(self, alpha: float) -> None:
-        alpha = clip(alpha, 0, 1)
-        self.interpolate_mobject(self.rate_func(alpha))
+        self.interpolate_mobject(alpha)
 
     def update(self, alpha: float) -> None:
         """
@@ -155,7 +176,8 @@ class Animation(object):
         full_length = (num_submobjects - 1) * lag_ratio + 1
         value = alpha * full_length
         lower = index * lag_ratio
-        return clip((value - lower), 0, 1)
+        raw_sub_alpha = clip((value - lower), 0, 1)
+        return self.rate_func(raw_sub_alpha)
 
     # Getters and setters
     def set_run_time(self, run_time: float):
@@ -163,6 +185,8 @@ class Animation(object):
         return self
 
     def get_run_time(self) -> float:
+        if self.time_span:
+            return max(self.run_time, self.time_span[1])
         return self.run_time
 
     def set_rate_func(self, rate_func: Callable[[float], float]):

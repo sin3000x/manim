@@ -1,8 +1,13 @@
-from typing import Callable
+from __future__ import annotations
 
 import numpy as np
 
 from manimlib.utils.bezier import bezier
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Callable
 
 
 def linear(t: float) -> float:
@@ -52,6 +57,10 @@ def there_and_back_with_pause(t: float, pause_ratio: float = 1. / 3) -> float:
 
 def running_start(t: float, pull_factor: float = -0.5) -> float:
     return bezier([0, 0, pull_factor, pull_factor, 1, 1, 1])(t)
+
+
+def overshoot(t: float, pull_factor: float = 1.5) -> float:
+    return bezier([0, 0, pull_factor, pull_factor, 1, 1])(t)
 
 
 def not_quite_there(
