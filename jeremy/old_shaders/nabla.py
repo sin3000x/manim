@@ -572,3 +572,25 @@ class Pic(Scene):
 
         div = Tex(r"\nabla\cdot\vf=2", color=YELLOW, stroke_width=5).scale(4.5).add_background_rectangle(opacity=1)
         self.add(field,div)
+
+
+class VectorField2(Scene):
+    def construct(self):
+        plane = NumberPlane()
+        plane.add_coordinate_labels()
+        self.add(plane); self.wait()
+        scale = 1/5
+        f = lambda x,y: (x * scale,0)
+        f_label = Tex(r"\vf(x,y)=\frac15\begin{bmatrix}x\\0\end{bmatrix}", color=YELLOW).add_background_rectangle().to_corner(UL)
+        self.play(Write(f_label))
+        f_label.add_updater(lambda t: self.add(t))
+
+        field = VF(func=f, coordinate_system=plane, step_multiple=1, factor=1).set_color(RED)
+        # for i in range(len(field)):
+        #     coord = field[i].get_start()[:3]
+        #     coord = (round(coord[0]/5, 1), round(coord[1]/5, 1))
+        #     txt = Text(f"{coord}").scale(.5)
+        #     txt.move_to(field[i].get_end())
+        #     self.add(txt)
+        self.play(FadeIn(field))
+        return super().construct()

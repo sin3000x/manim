@@ -144,6 +144,7 @@ class VF(VGroup):
         samples = get_sample_points_from_coordinate_system(
             coordinate_system, self.step_multiple
         )
+        self.samples = samples
         self.add(*(
             self.get_vector(coords)
             for coords in samples
