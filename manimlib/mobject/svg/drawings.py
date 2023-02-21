@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import os
-
-from manimlib.animation.animation import Animation
-=======
 from __future__ import annotations
 
 import numpy as np
 
 from manimlib.animation.composition import AnimationGroup
->>>>>>> bf5d587204143d036656c2fa64894d5ac1336098
 from manimlib.animation.rotation import Rotating
 from manimlib.constants import BLACK
 from manimlib.constants import BLUE_A
@@ -63,17 +57,7 @@ from manimlib.utils.space_ops import compass_directions
 from manimlib.utils.space_ops import midpoint
 from manimlib.utils.space_ops import rotate_vector
 
-<<<<<<< HEAD
-MEDIA_DIR="/Users/jeremy/Documents/manim/media"
-pi_creature_dir_maybe = os.path.join(MEDIA_DIR, "assets", "PiCreature")
-if os.path.exists(pi_creature_dir_maybe):
-    PI_CREATURE_DIR = pi_creature_dir_maybe
-else:
-    PI_CREATURE_DIR = os.path.join("assets")
-
-=======
 from typing import TYPE_CHECKING
->>>>>>> bf5d587204143d036656c2fa64894d5ac1336098
 
 if TYPE_CHECKING:
     from typing import Tuple, Sequence, Callable
@@ -325,27 +309,6 @@ class Clock(VGroup):
         )
 
 
-<<<<<<< HEAD
-class ClockPassesTime(Animation):
-    CONFIG = {
-        "run_time": 5,
-        "hours_passed": 12,
-        "rate_func": linear,
-    }
-
-    def __init__(self, clock, **kwargs):
-        digest_config(self, kwargs)
-        assert (isinstance(clock, Clock))
-        rot_kwargs = {
-            "axis": OUT,
-            "about_point": clock.get_center()
-        }
-        hour_radians = -self.hours_passed * 2 * np.pi / 12
-        self.hour_rotation = Rotating(
-            clock.hour_hand,
-            angle=hour_radians,
-            **rot_kwargs
-=======
 class ClockPassesTime(AnimationGroup):
     def __init__(
         self,
@@ -358,7 +321,6 @@ class ClockPassesTime(AnimationGroup):
         rot_kwargs = dict(
             axis=OUT,
             about_point=clock.get_center()
->>>>>>> bf5d587204143d036656c2fa64894d5ac1336098
         )
         hour_radians = -hours_passed * 2 * PI / 12
         super().__init__(

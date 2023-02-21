@@ -22,7 +22,7 @@ class ParametricCurve(VMobject):
         epsilon: float = 1e-8,
         # TODO, automatically figure out discontinuities
         discontinuities: Sequence[float] = [],
-        use_smoothing: bool = True,
+        use_smoothing: bool = False,
         **kwargs
     ):
         self.t_func = t_func

@@ -416,6 +416,8 @@ class GraphExample(Scene):
         sin_graph = axes.get_graph(
             lambda x: 2 * math.sin(x),
             color=BLUE,
+            x_range=[0, 5],
+            use_smoothing=False
         )
         # By default, it draws it so as to somewhat smoothly interpolate
         # between sampled points (x, f(x)).  If the graph is meant to have
@@ -575,8 +577,8 @@ class SurfaceExample(Scene):
 
         # day_texture = "EarthTextureMap"
         # night_texture = "NightEarthTextureMap"
-        day_texture = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Whole_world_-_land_and_oceans.jpg/1280px-Whole_world_-_land_and_oceans.jpg"
-        night_texture = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/1280px-The_earth_at_night.jpg"
+        day_texture = "/Users/jeremy/Downloads/1.jpg"
+        night_texture = "/Users/jeremy/Downloads/2.jpg"
 
         surfaces = [
             TexturedSurface(surface, day_texture, night_texture)

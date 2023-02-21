@@ -16,7 +16,200 @@
 \usepackage{physics}
 \usepackage{xcolor}
 \usepackage{microtype}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{/Users/jeremy/Documents/tex/manim.tex}
+\newcommand{\vnull}{\bm 0}
+\renewcommand{\va}{\bm a}
+\renewcommand{\vb}{\bm b}
+\newcommand{\vc}{\bm c}
+\newcommand{\vd}{\bm d}
+\newcommand{\ve}{\bm e}
+\newcommand{\vf}{\vec{\bm f}}
+\newcommand{\vg}{\bm g}
+\newcommand{\vh}{\bm h}
+\newcommand{\vi}{\vec{\bm i}}
+\newcommand{\vj}{\vec{\bm j}}
+\newcommand{\vk}{\vec{\bm k}}
+\newcommand{\vn}{\vec{\bm n}}
+\newcommand{\vp}{\bm p}
+\newcommand{\vq}{\bm q}
+\newcommand{\vr}{\bm r}
+\newcommand{\vs}{\bm s}
+\newcommand{\vt}{\vec{\bm t}}
+\renewcommand{\vu}{\bm u}
+\newcommand{\vv}{\bm v}
+\newcommand{\vw}{\bm w}
+\newcommand{\vW}{\bm W}
+\newcommand{\vx}{\vec{\bm x}}
+\newcommand{\vy}{\bm y}
+\newcommand{\vz}{\bm z}
+\newcommand{\veta}{\bm \eta}
+\newcommand{\vth}{\bm \theta}
+\newcommand{\vdelta}{\bm \delta}
+
+% spaces
+\newcommand{\spA}{\mathcal A}
+\newcommand{\spB}{\mathcal B}
+\newcommand{\spD}{\mathcal D} % domain
+\newcommand{\spF}{\mathcal F}
+\newcommand{\spH}{\mathcal H}
+\newcommand{\spK}{\mathcal K} % polynomial Krylov space
+\newcommand{\spL}{\mathcal L} % linear operators
+\newcommand{\spM}{\mathcal M}
+\newcommand{\spN}{\mathcal N}
+\newcommand{\spP}{\mathcal P} % polynomials
+\newcommand{\spQ}{\mathcal Q} % rational Krylov space
+\newcommand{\spR}{\mathcal R} % range
+\newcommand{\spS}{\mathcal S}
+\newcommand{\spV}{\mathcal V}
+
+% special sets
+\newcommand{\A}{\mathbb{A}} % annulus
+\newcommand{\ud}{\mathbb{D}} % unit disk
+\newcommand{\C}{\mathbb C} % complex numbers
+\newcommand{\E}{\mathbb E} % expectation
+\newcommand{\cC}{\overline{\mathbb C}} % Riemann sphere
+\newcommand{\R}{\mathbb R} % real numbers
+
+% hats
+\newcommand*{\Ahat}{\widehat{A}}
+\newcommand*{\Bhat}{\widehat{B}}
+\newcommand*{\Chat}{\widehat{C}}
+\newcommand*{\Dhat}{\widehat{D}}
+\newcommand*{\Ehat}{\widehat{E}}
+\newcommand*{\Fhat}{\widehat{F}}
+\newcommand*{\Ghat}{\widehat{G}}
+\newcommand*{\Hhat}{\widehat{H}}
+\newcommand*{\Ihat}{\widehat{I}}
+\newcommand*{\Jhat}{\widehat{J}}
+\newcommand*{\Khat}{\widehat{K}}
+\newcommand*{\Lhat}{\widehat{L}}
+\newcommand*{\Mhat}{\widehat{M}}
+\newcommand*{\Nhat}{\widehat{N}}
+\newcommand*{\Ohat}{\widehat{O}}
+\newcommand*{\Phat}{\widehat{P}}
+\newcommand*{\Qhat}{\widehat{Q}}
+\newcommand*{\Rhat}{\widehat{R}}
+\newcommand*{\Shat}{\widehat{S}}
+\newcommand*{\That}{\widehat{T}}
+\newcommand*{\Uhat}{\widehat{U}}
+\newcommand*{\Vhat}{\widehat{V}}
+\newcommand*{\What}{\widehat{W}}
+\newcommand*{\Xhat}{\widehat{X}}
+\newcommand*{\Yhat}{\widehat{Y}}
+\newcommand*{\Zhat}{\widehat{Z}}
+\newcommand*{\ahat}{\widehat{a}}
+\newcommand*{\bhat}{\widehat{b}}
+\newcommand*{\chat}{\widehat{c}}
+\newcommand*{\dhat}{\widehat{d}}
+\newcommand*{\ehat}{\widehat{e}}
+\newcommand*{\vehat}{\widehat{\ve}}
+\newcommand*{\fhat}{\widehat{f}}
+\newcommand*{\ghat}{\widehat{g}}
+\newcommand*{\hhat}{\widehat{h}}
+\newcommand*{\ihat}{\widehat{i}}
+\newcommand*{\jhat}{\widehat{j}}
+\newcommand*{\khat}{\widehat{k}}
+\newcommand*{\lhat}{\widehat{l}}
+\newcommand*{\mhat}{\widehat{m}}
+\newcommand*{\nhat}{\widehat{n}}
+\newcommand*{\ohat}{\widehat{o}}
+\newcommand*{\phat}{\widehat{p}}
+\newcommand*{\qhat}{\widehat{q}}
+\newcommand*{\rhat}{\widehat{r}}
+\newcommand*{\shat}{\widehat{s}}
+\newcommand*{\that}{\widehat{t}}
+\newcommand*{\uhat}{\widehat{u}}
+\newcommand*{\vhat}{\widehat{v}}
+\newcommand*{\what}{\widehat{w}}
+\newcommand*{\xhat}{\widehat{x}}
+\newcommand*{\yhat}{\widehat{y}}
+\newcommand*{\zhat}{\widehat{z}}
+% bars
+\newcommand*{\barvx}{\overline{\vx}}
+\newcommand*{\Abar}{\overline{A}}
+\newcommand*{\Bbar}{\overline{B}}
+\newcommand*{\Cbar}{\overline{C}}
+\newcommand*{\Dbar}{\overline{D}}
+\newcommand*{\Ebar}{\overline{E}}
+\newcommand*{\Fbar}{\overline{F}}
+\newcommand*{\Gbar}{\overline{G}}
+\newcommand*{\Hbar}{\overline{H}}
+\newcommand*{\Ibar}{\overline{I}}
+\newcommand*{\Jbar}{\overline{J}}
+\newcommand*{\Kbar}{\overline{K}}
+\newcommand*{\Lbar}{\overline{L}}
+\newcommand*{\Mbar}{\overline{M}}
+\newcommand*{\Nbar}{\overline{N}}
+\newcommand*{\Obar}{\overline{O}}
+\newcommand*{\Pbar}{\overline{P}}
+\newcommand*{\Qbar}{\overline{Q}}
+\newcommand*{\Rbar}{\overline{R}}
+\newcommand*{\Sbar}{\overline{S}}
+\newcommand*{\Tbar}{\overline{T}}
+\newcommand*{\Ubar}{\overline{U}}
+\newcommand*{\Vbar}{\overline{V}}
+\newcommand*{\Wbar}{\overline{W}}
+\newcommand*{\Xbar}{\overline{X}}
+\newcommand*{\Ybar}{\overline{Y}}
+\newcommand*{\Zbar}{\overline{Z}}
+\newcommand*{\abar}{\overline{a}}
+\newcommand*{\bbar}{\overline{b}}
+\newcommand*{\cbar}{\overline{c}}
+\newcommand*{\dbar}{\overline{d}}
+\newcommand*{\ebar}{\overline{e}}
+\newcommand*{\fbar}{\overline{f}}
+\newcommand*{\gbar}{\overline{g}}
+%\newcommand*{\hbar}{\overline{h}}
+\newcommand*{\ibar}{\overline{i}}
+\newcommand*{\jbar}{\overline{j}}
+\newcommand*{\kbar}{\overline{k}}
+\newcommand*{\lbar}{\overline{l}}
+\newcommand*{\mbar}{\overline{m}}
+\newcommand*{\nbar}{\overline{n}}
+\newcommand*{\obar}{\overline{o}}
+\newcommand*{\pbar}{\overline{p}}
+\newcommand*{\qbar}{\overline{q}}
+\newcommand*{\rbar}{\overline{r}}
+\newcommand*{\sbar}{\overline{s}}
+\newcommand*{\tbar}{\overline{t}}
+\newcommand*{\ubar}{\overline{u}}
+\newcommand*{\vbar}{\overline{v}}
+\newcommand*{\wbar}{\overline{w}}
+\newcommand*{\xbar}{\overline{x}}
+\newcommand*{\ybar}{\overline{y}}
+\newcommand*{\zbar}{\overline{z}}
+% math operators
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\diag}{diag} %
+\DeclareMathOperator{\exter}{ext}
+\DeclareMathOperator{\inter}{int} %
+\DeclareMathOperator{\Span}{span} %
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\sgn}{sgn} %
+\DeclareMathOperator{\sign}{sign} %
+\DeclareMathOperator{\sinc}{sinc} %
+%\DeclareMathOperator{\rank}{rank} %
+\DeclareMathOperator{\capa}{cap} %
+\DeclareMathOperator{\supp}{supp} %
+\DeclareMathOperator{\dint}{\int\!\!\int}%
+\DeclareMathOperator{\fov}{\mathbb{W}}%
+\DeclareMathOperator{\cond}{cond}%
+\newcommand{\divdif}{\mathord{\kern.43em{\vrule width.6pt height7pt depth-.28pt} \kern-.41em\Delta}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\Proj}{Proj}
+% some other commands
+\renewcommand{\d}{\,\mathrm{d}} % differential
+\newcommand{\with}{\,:\,}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\wto}{\overset{*}{\rightarrow}}
+\newcommand{\const}{\mathrm{const.}}
+\renewcommand{\i}{\mathrm{i}}
+\newcommand{\e}{\mathrm{e}}
+%%%%%%%%%%%%
 \linespread{1}
 \usepackage{centernot}
 \usepackage{mathtools}

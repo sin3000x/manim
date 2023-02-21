@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from colour import Color
 
-from manimlib.constants import BLACK, RED, YELLOW, WHITE
+from manimlib.constants import BLACK, RED, YELLOW, WHITE, GOLD
 from manimlib.constants import DL, DOWN, DR, LEFT, RIGHT, UL, UR
 from manimlib.constants import SMALL_BUFF
 from manimlib.mobject.geometry import Line

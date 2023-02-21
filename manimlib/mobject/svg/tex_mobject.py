@@ -210,19 +210,12 @@ class Tex(StringMobject):
     def set_color_by_tex_to_color_map(
         self, color_map: dict[Selector, ManimColor]
     ):
-<<<<<<< HEAD
-        for tex, color in list(tex_to_color_map.items()):
-            self.set_color_by_tex(tex, color, **kwargs)
-        return self
-
-    def tm(self, tex_to_color_map, **kwargs):
-        return self.set_color_by_tex_to_color_map(self, tex_to_color_map, **kwargs)
-        
-    def index_of_part(self, part: SingleStringTex, start: int = 0) -> int:
-        return self.submobjects.index(part, start)
-=======
         return self.set_parts_color_by_dict(color_map)
->>>>>>> bf5d587204143d036656c2fa64894d5ac1336098
+
+    def tm(
+        self, color_map: dict[Selector, ManimColor]
+    ):
+        return self.set_parts_color_by_dict(color_map)
 
     def get_tex(self) -> str:
         return self.get_string()
@@ -289,91 +282,6 @@ class Tex(StringMobject):
             return VGroup(*decimal_mobs)
         return decimal_mobs[index]
 
-    def tm(self, texs_to_color_map, **kwargs):
-        return self.set_color_by_tex_to_color_map(texs_to_color_map, **kwargs)
-        # return self
-
 
 class TexText(Tex):
-<<<<<<< HEAD
-    CONFIG = {
-        "math_mode": False,
-        "arg_separator": "",
-    }
-
-
-class BulletedList(TexText):
-    CONFIG = {
-        "buff": MED_LARGE_BUFF,
-        "dot_scale_factor": 2,
-        "alignment": "",
-    }
-
-    def __init__(self, *items: str, **kwargs):
-        line_separated_items = [s + "\\\\" for s in items]
-        TexText.__init__(self, *line_separated_items, **kwargs)
-        for part in self:
-            dot = Tex("\\cdot").scale(self.dot_scale_factor)
-            dot.next_to(part[0], LEFT, SMALL_BUFF)
-            part.add_to_back(dot)
-        self.arrange(
-            DOWN,
-            aligned_edge=LEFT,
-            buff=self.buff
-        )
-
-    def fade_all_but(self, index_or_string: int | str, opacity: float = 0.5) -> None:
-        arg = index_or_string
-        if isinstance(arg, str):
-            part = self.get_part_by_tex(arg)
-        elif isinstance(arg, int):
-            part = self.submobjects[arg]
-        else:
-            raise Exception("Expected int or string, got {0}".format(arg))
-        for other_part in self.submobjects:
-            if other_part is part:
-                other_part.set_fill(opacity=1)
-            else:
-                other_part.set_fill(opacity=opacity)
-
-
-class TexFromPresetString(Tex):
-    CONFIG = {
-        # To be filled by subclasses
-        "tex": None,
-        "color": None,
-    }
-
-    def __init__(self, **kwargs):
-        digest_config(self, kwargs)
-        Tex.__init__(self, self.tex, **kwargs)
-        self.set_color(self.color)
-
-
-class Title(TexText):
-    CONFIG = {
-        "scale_factor": 1,
-        "include_underline": True,
-        "underline_width": FRAME_WIDTH - 2,
-        # This will override underline_width
-        "match_underline_width_to_text": False,
-        "underline_buff": MED_SMALL_BUFF,
-        "underline_color": YELLOW
-    }
-
-    def __init__(self, *text_parts: str, **kwargs):
-        TexText.__init__(self, *text_parts, **kwargs)
-        self.scale(self.scale_factor)
-        self.to_edge(UP)
-        if self.include_underline:
-            underline = Line(LEFT, RIGHT, color=self.underline_color)
-            underline.next_to(self, DOWN, buff=self.underline_buff)
-            if self.match_underline_width_to_text:
-                underline.match_width(self)
-            else:
-                underline.set_width(self.underline_width)
-            self.add(underline)
-            self.underline = underline
-=======
     tex_environment: str = ""
->>>>>>> bf5d587204143d036656c2fa64894d5ac1336098

@@ -45,6 +45,7 @@ ctex:
     \usepackage{physics}
     \usepackage{xcolor}
     \usepackage{microtype}
+    \input{/Users/jeremy/Documents/tex/manim.tex}
     \linespread{1}
 
 # Simplified TeX templates

@@ -137,7 +137,6 @@ class TransformFromCopy(Transform):
     replace_mobject_with_target_in_scene: bool = True
 
     def __init__(self, mobject: Mobject, target_mobject: Mobject, **kwargs):
-<<<<<<< HEAD
         super().__init__(target_mobject, mobject, **kwargs)
 
     def interpolate(self, alpha: float) -> None:
@@ -148,6 +147,7 @@ class ClockwiseTransform(Transform):
     CONFIG = {
         "path_arc": -np.pi
     }
+
 
 class ClockwiseReplacementTransform(Transform):
     CONFIG = {
@@ -160,9 +160,7 @@ class CounterclockwiseTransform(Transform):
     CONFIG = {
         "path_arc": np.pi
     }
-=======
-        super().__init__(mobject.copy(), target_mobject, **kwargs)
->>>>>>> bf5d587204143d036656c2fa64894d5ac1336098
+
 
 class CounterclockwiseReplacementTransform(Transform):
     CONFIG = {

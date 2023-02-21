@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from manimlib.constants import MED_SMALL_BUFF, WHITE, GREY_C
+from manimlib.constants import MED_SMALL_BUFF, WHITE, GREY_C, YELLOW
 from manimlib.constants import DOWN, LEFT, RIGHT, UP
 from manimlib.constants import FRAME_WIDTH
 from manimlib.constants import MED_LARGE_BUFF, SMALL_BUFF
@@ -64,11 +64,11 @@ class Title(TexText):
         # This will override underline_width
         match_underline_width_to_text: bool = False,
         underline_buff: float = SMALL_BUFF,
-        underline_style: dict = dict(stroke_width=2, stroke_color=GREY_C),
+        underline_style: dict = dict(stroke_width=4, stroke_color=YELLOW),
         **kwargs
     ):
         super().__init__(*text_parts, font_size=font_size, **kwargs)
-        self.to_edge(UP, buff=MED_SMALL_BUFF)
+        self.to_edge(UP, buff=.5)
         if include_underline:
             underline = Line(LEFT, RIGHT, **underline_style)
             underline.next_to(self, DOWN, buff=underline_buff)
