@@ -45,7 +45,7 @@ from manimlib.utils.space_ops import angle_of_vector
 from manimlib.utils.space_ops import get_norm
 from manimlib.utils.space_ops import rotation_matrix_transpose
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
     from typing import Callable, Iterable, Iterator, Union, Tuple, Optional
@@ -53,8 +53,8 @@ if TYPE_CHECKING:
     from manimlib.typing import ManimColor, Vect3, Vect4, Vect3Array, UniformDict, Self
     from moderngl.context import Context
 
-    TimeBasedUpdater = Callable[["Mobject", float], "Mobject" | None]
-    NonTimeUpdater = Callable[["Mobject"], "Mobject" | None]
+    TimeBasedUpdater = Callable[["Mobject", float], Optional["Mobject"]]
+    NonTimeUpdater = Callable[["Mobject"], Optional["Mobject"]]
     Updater = Union[TimeBasedUpdater, NonTimeUpdater]
 
 
