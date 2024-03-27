@@ -269,6 +269,7 @@ class FlashAround(VShowPassingFlash):
         self,
         mobject: Mobject,
         time_width: float = 1.0,
+        taper_width: float = 0.0,
         stroke_width: float = 4.0,
         color: ManimColor = YELLOW,
         buff: float = SMALL_BUFF,
@@ -281,7 +282,7 @@ class FlashAround(VShowPassingFlash):
         path.insert_n_curves(n_inserted_curves)
         path.set_points(path.get_points_without_null_curves())
         path.set_stroke(color, stroke_width)
-        super().__init__(path, time_width=time_width, **kwargs)
+        super().__init__(path, time_width=time_width, taper_width=taper_width, **kwargs)
 
     def get_path(self, mobject: Mobject, buff: float) -> SurroundingRectangle:
         return SurroundingRectangle(mobject, buff=buff)
@@ -289,7 +290,7 @@ class FlashAround(VShowPassingFlash):
 
 class FlashUnder(FlashAround):
     def get_path(self, mobject: Mobject, buff: float) -> Underline:
-        return Underline(mobject, buff=buff)
+        return Underline(mobject, buff=buff, stretch_factor=1.0)
 
 
 class ShowCreationThenDestruction(ShowPassingFlash):

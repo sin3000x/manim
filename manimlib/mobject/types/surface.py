@@ -130,21 +130,31 @@ class Surface(Mobject):
     def get_unit_normals(self) -> Vect3Array:
         nu, nv = self.resolution
         indices = np.arange(nu * nv)
+        if len(indices) == 0:
+            return np.zeros((3, 0))
 
-        left  = indices - 1
-        right = indices + 1
-        up    = indices - nv
-        down  = indices + nv
+        # For each point, find two adjacent points at indices
+        # step1 and step2, such that crossing points[step1] - points
+        # with points[step1] - points gives a normal vector
+        step1 = indices + 1
+        step2 = indices + nu
 
-        left[0] = indices[0]
-        right[-1] = indices[-1]
-        up[:nv] = indices[:nv]
-        down[-nv:] = indices[-nv:]
+        # Right edge
+        step1[nu - 1::nu] = indices[nu - 1::nu] + nu
+        step2[nu - 1::nu] = indices[nu - 1::nu] - 1
+
+        # Bottom edge
+        step1[-nu:] = indices[-nu:] - nu
+        step2[-nu:] = indices[-nu:] + 1
+
+        # Lower right point
+        step1[-1] = indices[-1] - 1
+        step2[-1] = indices[-1] - nu
 
         points = self.get_points()
         crosses = cross(
-            points[right] - points[left],
-            points[up] - points[down],
+            points[step1] - points,
+            points[step2] - points,
         )
         self.data["normal"] = normalize_along_axis(crosses, 1)
         return self.data["normal"]
@@ -166,7 +176,7 @@ class Surface(Mobject):
 
         nu, nv = smobject.resolution
         self.data['point'][:] = self.get_partial_points_array(
-            self.data['point'], a, b,
+            smobject.data['point'], a, b,
             (nu, nv, 3),
             axis=axis
         )
@@ -183,7 +193,7 @@ class Surface(Mobject):
         if len(points) == 0:
             return points
         nu, nv = resolution[:2]
-        points = points.reshape(resolution)
+        points = points.reshape(resolution).copy()
         max_index = resolution[axis] - 1
         lower_index, lower_residue = integer_interpolate(0, max_index, a)
         upper_index, upper_residue = integer_interpolate(0, max_index, b)
