@@ -3,8 +3,35 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/test_mac/480p15/partial_movie_files/HappyNewYear" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/wcat/480p15/partial_movie_files/ClosedLoopScene" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/wcat/480p15/partial_movie_files/SearchForRectangleOnLoop" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/wcat/480p15/partial_movie_files/WrapUpToTorus" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/attain" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/boundedness" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/cardinal" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/contour" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/example_scenes" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/fun_limsup" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/heine" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/limsup" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/map" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/mobius" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/mvt" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/nabla" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/NL" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/part1" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/svd" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/svd_ch" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/uni_conts" />
+      <excludeFolder url="file://$MODULE_DIR$/media/videos/uni_conv" />
+      <excludeFolder url="file://$MODULE_DIR$/media/Tex" />
+      <excludeFolder url="file://$MODULE_DIR$/.eggs" />
+      <excludeFolder url="file://$MODULE_DIR$/manimgl.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/videos" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (manim)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="jeremy310" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

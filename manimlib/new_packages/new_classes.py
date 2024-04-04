@@ -147,7 +147,9 @@ class Debug(VGroup):
     def __init__(self, tex, scale=.7):
         VGroup.__init__(self)
         for i, t in enumerate(tex):
-            self.add(Text(str(i), color=PINK).scale(scale).move_to(t))
+            self.add(
+                Text(str(i)).set_color(PINK).scale(scale).move_to(t)
+            )
 
 class DashedPolygon(VMobject):
     def __init__(self, *vertices, **kwargs):
