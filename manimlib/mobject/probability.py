@@ -276,6 +276,7 @@ class BarChart(VGroup):
     def add_bars(self, values: Iterable[float]) -> None:
         buff = float(self.width) / (2 * len(values))
         bars = VGroup()
+        self.x_ticks = VGroup()
         for i, value in enumerate(values):
             bar = Rectangle(
                 height=(value / self.max_value) * self.height,
@@ -284,7 +285,12 @@ class BarChart(VGroup):
                 fill_opacity=self.bar_fill_opacity,
             )
             bar.move_to((2 * i + 0.5) * buff * RIGHT, DOWN + LEFT * 5)
+            x_tick = Line(UP, DOWN).set_height(self.tick_height)
+            x_tick.move_to(bar.get_bottom())
+            # x_tick.move_to((2 * i + 0.5) * buff * RIGHT, DOWN + LEFT * 5)
             bars.add(bar)
+            self.x_ticks.add(x_tick)
+        self.add(self.x_ticks)
         bars.set_color_by_gradient(*self.bar_colors)
 
         bar_labels = VGroup()

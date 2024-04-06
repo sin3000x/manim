@@ -25,13 +25,13 @@ class Transform(Animation):
     replace_mobject_with_target_in_scene: bool = False
 
     def __init__(
-        self,
-        mobject: Mobject,
-        target_mobject: Mobject | None = None,
-        path_arc: float = 0.0,
-        path_arc_axis: np.ndarray = OUT,
-        path_func: Callable | None = None,
-        **kwargs
+            self,
+            mobject: Mobject,
+            target_mobject: Mobject | None = None,
+            path_arc: float = 0.0,
+            path_arc_axis: np.ndarray = OUT,
+            path_func: Callable | None = None,
+            **kwargs
     ):
         self.target_mobject = target_mobject
         self.path_arc = path_arc
@@ -119,11 +119,11 @@ class Transform(Animation):
         ])
 
     def interpolate_submobject(
-        self,
-        submob: Mobject,
-        start: Mobject,
-        target_copy: Mobject,
-        alpha: float
+            self,
+            submob: Mobject,
+            start: Mobject,
+            target_copy: Mobject,
+            alpha: float
     ):
         submob.interpolate(start, target_copy, alpha, self.path_func)
         return self
@@ -132,10 +132,6 @@ class Transform(Animation):
 class ReplacementTransform(Transform):
     replace_mobject_with_target_in_scene: bool = True
 
-class RT(Transform):
-    CONFIG = {
-        "replace_mobject_with_target_in_scene": True,
-    }
 
 class TransformFromCopy(Transform):
     replace_mobject_with_target_in_scene: bool = True
@@ -171,6 +167,7 @@ class CounterclockwiseReplacementTransform(Transform):
         "path_arc": np.pi,
         "replace_mobject_with_target_in_scene": True,
     }
+
 
 class MoveToTarget(Transform):
     def __init__(self, mobject: Mobject, **kwargs):
@@ -211,7 +208,7 @@ class ApplyMethod(Transform):
                 "Whoops, looks like you accidentally invoked "
                 "the method you want to animate"
             )
-        assert(isinstance(method.__self__, Mobject))
+        assert (isinstance(method.__self__, Mobject))
 
     def create_target(self) -> Mobject:
         method = self.method
@@ -229,21 +226,21 @@ class ApplyMethod(Transform):
 
 class ApplyPointwiseFunction(ApplyMethod):
     def __init__(
-        self,
-        function: Callable[[np.ndarray], np.ndarray],
-        mobject: Mobject,
-        run_time: float = 3.0,
-        **kwargs
+            self,
+            function: Callable[[np.ndarray], np.ndarray],
+            mobject: Mobject,
+            run_time: float = 3.0,
+            **kwargs
     ):
         super().__init__(mobject.apply_function, function, run_time=run_time, **kwargs)
 
 
 class ApplyPointwiseFunctionToCenter(Transform):
     def __init__(
-        self,
-        function: Callable[[np.ndarray], np.ndarray],
-        mobject: Mobject,
-        **kwargs
+            self,
+            function: Callable[[np.ndarray], np.ndarray],
+            mobject: Mobject,
+            **kwargs
     ):
         self.function = function
         super().__init__(mobject, **kwargs)
@@ -254,20 +251,20 @@ class ApplyPointwiseFunctionToCenter(Transform):
 
 class FadeToColor(ApplyMethod):
     def __init__(
-        self,
-        mobject: Mobject,
-        color: ManimColor,
-        **kwargs
+            self,
+            mobject: Mobject,
+            color: ManimColor,
+            **kwargs
     ):
         super().__init__(mobject.set_color, color, **kwargs)
 
 
 class ScaleInPlace(ApplyMethod):
     def __init__(
-        self,
-        mobject: Mobject,
-        scale_factor: npt.ArrayLike,
-        **kwargs
+            self,
+            mobject: Mobject,
+            scale_factor: npt.ArrayLike,
+            **kwargs
     ):
         super().__init__(mobject.scale, scale_factor, **kwargs)
 
@@ -286,10 +283,10 @@ class Restore(Transform):
 
 class ApplyFunction(Transform):
     def __init__(
-        self,
-        function: Callable[[Mobject], Mobject],
-        mobject: Mobject,
-        **kwargs
+            self,
+            function: Callable[[Mobject], Mobject],
+            mobject: Mobject,
+            **kwargs
     ):
         self.function = function
         super().__init__(mobject, **kwargs)
@@ -303,10 +300,10 @@ class ApplyFunction(Transform):
 
 class ApplyMatrix(ApplyPointwiseFunction):
     def __init__(
-        self,
-        matrix: npt.ArrayLike,
-        mobject: Mobject,
-        **kwargs
+            self,
+            matrix: npt.ArrayLike,
+            mobject: Mobject,
+            **kwargs
     ):
         matrix = self.initialize_matrix(matrix)
 
@@ -328,10 +325,10 @@ class ApplyMatrix(ApplyPointwiseFunction):
 
 class ApplyComplexFunction(ApplyMethod):
     def __init__(
-        self,
-        function: Callable[[complex], complex],
-        mobject: Mobject,
-        **kwargs
+            self,
+            function: Callable[[complex], complex],
+            mobject: Mobject,
+            **kwargs
     ):
         self.function = function
         method = mobject.apply_complex_function
@@ -341,6 +338,7 @@ class ApplyComplexFunction(ApplyMethod):
         func1 = self.function(complex(1))
         self.path_arc = np.log(func1).imag
         super().init_path_func()
+
 
 ###
 
